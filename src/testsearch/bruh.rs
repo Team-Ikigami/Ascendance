@@ -1,4 +1,4 @@
-mod render::npc;
-fn yothatswhatimlookingfor(){
-    render::character::jimmy_the_candyman();
+use crate::render::npc;
+pub fn yothatswhatimlookingfor(){
+        npc::render::character::jimmy_the_candyman();
 }
