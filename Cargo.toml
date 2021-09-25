@@ -3,7 +3,6 @@ name = "rust_game"
 version = "0.1.0"
 edition = "2018"
 authors = ["Random guy <ikigami.business@gmail.com>"]
-license = "CC BY-SA"
 license = "AFPL"
 description = "A JRPG made in Rust."
 
