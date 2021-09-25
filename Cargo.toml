@@ -10,10 +10,12 @@ description = "A JRPG made in Rust."
 
 
 [dependencies]
-# rg3d = "0.23.0"
-# toml = "0.5.8"
+toml = "0.5.8"
+# below are libraries used and made by me
 render = { path = "./src/render", version = "0.1.0"}
 items = { path = "./src/items", version = "0.1.0" }
 user-interfaces = { path = "./src/user-interfaces", version = "0.1.0" }
+world-interaction = { path = "./src/world-interaction", version = "0.1.0" }
+
 
 [workspace]
