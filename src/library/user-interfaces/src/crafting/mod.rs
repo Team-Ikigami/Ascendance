@@ -1,0 +1,9 @@
+pub mod basicbrewingtable;
+pub mod mediumbrewingtable;
+pub mod advancedbrewingtable;
+pub mod godlybrewingtable;
+pub mod basicmetalanvil;
+pub mod mediummetalanvil;
+pub mod advancedmetalanvil;
+pub mod godlymetalanvil;
+pub mod inventory;

@@ -1,16 +1,7 @@
-#[warn(not(unused_imports))]
-pub mod basicbrewingtable;
-pub mod mediumbrewingtable;
-pub mod advancedbrewingtable;
-pub mod godlybrewingtable;
-pub mod basicmetalanvil;
-pub mod mediummetalanvil;
-pub mod advancedmetalanvil;
-pub mod godlymetalanvil;
-pub mod inventory;
+pub mod crafting;
+pub mod user;
 
 use rg3d_ui::*;
-
 
 #[cfg(test)]
 mod tests {
