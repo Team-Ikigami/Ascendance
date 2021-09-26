@@ -82,4 +82,4 @@ As of right now this is unavailable for other people to see. There are reasons f
       - [ ] Breaking
       - [ ] falling
 - [ ] Development
-  - [ ] Continue the intitiation developements 
+  - [ ] Continue the intitiation developements
