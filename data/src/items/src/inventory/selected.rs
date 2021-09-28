@@ -1,7 +1,7 @@
 pub mod backend;
 
 pub mod weapons {
-    pub struct weapontype(){
+    pub struct Weapontype {
         weaponused: Char,
         weaponstrength: u32,
         bow: String,
@@ -19,7 +19,7 @@ pub mod weapons {
         axe: String,
         magic: bool,
     };
-    pub struct magic {
+    pub struct Magic {
         element: Char,
         firespell: String,
         waterspell: String,
