@@ -1,5 +1,5 @@
 pub mod inventory;
-pub mod weapons;
+pub mod category;
 pub mod backend;
 
 #[cfg(test)]

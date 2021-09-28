@@ -1,5 +1,6 @@
 /target
 /planning.txt
-/data/models/experiment room.blend
 /.history
 /module maps.txt
+/data/target
+/data/src/target
