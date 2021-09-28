@@ -8,9 +8,12 @@ As of right now this is unavailable for other people to see. There are reasons f
 1. Incomplete apha. This is currenty a game that is pre-alpha, meaning that there is practically nothing
 2. This is mainly going to be a learning experiance of the pyrox engine.
 
-- [x] initiate user-interface (what i think will be necesary for now)
+## Tasks
+
+- [ ] initiate user-interface (what i think will be necesary for now)
   - [ ] initiate items
     - [x] Structs and calling for the selected
+    - [ ] Basic Framing for the project
     - [ ] Bug checked the structs and mods
     - [ ] Learnt proper syntax
     - [ ] Know how to actually interconnect variables

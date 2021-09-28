@@ -9,11 +9,5 @@ description = "A JRPG made in Rust."
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-toml = "0.5.8"
 # below are libraries used and made by me
-render = { path = "./src/library/render", version = "0.1.0"}
-items = { path = "./src/library/items", version = "0.1.0" }
-user-interfaces = { path = "./src/library/user-interfaces", version = "0.1.0" }
-world-interaction = { path = "./src/library/world-interaction", version = "0.1.0" }
-
-[workspace]
+data = { path = "./data"}
