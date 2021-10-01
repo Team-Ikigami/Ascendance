@@ -1,8 +1,9 @@
-pub use crate::items;
-pub use crate::render;
-pub use crate::user_interfaces;
-pub use crate::world_interaction;
+pub use items::*;
+pub use render::*;
+pub use user_interfaces::*;
+pub use world_interaction::*;
 use std::fs::*;
+use rg3d::*;
 
 let gameopen = 0;
 
@@ -16,7 +17,7 @@ pub mod game {
                 self::secondrun::tmpnm();
             }
             else {
-                file(())
+                file("/int/init.txt")
                 println!("oops, it seems you havent done something wrong. We will now terminate your processes");
             }
         }
@@ -26,12 +27,20 @@ pub mod game {
     }
     pub mod wininitial {
         pub fn tmpnm() {
-            println!("gggg");
+            ;
         }
     }
     pub mod secondrun {
         pub fn tmpnm() {
             println!("gggg");
+        }
+        pub fn openanimation() {
+            // display animation
+            secondrun::Frontpage();
+        }
+        pub fn Frontpage(){
+            items::game::openingf::allaspects::Init();
+            
         }
     }
 }

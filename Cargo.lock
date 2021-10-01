@@ -517,6 +517,7 @@ version = "0.1.0"
 dependencies = [
  "items",
  "render",
+ "rg3d",
  "user-interfaces",
  "world-interaction",
 ]
