@@ -11,3 +11,4 @@ items = { path = "./src/items", version = "0.1.0" }
 user-interfaces = { path = "./src/user-interfaces", version = "0.1.0" }
 world-interaction = { path = "./src/world-interaction", version = "0.1.0" }
 rg3d = "0.23.1"
+rg3d-ui = "0.14.0"

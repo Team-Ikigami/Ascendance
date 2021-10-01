@@ -518,6 +518,7 @@ dependencies = [
  "items",
  "render",
  "rg3d",
+ "rg3d-ui",
  "user-interfaces",
  "world-interaction",
 ]
