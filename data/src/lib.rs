@@ -16,7 +16,7 @@ pub mod game {
         if Path::path("/int/init.txt").exists() == true {
             let mut int = read_to_string(path: "/int/init.txt")
             if int = 1 {
-                self::secondrun::tmpnm();
+                self::secondrun::openani();
             }
             else {
                 file("/int/init.txt")
@@ -26,24 +26,19 @@ pub mod game {
         else {
             wininitial::animationplayer()();
         }
+    fn openanimation() {}
+    
     self fn checkassetsareinstalled() {
         println!("help me!");
     pub mod wininitial {
-        pub fn animationplayer() {
-            super:
+        pub fn Frontpage() {
+
         }
     }
     pub mod secondrun {
-        pub fn tmpnm() {
-            assert!(!Path::new("../../assets/video/cutscene/trailer.mp4").try_exists().expect("Failed to load Video asset. Please check if there is something wrong with your installation."))
-            println!("gggg");
-        }
-        pub fn openanimation() {
-            // display animation
-            secondrun::Frontpage();
-        }
         pub fn Frontpage(){
-            items::game::openingf::allaspects::Init();
+            super::openanimation();
+            items::game::opening::Frontpage::one();
             
         }
     }

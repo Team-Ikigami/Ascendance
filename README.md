@@ -86,3 +86,10 @@ As of right now this is unavailable for other people to see. There are reasons f
       - [ ] falling
 - [ ] Development
   - [ ] Continue the intitiation developements
+- [ ]User end save files:
+  - [ ] Working with save files
+  - [ ] User-interfaces saving new files and accessing files
+  - [ ] List inventory possibilites and work
+- [ ]Currently what needs to be done
+  - [ ] Items folder
+  - [ ] Items with savefile library
