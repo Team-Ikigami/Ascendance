@@ -1,14 +1,16 @@
-pub use items::*;
-pub use render::*;
-pub use user_interfaces::*;
-pub use world_interaction::*;
+pub mod items;
+pub mod render;
+pub mod user_interfaces;
+pub mod world_interaction;
 use std::fs::*;
+use std::path::*;
 use rg3d::*;
 
 let gameopen = 0;
 
 pub mod game {
     pub fn run() {
+        user_interfaces::tests::it_works();
         let mut file = File::create("/int/init.txt");
         let mut f = File::read
         if Path::path("/int/init.txt").exists() == true {
@@ -22,16 +24,18 @@ pub mod game {
             }
         }
         else {
-            self::wininitial::tmpnm();
+            wininitial::animationplayer()();
         }
-    }
+    self fn checkassetsareinstalled() {
+        println!("help me!");
     pub mod wininitial {
-        pub fn tmpnm() {
-            ;
+        pub fn animationplayer() {
+            super:
         }
     }
     pub mod secondrun {
         pub fn tmpnm() {
+            assert!(!Path::new("../../assets/video/cutscene/trailer.mp4").try_exists().expect("Failed to load Video asset. Please check if there is something wrong with your installation."))
             println!("gggg");
         }
         pub fn openanimation() {
