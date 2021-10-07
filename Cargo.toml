@@ -1,13 +1,11 @@
 [package]
-name = "rust_game"
+name = "data"
 version = "0.1.0"
 edition = "2018"
-authors = ["Ikigami <ikigami.business@gmail.com>"]
-license = "AFPL"
-description = "A JRPG made in Rust."
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-# below are libraries used and made by me
-data = { path = "./data"}
+rg3d = "0.23.1"
+rg3d-ui = "0.14.0"
+savefile = "0.8.3"

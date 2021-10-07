@@ -1,5 +1,19 @@
-use data::*;
+mod items;
+mod render;
+mod user_interfaces;
+mod world_interaction;
 
-fn main() {
-    game::run();
+pub use crate::items::*;
+
+use savefile::*;
+use rg3d::*;
+
+pub mod game {
+    pub fn run() {
+        
+    }
+}
+
+fn main(){
+
 }
