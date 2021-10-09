@@ -1,8 +1,8 @@
-pub mod backend;
+use super::super::backend::*;
 
 pub mod weapons {
     pub struct Weapontype {
-        weaponused: Char,
+        weaponused: char,
         weaponstrength: u32,
         bow: String,
         longbow: String,
@@ -20,17 +20,17 @@ pub mod weapons {
         magic: bool,
     };
     pub struct Magic {
-        element: Char,
+        element: char,
         firespell: String,
         waterspell: String,
         icespell: String,
         electricspell: String,
         darkspell: String,
         spellpower: u64,
-    };
-    pub fn weaponused(weaponused: Char) -> weapontype {
-        weapontype {
-            weaponused: Super::user_interfaces::user::interface::rows::slots.selectedweapon,
+    }
+    pub fn weaponused(weaponused: Char) -> Weapontype {
+        Weapontype {
+            weaponused: super::user_interfaces::user::interface::rows::slots.selectedweapon,
         }
     }
 }

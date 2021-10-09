@@ -1,19 +1,12 @@
+#[allow(unused_imports)]
 mod items;
-mod render;
+mod user;
 mod user_interfaces;
-mod world_interaction;
-
-pub use crate::items::*;
-
+pub use items::*;
 use savefile::*;
-use rg3d::*;
+// use rg3d::*;
+// use ron::*;
 
-pub mod game {
-    pub fn run() {
-        
-    }
-}
-
-fn main(){
-
+fn main() {
+    println!("HELLO WORRLD");
 }
