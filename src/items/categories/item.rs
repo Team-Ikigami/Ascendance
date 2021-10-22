@@ -9,3 +9,6 @@ pub mod weapons{
         println!("certified bruh moment");
     }
 }
+pub mod miscellaneous {
+    //! Important for something
+}
