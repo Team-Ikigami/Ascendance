@@ -1,29 +1,31 @@
-#[allow(unused_imports)]
-mod items;
-mod user;
-mod user_interfaces;
+// #[allow(unused_imports)]
+// mod items;
+// mod user;
+// mod user_interfaces;
+// mod statistics;
 
-use items::{
-    statistics::{
-        ItemValue,
-        ItemDurability,
-    },
-    item::{
-        weapons::{
-            magic::{},
-            melee::{},
-            ranged::{},
-        },
-        miscellaneous::{},
-        construction::{},
-        clothing::{},
-    },
-};
-use user::{
-    user::{save_player, load_player},
-};
-use savefile::*;
-use ron::*;
+// use items::{
+//     item::{
+//         weapons::{
+//             magic::{},
+//             melee::{},
+//             ranged::{},
+//         },
+//         miscellaneous::{},
+//         construction::{},
+//         clothing::{},
+//     },
+// };
+// use user::{
+//     user::{save_player, load_player},
+// };
+// use user_interfaces::{
+//     crafting::{
+//         advancedanvil::{layout}
+//     }
+// }
+// use savefile::*;
+// use ron::*;
 use crate::shared::create_camera;
 use rg3d::engine::resource_manager::MaterialSearchOptions;
 use rg3d::engine::Engine;
@@ -330,7 +332,7 @@ async fn create_scene(resource_manager: ResourceManager) -> GameScene {
     // this is because animation is a set of skeleton bones with their own transforms.
     let walk_animation_resource = resource_manager
         .request_model(
-            "examples/data/mutant/walk.fbx",
+            "../assets/models/objects/walk.fbx",
             MaterialSearchOptions::RecursiveUp,
         )
         .await
@@ -426,7 +428,7 @@ fn main() {
                     engine.user_interface.send_message(TextMessage::text(
                         interface.debug_text,
                         MessageDirection::ToWidget,
-                        format!("Example 04 - User Interface\nFPS: {}", fps),
+                        format!("Test 01\nFPS: {}", fps),
                     ));
 
                     engine.update(fixed_timestep);

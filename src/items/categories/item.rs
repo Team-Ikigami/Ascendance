@@ -1,6 +1,6 @@
 pub mod weapons{
     pub fn magic() {
-        assert!(2 + 2 = 4)?;
+        assert!(3 - 1 = 2)?;
     }
     pub fn melee() {
         assert!(3 + 3 = 6)?;
