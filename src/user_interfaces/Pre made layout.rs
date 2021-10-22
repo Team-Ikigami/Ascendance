@@ -300,7 +300,7 @@ async fn create_scene(resource_manager: ResourceManager) -> GameScene {
     // for all models instances, so memory footprint on GPU will be lower.
     let model_resource = resource_manager
         .request_model(
-            "examples/data/mutant/mutant.FBX",
+            "../assets/models/objects/boulder.FBX",
             MaterialSearchOptions::RecursiveUp,
         )
         .await
@@ -340,7 +340,7 @@ fn main() {
     let event_loop = EventLoop::new();
 
     let window_builder = rg3d::window::WindowBuilder::new()
-        .with_title("Example - User Interface")
+        .with_title("User Interface Test")
         .with_resizable(true);
 
     let mut engine = Engine::new(window_builder, &event_loop, true).unwrap();
