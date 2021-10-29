@@ -1,6 +1,10 @@
-use rg3d_ui::widget::WidgetBuilder;
-
-fn MetAdvAnv(){
+fn MetalBasicAnvil() {
+    println!("Basic");
+}
+fn MetalMediumAnvil() {
+    println!("Basic");
+}
+fn MetalAdvancedAnvil() {
     let ctx = &mut engine.user_interface.build_ctx();
     let scrollbar;
     GridBuilder::new(
@@ -9,6 +13,7 @@ fn MetAdvAnv(){
                 ImageBuilder::new(
                     WidgetBuilder::new()
                         .on_row(0)
+             
                         .on_column(0)
                         .with_vertical_alignment(VerticalAlignment::Center),
                 )
@@ -46,10 +51,30 @@ fn MetAdvAnv(){
         )
     )
 }
-
-fn ReAdvAnv() {
-
+fn MetalGodlyAnvil() {
+    println!("Basic");
 }
-fn NoAdvAnv() {
-
+fn RefinedBasicAnvil() {
+    println!("Basic");
+}
+fn RefinedMediumAnvil() {
+    println!("Basic");
+}
+fn RefinedAdvancedAnvil() {
+    println!("Basic");
+}
+fn RefinedGodlyAnvil() {
+    println!("Basic");
+}
+fn NobleBasicAnvil() {
+    println!("Basic");
+}
+fn NobleMediumAnvil() {
+    println!("Basic");
+}
+fn NobleAdvancedAnvil() {
+    println!("Basic");
+}
+fn NobleGodlyAnvil() {
+    println!("Basic");
 }
