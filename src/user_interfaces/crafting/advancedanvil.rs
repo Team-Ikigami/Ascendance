@@ -10,7 +10,7 @@ fn MetAdvAnv(){
                     WidgetBuilder::new()
                         .on_row(0)
                         .on_column(0)
-                       .with_vertical_alignment(VerticalAlignment::Center),
+                        .with_vertical_alignment(VerticalAlignment::Center),
                 )
             .with_texture("../../../assets/textures/icons/anvil.png")
             .build(ctx)

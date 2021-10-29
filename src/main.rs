@@ -63,7 +63,17 @@ use rg3d::{
     utils::translate_event,
     window::Fullscreen,
 };
-use rg3d_ui::formatted_text::WrapMode;
+use rg3d_ui::{
+    formatted_text::{WrapMode},
+    window::{
+        WindowBuilder
+    },
+    message::{
+        MessageBox,
+        ScrollBarMessage,
+        TextMessage,
+    },
+};
 use std::time::Instant;
 
 const DEFAULT_MODEL_ROTATION: f32 = 180.0;
@@ -389,6 +399,7 @@ fn main() {
     // Finally run our event loop which will respond to OS and window events and update
     // engine state accordingly. Engine lets you to decide which event should be handled,
     // this is minimal working example if how it should be.
+    // TODO when the camera is looking directly at an anvil, show a UI
     event_loop.run(move |event, _, control_flow| {
         match event {
             Event::MainEventsCleared => {
