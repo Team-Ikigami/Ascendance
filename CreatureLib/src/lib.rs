@@ -3,7 +3,6 @@
 mod npc;
 mod hostile;
 mod friends;
-mod ai;
 mod error;
 use npc::{
     town::{
