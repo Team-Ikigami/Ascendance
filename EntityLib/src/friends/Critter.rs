@@ -1,3 +1,4 @@
+//! Bugs and spiders
 mod super::Enemy::Snake;
 use Snake::{
     hydra::{model, load},
