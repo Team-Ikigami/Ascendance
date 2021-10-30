@@ -1,33 +1,25 @@
 //! Bugs and spiders
-mod super::Enemy::Snake;
-use Snake::{
-    hydra::{model, load},
-    commongreen::{model, load},
-    commonbrown::{model, load},
-    commonred::{model, load},
-    god::{model, load},
-};
-use ron::*;
-
-struct hurt {
-    // Struct made of function
-    cred: func,
-};
-struct create {
-    cred: func,
-};
-
-impl create {
-    fn cred() {
-        load::new()
-            .token(rand::randinteger(1...101))
-            .health(rand::randinteger(place))
-            .build()
+impl Spider {
+    fn New() {
+        //! create model, select AI from list
+    }
+    fn Curious() {
+        //! Curious animation, moves closer or further. Will not attack
+    }
+    fn Protective() {
+        //! Egg sac nearby
     }
 }
-impl hurt {
-    fn cred() {
-        ron::parse("loadedsnake.ron");
-        ron::search(snake.token
+impl worms {
+    fn New() {
+        //! select AI and Model from list
+    }
+    fn Colony() {
+        //! worm colony, rare encounter
+    }
+}
+impl Flies {
+    fn New() {
+        //! selects what form of annoying
     }
 }
