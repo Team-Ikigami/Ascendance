@@ -6,22 +6,27 @@ mod friends;
 mod error;
 use npc::{
     town::{
-        random::new,
-        cityone::*,
-        citytwo::*,
+        random,
+        cityone,
+        citytwo,
     },
-    random::{
-        traveller::{Salesman, thief, lostman, crazylady},
-    },
+    random::traveller,
 };
 use hostile::{
     bandit::{BasicB, LeaderB, Chief, king, god},
     enemysoldier::{BasicES, LeaderES, ChiefES),
     large::{
-        savannha::{Lion, Goblin, Tiger, Deranged},
-        ocean::{Kraken, Shark, ReallyLargeShark},
-        mountain::{Mountaindragon, Snowgiant},
-        everwhere::{Troll, SleepingLandDragon},
+        Lion,
+        Goblin,
+        Tiger,
+        Deranged,
+        Kraken,
+        Shark,
+        ReallyLargeShark,
+        Mountaindragon,
+        Snowgiant,
+        Troll,
+        SleepingLandDragon,
     },
     small::{
         Mouse,
@@ -71,6 +76,114 @@ fn mountain(summonid: &mut CreatureID, creaturesize: &mut CreatureSize, &mut Hos
             }
             CreatureSize(CS) if CS = 2 => match {
                 summonid(SID) if SID = 1 => Sheep::New(rand::RandInt(10 .. 20));
+            }
+        }
+        _ => {
+            let control_loop = ControlFlow::Exit;
+        }
+    }
+}
+fn savannha(summonid: &mut CreatureID, creaturesize: &mut CreatureSize, &mut Hostility) {
+    let summonid;
+    match EnemySummon {
+        Hostility(H) if H = True => match {
+            CreatureSize(CS) if CS = 1 => match {
+                summonid(SID) if SID = 1 => ::new(),
+                summonid(SID) if SID = 2 => ::new(),
+            }
+            CreatureSize(CS) if CS = 2 => match {
+                summonid(SID) if SID = 1 => ::new(),
+                summonid(SID) if SID = 2 => ::new(),
+            }
+        }
+        Hostility(H) if H = False => match {
+            CreatureSize(CS) if CS = 1 => match {
+                summonid(SID) if SID = 1 => ::New(),
+                summon(SID) if SID = 2 => ::New(),
+            }
+            CreatureSize(CS) if CS = 2 => match {
+                summonid(SID) if SID = 1 => ::New(rand::RandInt(10 .. 20));
+            }
+        }
+        _ => {
+            let control_loop = ControlFlow::Exit;
+        }
+    }
+}
+fn everywhere(summonid: &mut CreatureID, creaturesize: &mut CreatureSize, &mut Hostility) {
+    let summonid;
+    match EnemySummon {
+        Hostility(H) if H = True => match {
+            CreatureSize(CS) if CS = 1 => match {
+                summonid(SID) if SID = 1 => ::new(),
+                summonid(SID) if SID = 2 => ::new(),
+            }
+            CreatureSize(CS) if CS = 2 => match {
+                summonid(SID) if SID = 1 => ::new(),
+                summonid(SID) if SID = 2 => ::new(),
+            }
+        }
+        Hostility(H) if H = False => match {
+            CreatureSize(CS) if CS = 1 => match {
+                summonid(SID) if SID = 1 => ::New(),
+                summon(SID) if SID = 2 => ::New(),
+            }
+            CreatureSize(CS) if CS = 2 => match {
+                summonid(SID) if SID = 1 => ::New(rand::RandInt(10 .. 20));
+            }
+        }
+        _ => {
+            let control_loop = ControlFlow::Exit;
+        }
+    }
+}
+fn ocean(summonid: &mut CreatureID, creaturesize: &mut CreatureSize, &mut Hostility) {
+    let summonid;
+    match EnemySummon {
+        Hostility(H) if H = True => match {
+            CreatureSize(CS) if CS = 1 => match {
+                summonid(SID) if SID = 1 => ::new(),
+                summonid(SID) if SID = 2 => ::new(),
+            }
+            CreatureSize(CS) if CS = 2 => match {
+                summonid(SID) if SID = 1 => ::new(),
+                summonid(SID) if SID = 2 => ::new(),
+            }
+        }
+        Hostility(H) if H = False => match {
+            CreatureSize(CS) if CS = 1 => match {
+                summonid(SID) if SID = 1 => ::New(),
+                summon(SID) if SID = 2 => ::New(),
+            }
+            CreatureSize(CS) if CS = 2 => match {
+                summonid(SID) if SID = 1 => ::New(rand::RandInt(10 .. 20));
+            }
+        }
+        _ => {
+            let control_loop = ControlFlow::Exit;
+        }
+    }
+}
+fn underground(summonid: &mut CreatureID, creaturesize: &mut CreatureSize, &mut Hostility) {
+    let summonid;
+    match EnemySummon {
+        Hostility(H) if H = True => match {
+            CreatureSize(CS) if CS = 1 => match {
+                summonid(SID) if SID = 1 => ::new(),
+                summonid(SID) if SID = 2 => ::new(),
+            }
+            CreatureSize(CS) if CS = 2 => match {
+                summonid(SID) if SID = 1 => ::new(),
+                summonid(SID) if SID = 2 => ::new(),
+            }
+        }
+        Hostility(H) if H = False => match {
+            CreatureSize(CS) if CS = 1 => match {
+                summonid(SID) if SID = 1 => ::New(),
+                summon(SID) if SID = 2 => ::New(),
+            }
+            CreatureSize(CS) if CS = 2 => match {
+                summonid(SID) if SID = 1 => ::New(rand::RandInt(10 .. 20));
             }
         }
         _ => {
