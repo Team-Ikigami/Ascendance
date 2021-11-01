@@ -1,5 +1,5 @@
 
-# The New World
+# The New World: Starting From The Bottom
 
 ## information
 
@@ -22,7 +22,11 @@ As of right now this is unavailable for other people to see. There are reasons f
     - [ ] User Interface
     - [ ] Sound
     - [ ] Rendering
-  - [ ] Written a story and lore for the world
+  - [ ] World Building
+    - [ ] Written Lore
+    - [ ] Drawn Maps
+    - [ ] Writtin Book Easter Eggs
+    - [ ] lore world building stuff
   - [ ] Created assets
     - [ ] Music
       - [ ] Downloaded audio editor
@@ -92,4 +96,4 @@ As of right now this is unavailable for other people to see. There are reasons f
 
 # Documentation
 
-Documentation at [NewWorldRPG.com](AscensionRPG.github.io)
+Documentation at [NewWorldRPG.com/SFTB](AscensionRPG.github.io)
