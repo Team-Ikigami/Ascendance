@@ -1,5 +1,5 @@
 
-# The New World: Starting From The Bottom
+# Ascending to Godhood: Starting From The Bottom
 
 ## information
 
@@ -96,4 +96,4 @@ As of right now this is unavailable for other people to see. There are reasons f
 
 # Documentation
 
-Documentation at [NewWorldRPG.com/SFTB](AscensionRPG.github.io)
+Documentation at [ATG-RPG.com/SFTB](AscensionRPG.github.io)
