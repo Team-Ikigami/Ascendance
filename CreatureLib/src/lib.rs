@@ -15,45 +15,13 @@ use npc::{
 use hostile::{
     bandit::{BasicB, LeaderB, Chief, king, god},
     enemysoldier::{BasicES, LeaderES, ChiefES),
-    large::{
-        Lion,
-        Goblin,
-        Tiger,
-        Deranged,
-        Kraken,
-        Shark,
-        ReallyLargeShark,
-        Mountaindragon,
-        Snowgiant,
-        Troll,
-        SleepingLandDragon,
-    },
-    small::{
-        Mouse,
-        FlashyBird, 
-        Snakes,
-        CuteShark,
-        CommonFish,
-        SparklyRareFish,
-        rat,
-        vulture,
-        
-    },
+    large::{Lion, Goblin, Tiger, Deranged, Kraken, Shark, ReallyLargeShark, Mountaindragon, Snowgiant, Troll, SleepingLandDragon},
+    small::{Mouse, FlashyBird, Snakes, CuteShark, CommonFish, SparklyRareFish, rat, vulture},
 };
 use friends::{
-    Critter::{
-        Spider,
-        Worms,
-        Flies,
-    },
-    large::{
-        Cow,
-        Bull,
-        Sheep,
-    },
-    small::{
-        squirrel,
-    },
+    Critter::{Spider, Worms, Flies},
+    large::{Cow, Bull, Sheep},
+    small::{squirrel},
 };
     
 fn mountain(summonid: &mut CreatureID, creaturesize: &mut CreatureSize, &mut Hostility) {
@@ -188,6 +156,54 @@ fn underground(summonid: &mut CreatureID, creaturesize: &mut CreatureSize, &mut 
         }
         _ => {
             let control_loop = ControlFlow::Exit;
+        }
+    }
+}
+fn banditfort(PlayerLevel, BanditFort) {
+    match BFORT {
+        BanditFort(BF) if BF = 1 => {
+            let mut bandit = 0
+            let mut leader = 0
+            while(bandit < 10) {
+                BanditB::new()
+                    .clothes(rand::randint(1 .. 4))
+                    .weapon(rand::randint(1 .. 5))
+                    .health(PlayerHealth / 2)
+                    .defense(PlayerDefense / 2)
+                    .experiencegain(HitsGiven / 4)
+                    .build()
+                let bandit = bandit + 1
+            }
+            while(leader < 1) {
+                LeaderB::new()
+                    .clothes(rand::randint(1 .. 4))
+                    .weapon(rand::randint(1 .. 5))
+                    .health(PlayerHealth / 2)
+                    .defense(PlayerDefense / 2)
+                    .experiencegain(HitsGiven / 4) 
+                    .build()
+                let bandit = bandit + 1;
+            }
+        }
+        BanditFort(BF) if BF = 2 => {
+            while(bandit < 30) {
+                BanditB::new()
+                    .clothes(rand::randint(1 .. 4))
+                    .weapon(rand::randint(1 .. 5))
+                    .health(PlayerHealth / 2)
+                    .defense(PlayerDefense / 2)
+                    .build()
+            }
+            while(leader < 1) {
+                LeaderB::new()
+                    .clothes(rand::randint(1 .. 4))
+                    .weapon(rand::randint(1 .. 5))
+                    .health(PlayerHealth / 2)
+                    .defense(PlayerDefense / 2)
+                    .experiencegain(HitsGiven / 4) 
+                    .build()
+                let leader = leader + 1;
+            }
         }
     }
 }
