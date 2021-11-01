@@ -1,5 +1,5 @@
 //! npc means humans who are not inhenrently hostile or a random encounter
-//!
+//! CS = 1 means small CS = 2 means big
 mod npc;
 mod hostile;
 mod friends;
@@ -24,7 +24,7 @@ use friends::{
     small::{squirrel},
 };
     
-fn mountain(summonid: &mut CreatureID, creaturesize: &mut CreatureSize, &mut Hostility) {
+fn mountain(&CreatureID, &CreatureSize, &Hostility) {
     let summonid;
     match EnemySummon {
         Hostility(H) if H = True => match {
@@ -51,7 +51,7 @@ fn mountain(summonid: &mut CreatureID, creaturesize: &mut CreatureSize, &mut Hos
         }
     }
 }
-fn savannha(summonid: &mut CreatureID, creaturesize: &mut CreatureSize, &mut Hostility) {
+fn savannha(&CreatureID, &CreatureSize, &Hostility) {
     let summonid;
     match EnemySummon {
         Hostility(H) if H = True => match {
@@ -78,7 +78,7 @@ fn savannha(summonid: &mut CreatureID, creaturesize: &mut CreatureSize, &mut Hos
         }
     }
 }
-fn everywhere(summonid: &mut CreatureID, creaturesize: &mut CreatureSize, &mut Hostility) {
+fn everywhere(&CreatureID, &CreatureSize, &Hostility) {
     let summonid;
     match EnemySummon {
         Hostility(H) if H = True => match {
@@ -105,7 +105,7 @@ fn everywhere(summonid: &mut CreatureID, creaturesize: &mut CreatureSize, &mut H
         }
     }
 }
-fn ocean(summonid: &mut CreatureID, creaturesize: &mut CreatureSize, &mut Hostility) {
+fn ocean(&CreatureID, &CreatureSize, &Hostility) {
     let summonid;
     match EnemySummon {
         Hostility(H) if H = True => match {
@@ -132,7 +132,7 @@ fn ocean(summonid: &mut CreatureID, creaturesize: &mut CreatureSize, &mut Hostil
         }
     }
 }
-fn underground(summonid: &mut CreatureID, creaturesize: &mut CreatureSize, &mut Hostility) {
+fn underground(&CreatureID, &CreatureSize, &Hostility) {
     let summonid;
     match EnemySummon {
         Hostility(H) if H = True => match {
@@ -151,7 +151,7 @@ fn underground(summonid: &mut CreatureID, creaturesize: &mut CreatureSize, &mut 
                 summon(SID) if SID = 2 => ::New(),
             }
             CreatureSize(CS) if CS = 2 => match {
-                summonid(SID) if SID = 1 => ::New(rand::RandInt(10 .. 20));
+                summonid(SID) if SID = 1 => ::New();
             }
         }
         _ => {
@@ -166,8 +166,8 @@ fn banditfort(PlayerLevel, BanditFort) {
             let mut leader = 0
             while(bandit < 10) {
                 BanditB::new()
-                    .clothes(rand::randint(1 .. 4))
-                    .weapon(rand::randint(1 .. 5))
+                    .clothes(rand::thread_rng().gen_range(1..4))
+                    .weapon(rand::thread_rng().gen_range(1..5))
                     .health(PlayerHealth / 2)
                     .defense(PlayerDefense / 2)
                     .experiencegain(HitsGiven / 4)
@@ -176,8 +176,8 @@ fn banditfort(PlayerLevel, BanditFort) {
             }
             while(leader < 1) {
                 LeaderB::new()
-                    .clothes(rand::randint(1 .. 4))
-                    .weapon(rand::randint(1 .. 5))
+                    .clothes(rand::thread_rng().gen_range(1..4))
+                    .weapon(rand::thread_rng().gen_range(1..5))
                     .health(PlayerHealth / 2)
                     .defense(PlayerDefense / 2)
                     .experiencegain(HitsGiven / 4) 
@@ -188,17 +188,17 @@ fn banditfort(PlayerLevel, BanditFort) {
         BanditFort(BF) if BF = 2 => {
             while(bandit < 30) {
                 BanditB::new()
-                    .clothes(rand::randint(1 .. 4))
-                    .weapon(rand::randint(1 .. 5))
+                    .clothes(rand::thread_rng().gen_range(1..4))
+                    .weapon(rand::thread_rng().gen_range(1..5))
                     .health(PlayerHealth / 2)
                     .defense(PlayerDefense / 2)
                     .build()
             }
             while(leader < 1) {
                 LeaderB::new()
-                    .clothes(rand::randint(1 .. 4))
-                    .weapon(rand::randint(1 .. 5))
-                    .health(PlayerHealth / 2)
+                    .clothes(rand::thread_rng().gen_range(1..4))
+                    .weapon(rand::thread_rng().gen_range(1..5))
+                    .health(PlayerHealth / 1.5)
                     .defense(PlayerDefense / 2)
                     .experiencegain(HitsGiven / 4) 
                     .build()
