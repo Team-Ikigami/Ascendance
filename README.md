@@ -1,5 +1,5 @@
 
-# rust_game
+# The New World
 
 ## information
 
@@ -90,6 +90,6 @@ As of right now this is unavailable for other people to see. There are reasons f
   - [ ] User-interfaces saving new files and accessing files
   - [ ] List inventory possibilites and work
 
-# Documenntation
+# Documentation
 
-Documentation at [AscensionRPG.com](AscensionRPG.github.io)
+Documentation at [NewWorldRPG.com](AscensionRPG.github.io)
