@@ -9,6 +9,6 @@ edition = "2018"
 rg3d = "0.23.1"
 rg3d-ui = "0.14.0"
 savefile = "0.8.3"
-ron = "0.6.5"
+ron = "0.7.0"
 
 data = { path = "./data", version = "*" }
