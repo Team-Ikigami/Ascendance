@@ -6,9 +6,6 @@ edition = "2018"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-rg3d = "0.23.1"
-rg3d-ui = "0.14.0"
+rg3d = { git = "https://github.com/rg3dengine/rg3d", rev = "a3c3d678c361aa72fc44c36f3e37adc20a54f311" }
 savefile = "0.8.3"
 ron = "0.7.0"
-
-data = { path = "./data", version = "*" }
