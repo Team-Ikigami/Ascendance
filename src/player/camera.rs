@@ -53,6 +53,10 @@ pub struct CameraController {
     pivot: Handle<Node>,
     hinge: Handle<Node>,
     camera: Handle<Node>,
+    // An angle around local Y axis of the pivot.
+    yaw: f32,
+    // An angle around local X axis of the hinge.
+    pitch: f32,
 }
 
 impl CameraController {
@@ -83,11 +87,41 @@ impl CameraController {
                 hinge
             }])
             .build(graph);
-
+    
         Self {
             pivot,
             hinge,
             camera,
+            yaw: 0.0,
+            pitch: 0.0,
         }
+    }
+    pub fn handle_device_event(&mut self, device_event: &DeviceEvent) {
+        if let DeviceEvent::MouseMotion { delta } = device_event {
+            const MOUSE_SENSITIVITY: f32 = 0.015;
+
+            self.yaw -= (delta.0 as f32) * MOUSE_SENSITIVITY;
+            self.pitch = (self.pitch + (delta.1 as f32) * MOUSE_SENSITIVITY)
+                // Limit vertical angle to [-90; 90] degrees range
+                .max(-90.0f32.to_radians())
+                .min(90.0f32.to_radians());
+        }
+    }
+    pub fn update(&mut self, graph: &mut Graph) {
+        // Apply rotation to the pivot.
+        graph[self.pivot]
+            .local_transform_mut()
+            .set_rotation(UnitQuaternion::from_axis_angle(
+                &Vector3::y_axis(),
+                self.yaw,
+            ));
+
+        // Apply rotation to the hinge.
+        graph[self.hinge]
+            .local_transform_mut()
+            .set_rotation(UnitQuaternion::from_axis_angle(
+                &Vector3::x_axis(),
+                self.pitch,
+            ));
     }
 }
