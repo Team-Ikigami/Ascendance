@@ -1,27 +1,28 @@
-// #[allow(unused_imports)]
-mod items;
-mod user;
-mod GUI;
-use savefile::*;
-use ron::*;
 use rg3d::{
-    engine::Engine,
-    engine::framework::prelude::*,
-    window::Fullscreen,
+    core::{color::Color, futures::executor::block_on, pool::Handle},
+    engine::framework::{Framework, GameEngine, GameState},
+    event::{DeviceEvent, DeviceId, WindowEvent},
+    scene::Scene,
 };
-use std::time::Instant;
 
-struct Game { }
+struct Game {
+    // Empty for now.
+}
 
 impl GameState for Game {
-    fn init(_engine: &mut Engine) -> Self where Self: Sized {
-        Self { }
+    fn init(engine: &mut GameEngine) -> Self
+    where
+        Self: Sized,
+    {
+        Self {}
+    }
+
+    fn on_tick(&mut self, engine: &mut GameEngine, dt: f32) {
+        // This method is called at fixed rate of 60 FPS.
+        // It will contain all the logic of the game.
     }
 }
 
 fn main() {
-    Framework::<Game>::new()
-        .unwrap()
-        .title("Simple")
-        .run();
+    Framework::<Game>::new().unwrap().title("RPG").run()
 }
