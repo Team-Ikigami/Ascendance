@@ -30,6 +30,7 @@ pub struct Player {
     model: Handle<Node>,
     camera_controller: CameraController,
     input_controller: InputController,
+    animation_machine: AnimationMachine,
 }
 
 impl Player {
@@ -80,6 +81,7 @@ impl Player {
             pivot,
             model,
             // As a final stage create camera controller.
+            animation_machine: AnimationMachine::new(scene, model, resource_manager.clone()).await,
             camera_controller: CameraController::new(&mut scene.graph, resource_manager).await,
             input_controller: Default::default(),
         }
@@ -166,6 +168,8 @@ impl Player {
         scene.graph[self.camera_controller.pivot]
             .local_transform_mut()
             .set_position(position + velocity);
+        self.animation_machine
+            .update(scene, dt, AnimationMachineInput { walk: is_moving });
     }
     pub fn handle_key_event(&mut self, key: &KeyboardInput) {
         if let Some(key_code) = key.virtual_keycode {
