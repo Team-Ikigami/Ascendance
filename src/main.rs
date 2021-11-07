@@ -5,7 +5,7 @@ use rg3d::{
     event::{DeviceEvent, DeviceId, WindowEvent},
     scene::Scene,
 };
-
+use CreatureLib::{mountain, savannha, everywhere, ocean, underground, banditfort};
 mod level;
 mod player;
 struct Game {
@@ -38,6 +38,7 @@ impl GameState for Game {
         let scene = &mut engine.scenes[self.scene];
 
         self.player.update(scene);
+        
     }
 
     fn on_device_event(
