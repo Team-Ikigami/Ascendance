@@ -10,4 +10,11 @@ Cargo.lock
 **/*.rs.bk
 
 # indev folders
-*/indev/*.*
+data/scene/indev/
+data/models/indev/
+data/audio/indev/
+data/textures/indev/
+
+# extension generated folders
+/.history
+
