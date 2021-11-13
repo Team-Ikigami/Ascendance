@@ -1,11 +1,11 @@
 
 # Ascending to Godhood: Starting From The Bottom
 
-## information
+## Information
 
-As of right now this is unavailable for other people to see. There are reasons for this, such as;
+This repository only contains a demo of the game which includes roughly 3-20 hours of playtime. Please report issues with both the Demo version and the official licensed version here. To gain permission to view the official versions source code, please open an issue with the Source Request template and with the title Request Permission View Access. Any other title (case sensitive) will be closed and ignored. 
 
-1. Incomplete apha. This is currenty a game that is pre-alpha, meaning that there is practically nothing.
+This repository contains information on what has not been completed for the demo.
 
 ## Tasks
 
