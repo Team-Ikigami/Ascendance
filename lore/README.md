@@ -46,6 +46,7 @@ pleased by their success gave the humans a book filled with knowledge untold in 
 or the heavenly realm, and with this the humans learn of the skill to change the world as
 they saw fit.
 
+
 They called this skill Magic after their word for world *Mag* and their word for change *hik*.
 Then for hundreds of years these humans lived and learn more of this Magic. Until Tag awoke 
 and granted them the blessing of fertility, these humans who lived for so long without
@@ -129,3 +130,5 @@ An unknown fact about the sword is that it has no effect on demons.
 A crafty race that are stronger than the gods, while they are weakened on earth, the closer they are 
 to human settlements affects how strong they are, The more sinful the humans are, the stronger they are.
 Fighting them 
+
+### Demon-Subspecies
