@@ -2,7 +2,7 @@
 name: Source code access
 about: Request access to source code
 title: Source Code Access Request
-labels: ''
+labels: Developer application
 assignees: ''
 
 ---
