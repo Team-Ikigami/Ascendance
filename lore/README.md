@@ -110,10 +110,10 @@ and others would love them.
 
 ## Palace of the Undead
 
-A parasite infected some food, which when eated, would cause
-the person to have sped up cell growth, this caused two things; Firstly, they would quickly become deformed fleshy monsters
-and Secondly, the sped up cell growth in their brain would cause them to become hostile and unintelligent. The parasites eggs would
-also be stuck into the teeth of the monster, which would spread it to any food they ate.
+A parasite infected some food, which when eated, would cause the person to have sped up cell growth, this caused two 
+things; Firstly, they would quickly become deformed fleshy monsters and secondly, the sped up cell growth in their 
+brain would cause them to become hostile and unintelligent. The parasites eggs would also be stuck into the teeth 
+of the monster, which would spread it to any food they ate.
 
 # Items
 
@@ -123,7 +123,7 @@ An item with the ability to cause doubt in all it targets and deny any negative 
 Used in the battle of gods to destroy the gods that would cause them to age and weaken.
 An unknown fact about the sword is that it has no effect on demons.
 
-# Monsters
+# Species
 
 ## Demons
 
@@ -131,4 +131,24 @@ A crafty race that are stronger than the gods, while they are weakened on earth,
 to human settlements affects how strong they are, The more sinful the humans are, the stronger they are.
 Fighting them 
 
-### Demon-Subspecies
+## Succubi
+
+A relative to the demon, closer to the sin of lust than the others. Just like their cousins, they are crafty and 
+ck up prey often.
+
+## Inoto
+
+A demi-human that takes characteristics of the domesticated wolf as part of their species
+
+## Neoto
+
+A demi-human that takes characteristics of the domesticated cat as their species. The most popular demi-human for other humans
+Usually peaceful but some are rather feisty.
+
+## Spiders
+
+The spider is a worshipped being as it said that each leg corresponds to a god and the other two legs represent the two demons that influenced the world the most
+
+### House spider
+
+
