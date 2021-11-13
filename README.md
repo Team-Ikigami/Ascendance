@@ -1,5 +1,5 @@
 
-# Ascending to Godhood: Starting From The Bottom
+# Ascending to Godhood. Demo Version
 
 ## Information
 
