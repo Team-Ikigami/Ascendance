@@ -105,9 +105,9 @@ went to the demons, asking for their beauty to be worsened a smidgen because the
 family. The demons obliged and made the demi-humans a controversial species with humans, some woukd hate them 
 and others would love them.
 
-<div id="undeadpalace">
-    ## Palace of the Undead
-</div>
+<div id="undeadpalace"></div>
+
+## Palace of the Undead
 
 A parasite infected some food, which when eated, would cause
 the person to have sped up cell growth, this caused two things; Firstly, they would quickly become deformed fleshy monsters
