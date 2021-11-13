@@ -1,0 +1,8 @@
+required_approvals = 2
+block_labels = ["wip"]
+delete_merged_branches = true
+status = [
+    "Check (windows-latest)",
+    "Test Suite",
+    "Rustfmt",
+]
