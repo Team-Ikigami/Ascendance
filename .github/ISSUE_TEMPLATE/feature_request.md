@@ -11,7 +11,7 @@ assignees: HermaeusTheMora, DuckEater54
 
 ## **Is your feature request related to a problem? Please describe.**
 
-The problem i'm experiencing involves the 
+The problem i'm experiencing involves:
 
 **Replace this line**
 
