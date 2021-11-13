@@ -7,8 +7,14 @@ assignees: HermaeusTheMora, DuckEater54
 
 ---
 
-**Is your feature request related to a problem? Please describe.**
-A description of what the feature is. For example, a weapon, enemy, ally, map, or something else entirely.
+# Feature Request
 
-**Additional context**
+## **Is your feature request related to a problem? Please describe.**
+
+The problem i'm experiencing involves:
+**Replace this line**
+The feature I would like to have added is:
+- [ ] **check box item, replace this bold section**
+
+## **Additional context about how to improve for the future relating to this**
 Add any other context or screenshots about the feature request here.
