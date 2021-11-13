@@ -1,5 +1,5 @@
 required_approvals = 2
-block_labels = ["wip"]
+block_labels = ["wip", "not finished yet", "incomplete"]
 delete_merged_branches = true
 status = [
     "Check (windows-latest)",
