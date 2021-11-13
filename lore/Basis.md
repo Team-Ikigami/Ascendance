@@ -75,10 +75,7 @@ centuries without growing old, the humans had just decades before being useless.
 
 With more people reaching an age where they could no longer live a life of movement, the god of 
 death returned from the grave and granted the blessing of death to all species, this was the cause 
-of the great famine of old which brought every city to its knees. A parasite infected some food, which when eated, would cause
-the person to have sped up cell growth, this caused two things; Firstly, they would quickly become deformed fleshy monsters
-and Secondly, the sped up cell growth in their brain would cause them to become hostile and unintelligent. The parasites eggs would
-also be stuck into the teeth of the monster, which would spread it to any food they ate.
+of the great famine of old which brought every city to its knees. The city that got the worst of it was called [insert-name-here](#undeadpalace)
 The elves were not given death in the same way as the humans were as they used the weapon granted to those who killed
 Ondofna the first time. Instead they could only die if they were killed or ran out of magic, the one
 thing they seeked to improve. Following suit was the fourth god who gave them the ability to age with 
@@ -107,6 +104,14 @@ supremacy. Their country was under constant attack from humans because of the be
 went to the demons, asking for their beauty to be worsened a smidgen because they didnt want to have to kill their
 family. The demons obliged and made the demi-humans a controversial species with humans, some woukd hate them 
 and others would love them.
+
+<div id="undeadpalace">
+## Palace of the Undead
+</div>
+A parasite infected some food, which when eated, would cause
+the person to have sped up cell growth, this caused two things; Firstly, they would quickly become deformed fleshy monsters
+and Secondly, the sped up cell growth in their brain would cause them to become hostile and unintelligent. The parasites eggs would
+also be stuck into the teeth of the monster, which would spread it to any food they ate.
 
 # Items
 
