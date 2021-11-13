@@ -1,0 +1,40 @@
+name: Test Code
+
+env:
+  CARGO_TERM_COLOR: always
+  TestResultTrue ${{ false }}
+  
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+      branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Update
+        run: sudo apt update
+        
+      - name: Update Rust
+        run: rustup update
+                
+      - name: Install Dependencies
+        run: sudo apt-get install libasound2-dev libudev-dev pkg-config xorg-dev libxcb-shape0-dev libxcb-xfixes0-dev libxkbcommon-dev
+      
+      - name: Install rg3d
+        run: git clone https://github.com/rg3dengine/rg3d             
+        
+      - name: Build rg3d
+        run: cd rg3d && cargo build && cd ../.
+
+      - name: Build Project
+        run: cargo build -v
+
+      - name: Test Project
+        run: cargo test --all-targets --verbose
