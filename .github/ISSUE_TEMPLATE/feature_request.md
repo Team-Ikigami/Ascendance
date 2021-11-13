@@ -11,8 +11,10 @@ assignees: HermaeusTheMora, DuckEater54
 
 ## **Is your feature request related to a problem? Please describe.**
 
-The problem i'm experiencing involves:
+The problem i'm experiencing involves the 
+
 **Replace this line**
+
 The feature I would like to have added is:
 - [ ] **check box item, replace this bold section**
 
