@@ -97,3 +97,10 @@ As of right now this is unavailable for other people to see. There are reasons f
 # Documentation
 
 Documentation at [ATG-RPG.com/SFTB](AscensionRPG.github.io)
+
+# Contributing
+
+TODO
+- [ ] CREATE PR TEMPLATE
+- [ ] CREATE BUG_REPORT TEMPLATE
+- [ ] CREATE FEATURE_REQUEST TEMPLATE
