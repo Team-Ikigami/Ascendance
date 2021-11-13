@@ -75,13 +75,16 @@ centuries without growing old, the humans had just decades before being useless.
 
 With more people reaching an age where they could no longer live a life of movement, the god of 
 death returned from the grave and granted the blessing of death to all species, this was the cause 
-of the great famine of old which brought every city to its knees (scp 610). The elves were not 
-given death in the same way as the humans were as they used the weapon granted to those who killed
+of the great famine of old which brought every city to its knees. A parasite infected some food, which when eated, would cause
+the person to have sped up cell growth, this caused two things; Firstly, they would quickly become deformed fleshy monsters
+and Secondly, the sped up cell growth in their brain would cause them to become hostile and unintelligent. The parasites eggs would
+also be stuck into the teeth of the monster, which would spread it to any food they ate.
+The elves were not given death in the same way as the humans were as they used the weapon granted to those who killed
 Ondofna the first time. Instead they could only die if they were killed or ran out of magic, the one
 thing they seeked to improve. Following suit was the fourth god who gave them the ability to age with 
-the curse that when they age, they become more crazed with their search for knowledge (skyrim seeker)
-eventually succumibing to rituals and overflowing magic power. It is said that every time an elf aged
-to become a (seeker) the world would be unstable.
+the curse that when they age, they become more crazed with their search for knowledge, and became known as
+'Daemons', eventually succumibing to rituals and overflowing magic power. It is said that every time an elf aged
+to become a Daemon the world would become unstable.
 
 (keep this)
 The original humans were given the blessing of aging but not death as to curse them. Their species can 
@@ -109,7 +112,7 @@ and others would love them.
 
 ## The Throngbar (no changing this)
   
-An item with the ability to cause doubt in all it targets and deny and negative effects on its user.
+An item with the ability to cause doubt in all it targets and deny any negative effects on its user.
 Used in the battle of gods to destroy the gods that would cause them to age and weaken.
 An unknown fact about the sword is that it has no effect on demons.
 
