@@ -6,19 +6,18 @@ Each god represented a different part of life:
 - The first was Tag, who was the time before life, where stillness and death met 
 to bring life into the world. He also holds ground over fertility, the world cannot
 live without the fertility Tag brings.
-- The second was ~~~, who was the time when life grew and becomes independent,
-when Tag ends and ~~~~ begins is the time of birth and growth.
-- The third is ~~~~ and represents the mature adult life, stories about it (assign 
-gender) vary a lot, but most say that it is a tired being that has many wrinkles on
-its forehead and hair greyer than the clouds on a stormy day.
-- The fourth is ~~~~, who judges the old and brings Ondofna to power, without her, 
+- The second was Largo, who was the time when life grew and becomes independent,
+when Tag ends and Largo begins is the time of birth and growth.
+- The third is Eoden and represents the mature adult life, stories about her vary a
+lot, but most say that she is a tired being that has many wrinkles on her forehead and hair greyer than the clouds on a stormy day.
+- The fourth is Quor, who judges the old and brings Ondofna to power, without her, 
 the old would never age and feel the pains of long life. Not all species have her 
 blessing, such as the elves or the Dryads.
 - The fifth was Ondofna, the one who brings death and stillness to the world,
 without him, the sickly would suffer and the old would forever live. It is said
 that Tag and Ondofna might be the same god.
 ~ The sixth has no name and cannot be percieved, usually called the invisible
-god, the unnamed one (you can give them a name) controls the cycle between the
+god, the unnamed one (I like the sound of 'The Unnamed One') controls the cycle between the
 parts of life. Without it, one would forever stay the same in both mind and body.
 The cult that worships it has existed far longer than all others.
 
@@ -51,12 +50,12 @@ They called this skill Magic after their word for world *Mag* and their word for
 Then for hundreds of years these humans lived and learn more of this Magic. Until Tag awoke 
 and granted them the blessing of fertility, these humans who lived for so long without
 birthing another were scareed of this new discovery and stopped their worldly indulging, but 
-the damage had been done and they were now parents of a younger generation. Then ~~~~ (second)
+the damage had been done and they were now parents of a younger generation. Then Largo 
 awoke to guide the young ones who now roamed the worlds and let them grow and learn. These
 children, tired of their journey as wanderers split into two groups, one that would learn to be
 strong and one that would learn magic. Both their goals were to live forever.
 
-Then, ~~~~ (third god) awoke and the children grew into adults. The young ones who were in tune 
+Then, Eoden awoke and the children grew into adults. The young ones who were in tune 
 with the world rejected their worldly desires in order to learn, the ones who were in tune with 
 death did not reject the temptations set upon them by adulthood and maturity and gave birth to 
 more children who became even less in tune with magic. This happened for generations and 
@@ -70,7 +69,8 @@ users, now realising the need to keep their group alive before they were unable 
 another generation who was even closer to magic at birth. These children were not as able to 
 increase their potential and so they fought with the evolutionary traits they were born with to
 become even stronger. The humans who were not in touch with the world grew old younger than ever 
-with each generation. Unlike the magic users (now called elves, please explain) who could live for 
+with each generation. Unlike the magic uses, or elves, named so after their word for strong *ell* 
+and their word for blooded *vese* who could live for 
 centuries without growing old, the humans had just decades before being useless.
 
 With more people reaching an age where they could no longer live a life of movement, the god of 
@@ -105,7 +105,7 @@ went to the demons, asking for their beauty to be worsened a smidgen because the
 family. The demons obliged and made the demi-humans a controversial species with humans, some woukd hate them 
 and others would love them.
 
-# Item
+# Items
 
 ## The Throngbar (no changing this)
   
@@ -115,7 +115,7 @@ An unknown fact about the sword is that it has no effect on demons.
 
 # Monsters
 
-Demons
+## Demons
 
 A crafty race that are stronger than the gods, while they are weakened on earth, the closer they are 
 to human settlements affects how strong they are, The more sinful the humans are, the stronger they are.
