@@ -97,10 +97,3 @@ This repository contains information on what has not been completed for the demo
 # Documentation
 
 Documentation at [ATG-RPG.com/SFTB](AscensionRPG.github.io)
-
-# Contributing
-
-TODO
-- [ ] CREATE PR TEMPLATE
-- [ ] CREATE BUG_REPORT TEMPLATE
-- [ ] CREATE FEATURE_REQUEST TEMPLATE
