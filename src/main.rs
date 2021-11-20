@@ -8,6 +8,7 @@ use rg3d::{
 use CreatureLib::{mountain, savannha, everywhere, ocean, underground, banditfort};
 mod level;
 mod player;
+mod gui;
 struct Game {
     scene: Handle<Scene>,
     level: Level,
@@ -24,40 +25,17 @@ impl GameState for Game {
     fn init(engine: &mut GameEngine) -> Self
     where
         Self: Sized,
-    {
-        let mut scene = Scene::new();
-        scene.ambient_lighting_color = Color::opaque(150, 150, 150);
-        let player = block_on(Player::new(engine.resource_manager.clone(), &mut scene));
-        Self {
-            player,
-            level: block_on(Level::new(engine.resource_manager.clone(), &mut scene)),
-            scene: engine.scenes.add(scene),
-        }
-    }
-    fn on_tick(&mut self, engine: &mut GameEngine, dt: f32) {
-        let scene = &mut engine.scenes[self.scene];
-
-        self.player.update(scene);
-        
-    }
+    {}
+    fn on_tick(&mut self, engine: &mut GameEngine, dt: f32) {}
 
     fn on_device_event(
         &mut self,
         _engine: &mut GameEngine,
         _device_id: DeviceId,
         event: DeviceEvent,
-    ) {
-        self.player.handle_device_event(&event);
-    }
-    fn on_window_event(&mut self, _engine: &mut GameEngine, event: WindowEvent) {
-        match event {
-            WindowEvent::KeyboardInput { input, .. } => {
-                self.player.handle_key_event(&input);
-            }
-            _ => (),
-        }
-    }
+    ) {}
+    fn on_window_event(&mut self, _engine: &mut GameEngine, event: WindowEvent) {}
 }
 fn main() {
-    Framework::<Game>::new().unwrap().title("RPG").run()
+    Framework::<Game>::new().unwrap().title("Ascending to Godhood").run()
 }

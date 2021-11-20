@@ -1,13 +1,11 @@
 fn ThreeCoreBasicBrewingTable() {
     println!("f");
 }
-fn ThreeCoreMediumBrewingTable() {
+fn MediumBrewingTable() {
     println!("Three core brewing stand");
 }
-fn ThreeCoreAdvancedBrewingTable() {
-    let ctx = &mut engine.user_interface.build_ctx();
-    let scrollbar;
-    GridBuilder::new(
+fn AdvancedBrewingTable() {
+    let ThreeCoreAdvancedBrewingTable = GridBuilder::new(
         WidgetBuilder::new()
             .with_child(
                 ImageBuilder::new(

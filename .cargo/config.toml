@@ -1,0 +1,8 @@
+[alias]
+b = "build"
+f = "fmt"
+r = "run"
+fv = "run --release"
+
+[build]
+target-dir = "build"
