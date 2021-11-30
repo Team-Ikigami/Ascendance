@@ -1,8 +1,9 @@
 [alias]
-b = "build"
-f = "fmt"
-r = "run"
-fv = "run --release"
+b-lin = "make --makefile .cargo\Makefile.toml Linux-bft"
+b-win = "make --makefile .cargo\Makefile.toml Windows-bft"
+r = "make --makefile Makefile.toml Run"
+up = "make --makefile Makefile.toml Update"
+cl = "make --makefile Makefile.toml clean"
 
 [build]
 target-dir = "build"

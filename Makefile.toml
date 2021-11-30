@@ -1,0 +1,40 @@
+[env]
+CARGO_MAKE_RUST_SCRIPT_PROVIDER = "rust-script"
+
+[tasks.Linux-bft]
+script = [
+	"cargo fmt --verbose --message-format=human"
+	"cargo clean"
+	"cargo upgrade --workspace --exclude rg3d"
+	"cargo update"
+	"cd ${CARGO_MAKE_WORKING_DIRECTORY}/libraries/rg3d"
+	"git pull"
+	"cargo build --target=x86_64-unknown-linux-gnu --target-dir=build/linux",
+	"cargo test"
+]
+
+[tasks.Windows-bft]
+script = [
+        "cargo fmt --verbose --message-format=human"
+	"cargo clean"
+        "cargo upgrade --workspace --exclude=rg3d"
+        "cargo update"
+        "cd ${CARGO_MAKE_WORKING_DIRECTORY}/libraries/rg3d"
+        "git pull"
+        "cargo build --target=x86_64-pc-windows-msvc --target-dir=build/windows",
+        "cargo test"
+]
+[tasks.clean]
+command = "rmdir"
+args = [ "/S", "/Q", "build" ]
+
+[tasks.update]
+script = [
+	"cargo upgrade --workspace --exclude=rg3d"
+	"cargo update"
+	"cd ${CARGO_MAKE_WORKING_DIRECTORY}/libraries/rg3d"
+	"git pull"
+]
+[tasks.run]
+command = "cargo"
+args = "run"
