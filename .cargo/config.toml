@@ -1,9 +1,9 @@
 [alias]
-b-lin = "make --makefile .cargo\Makefile.toml Linux-bft"
-b-win = "make --makefile .cargo\Makefile.toml Windows-bft"
-r = "make --makefile Makefile.toml Run"
-up = "make --makefile Makefile.toml Update"
-cl = "make --makefile Makefile.toml clean"
+b = "build"
+fv = "run --release"
+updep = "upgrade --workspace --exclude=rg3d"
+uplock = "update"
+cl = "clean"
 
 [build]
 target-dir = "build"
