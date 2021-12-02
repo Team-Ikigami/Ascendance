@@ -3627,7 +3627,7 @@ dependencies = [
 [[package]]
 name = "rg3d"
 version = "0.23.1"
-source = "git+https://github.com/rg3dengine/rg3d?rev=5eb661a07500d1b9527265dbdce99e97fca3a718#5eb661a07500d1b9527265dbdce99e97fca3a718"
+source = "git+https://github.com/rg3dengine/rg3d#5eb661a07500d1b9527265dbdce99e97fca3a718"
 dependencies = [
  "bitflags 1.3.2",
  "ddsfile",
@@ -3655,7 +3655,7 @@ dependencies = [
 [[package]]
 name = "rg3d-core"
 version = "0.18.0"
-source = "git+https://github.com/rg3dengine/rg3d?rev=5eb661a07500d1b9527265dbdce99e97fca3a718#5eb661a07500d1b9527265dbdce99e97fca3a718"
+source = "git+https://github.com/rg3dengine/rg3d#5eb661a07500d1b9527265dbdce99e97fca3a718"
 dependencies = [
  "arrayvec 0.7.2",
  "base64 0.13.0",
@@ -3679,7 +3679,7 @@ dependencies = [
 [[package]]
 name = "rg3d-core-derive"
 version = "0.13.0"
-source = "git+https://github.com/rg3dengine/rg3d?rev=5eb661a07500d1b9527265dbdce99e97fca3a718#5eb661a07500d1b9527265dbdce99e97fca3a718"
+source = "git+https://github.com/rg3dengine/rg3d#5eb661a07500d1b9527265dbdce99e97fca3a718"
 dependencies = [
  "convert_case",
  "darling 0.13.0",
@@ -3691,7 +3691,7 @@ dependencies = [
 [[package]]
 name = "rg3d-physics2d"
 version = "0.1.0"
-source = "git+https://github.com/rg3dengine/rg3d?rev=5eb661a07500d1b9527265dbdce99e97fca3a718#5eb661a07500d1b9527265dbdce99e97fca3a718"
+source = "git+https://github.com/rg3dengine/rg3d#5eb661a07500d1b9527265dbdce99e97fca3a718"
 dependencies = [
  "rapier2d",
  "rg3d-core",
@@ -3700,7 +3700,7 @@ dependencies = [
 [[package]]
 name = "rg3d-physics3d"
 version = "0.1.0"
-source = "git+https://github.com/rg3dengine/rg3d?rev=5eb661a07500d1b9527265dbdce99e97fca3a718#5eb661a07500d1b9527265dbdce99e97fca3a718"
+source = "git+https://github.com/rg3dengine/rg3d#5eb661a07500d1b9527265dbdce99e97fca3a718"
 dependencies = [
  "rapier3d",
  "rg3d-core",
@@ -3709,7 +3709,7 @@ dependencies = [
 [[package]]
 name = "rg3d-resource"
 version = "0.2.0"
-source = "git+https://github.com/rg3dengine/rg3d?rev=5eb661a07500d1b9527265dbdce99e97fca3a718#5eb661a07500d1b9527265dbdce99e97fca3a718"
+source = "git+https://github.com/rg3dengine/rg3d#5eb661a07500d1b9527265dbdce99e97fca3a718"
 dependencies = [
  "rg3d-core",
 ]
@@ -3717,7 +3717,7 @@ dependencies = [
 [[package]]
 name = "rg3d-sound"
 version = "0.25.0"
-source = "git+https://github.com/rg3dengine/rg3d?rev=5eb661a07500d1b9527265dbdce99e97fca3a718#5eb661a07500d1b9527265dbdce99e97fca3a718"
+source = "git+https://github.com/rg3dengine/rg3d#5eb661a07500d1b9527265dbdce99e97fca3a718"
 dependencies = [
  "alsa-sys",
  "core-foundation-sys 0.8.3",
@@ -3733,7 +3733,7 @@ dependencies = [
 [[package]]
 name = "rg3d-ui"
 version = "0.14.0"
-source = "git+https://github.com/rg3dengine/rg3d?rev=5eb661a07500d1b9527265dbdce99e97fca3a718#5eb661a07500d1b9527265dbdce99e97fca3a718"
+source = "git+https://github.com/rg3dengine/rg3d#5eb661a07500d1b9527265dbdce99e97fca3a718"
 dependencies = [
  "copypasta",
  "fontdue",
