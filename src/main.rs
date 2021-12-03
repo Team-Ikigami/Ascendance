@@ -117,7 +117,30 @@ impl GameState for Game {
             Self: Sized 
     {
         let ctx = &mut engine.user_interface.build_ctx();
-        OpeningUI(ctx);
+        let OpeningUI = GridBuilder::new(WidgetBuilder::new())
+            .with_content(
+                GridBuilder::new(
+                    WidgetBuilder::new()
+                        .on_row(2)
+                        .on_column(1),
+                )
+                .with_content(
+                    newgame: ButtonBuilder::new(WidgetBuilder::new().on_column(2).on_row(2))
+                        .with_text("New Game")
+                        .with_back(ImageBuilder::new(WidgetBuilder::new()).with_texture(SharedTexture::new("data/ui/basbutton.png")))
+                        .build(ctx),
+                    
+                )
+                .build(ctx),
+            )
+            .with_back(
+                ImageBuilder::new(WidgetBuilder::new())
+                    .with_texture(ctx.request_texture("data/ui/openbg2.png"))
+                    .build(ctx),
+            )
+            .add_columns(2)
+            .add_rows(2)
+            .build(ctx);
         Self { }
     }
     fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {

@@ -52,3 +52,6 @@ fn ServerDisconnectUI(ui: &mut UserInterface) {
 fn ServerSettingsUI(ui: &mut UserInterface) {
     let ctx = &mut ui.build_ctx();
 }
+fn ServerChatUI(ui: &mut UserInterface) {
+    let ctx = &mut ui.build_ctx();
+}
