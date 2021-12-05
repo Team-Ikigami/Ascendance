@@ -1,0 +1,14 @@
+(
+    files: [
+        (
+            fwlocation: "https://file.atg-rpg.com/data/models/spider.fbx",
+            fpath: "./data/models/",
+            fname: "spider.fbx",
+        ),
+        (
+            fwlocation: "",
+            fpath: "",
+            fname: "",
+        ),
+    ].
+)

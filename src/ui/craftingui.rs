@@ -1,3 +1,5 @@
+use rg3d::engine::Engine;
+use rg3d::gui::UserInterface;
 // functions
 fn ThreeCoreBasicBrewingTable(ui: &mut UserInterface) -> Handle<UiNode> {
     let ctx = &mut ui.build_ctx();
