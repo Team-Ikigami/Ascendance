@@ -97,3 +97,10 @@ This repository contains information on what has not been completed for the demo
 # Documentation
 
 Documentation at [ATG-RPG.com/SFTB](AscensionRPG.github.io)
+
+# License
+
+By having access to view, edit, contribute, clone or otherwise, 
+you understand that you are restricted by the 
+Creative Commons Attribution NonCommercial No-Derivatives License to not share details of source code.
+More can be read about it [here](LICENSE.md).
