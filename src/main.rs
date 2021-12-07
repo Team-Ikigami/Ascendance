@@ -8,7 +8,9 @@ use rg3d::{
     engine::{
         Engine,
         framework::prelude::*,
-        resource_manager::ResourceManager
+        resource_manager::ResourceManager,
+		DeviceEvent,
+		DeviceId
     },
     gui::{
         button::{ButtonBuilder, ButtonMessage},
@@ -95,16 +97,26 @@ struct Game {	}
 // fn AverageBanditBarbarian(builder: &mut ResourceManager) {}
 // fn AverageBanditChief(builder: &mut ResourceManager) {}
 
+/// Uses the rg3d crates framework requirements. This section runs all the necesary functions and such.
+/// init is used for initializing of the game. In here we have resoure checks, preloading of the game and other stuff.
+/// on_tick is used for logic that happens every second. It has a fixed fps of 60 stored in the dt variable.
+/// on_ui_message handles the messges created from interacting with the ui. if let some() statements are exetremely common here.
+/// on_device_event handles the device events such as mouse and keyboard.
+/// on_window_event handles the window events such as resizing.
+/// on_resource_load handles the resource loading.
 impl GameState for Game {
-    fn init(engine: &mut Engine) -> Self 
-        where 
-            Self: Sized 
-    {
+    fn init(engine: &mut Engine) -> Self where Self: Sized {
         let ctx = &mut engine.user_interface.build_ctx();
         Self {	}
 	}
+	fn on_tick(&mut self, engine: &mut Engine, dt: f32, control_flow: &mut ControlFlow) {}
+	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
+	fn on_device_event(&mut self, engine: &mut Engine, device_id: DeviceId, event: DeviceEvent) {}
+	fn on_window_event(&mut self, engine: &mut Engine, event: WindowEvent) {}
+	fn on_exit(&mut self, engine: &mut Engine) {}
 }
 
+/// Uses the rg3d crate to create a window and run the game loop.
 fn main() {
     Framework::<Game>::new()
         .unwrap()
