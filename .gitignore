@@ -7,10 +7,6 @@ Cargo.lock
 *.class
 *.jar
 
-# Shared objects (inc. Windows DLLs)
-*.dll
-*.so
-
 # extension generated folders
 /.history/
 *.*~

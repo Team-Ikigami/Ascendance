@@ -1,14 +1,14 @@
 (
     files: [
         (
-            fwlocation: "https://file.atg-rpg.com/data/models/spider.fbx",
-            fpath: "./data/models/",
-            fname: "spider.fbx",
+            webaddr: "https://file.atg-rpg.com/zip/insect.zip",
+            fpath: "./tmpzip/",
+            fname: "insect.zip",
         ),
         (
-            fwlocation: "",
-            fpath: "",
-            fname: "",
+            webaddr: "https://file.atg-rpg.com/zip/trainingarea.zip",
+            fpath: "./tmpzip/",
+            fname: "trainingarea.zip",
         ),
     ].
 )

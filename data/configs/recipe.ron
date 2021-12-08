@@ -1,0 +1,20 @@
+(
+    map: [
+        FriedFowlEggRecipe: (
+            ingredients: [
+                item: FowlEgg,
+                amount: "1"
+            ],
+            result: FriedFowlEgg
+        ),
+        CookedMeatRecipe: (
+            ingredients: [
+                item: Meat,
+                amount: 1
+            ],
+            result: CookedMeat
+        ),
+        CookedPotatoRecipe: (
+
+    ]
+)
