@@ -8,9 +8,7 @@ use rg3d::{
     engine::{
         Engine,
         framework::prelude::*,
-        resource_manager::ResourceManager,
-		DeviceEvent,
-		DeviceId
+        resource_manager::ResourceManager
     },
     gui::{
         button::{ButtonBuilder, ButtonMessage},
@@ -58,7 +56,13 @@ use rg3d::{
             SoundBufferResource
         }
     },
+    event::{
+        WindowEvent,    
+        DeviceId,
+        DeviceEvent
+    },
     utils::into_gui_texture,
+    event_loop::ControlFlow,
 };
 use std::{
     borrow::Cow,
