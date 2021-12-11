@@ -1,0 +1,20 @@
+(
+    map: {
+        FowlEgg: (
+            model: "data/models/food/bird/egg1.fbx",
+            scale: 0.025,
+            name: "Fowl egg",
+            description: "A fowl egg",
+            consumable: true,
+            preview: "data/ui/food/egg.png"
+        ),
+        FriedFowlEgg: (
+            model: "data/models/food/bird/egg2.fbx",
+            scale: 0.025,
+            name: "Fried fowl egg",
+            description: "A fried fowl egg. Good for a quick snack and tastes best with salt.",
+            consumable: true,
+            preview: "data/ui/food/egg.png"
+        ),
+    }
+)

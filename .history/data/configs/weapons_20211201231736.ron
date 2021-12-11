@@ -1,0 +1,117 @@
+(
+    map: {
+        RustySword: (
+            model: "data/models/swords/rustysword.fbx",
+            scale: 1.0,
+            name: "Rusty Sword"
+            description: "A rusty sword. Strangely sturdy and can kill people over time.",
+            consumable: false,
+            preview: "data/ui/swords/rustysword.png"
+        ),
+        RustyShovel: (
+            model: "data/models/tools/shovel/rustyshovel.fbx",
+            scale: 0.1,
+            name: "Rusty shovel",
+            description: "A rusty shovel..",
+            consumable: false,
+            preview: "data/ui/tools/shovel.png"
+        ),
+        RustyAxe: (
+            model: "data/models/tools/axe/rustyaxe.fbx",
+            scale: 0.1,
+            name: "Rusty axe",
+            description: "A rusty axe..",
+            consumable: false,
+            preview: "data/ui/tools/axe.png"
+        ),
+        IronSword: (
+            model: "data/models/swords/ironsword.fbx",
+            scale: 1.0,
+            name: "Iron Sword",
+            description: "A iron sword. Can be used to kill people.",
+            consumable: false,
+            preview: "data/ui/swords/ironsword.png"
+        ),
+        IronShovel: (
+            model: "data/models/tools/shovel/ironshovel.fbx",
+            scale: 0.1,
+            name: "Iron shovel",
+            description: "A iron shovel..",
+            consumable: false,
+            preview: "data/ui/tools/shovel.png"
+        ),
+        IronAxe: (
+            model: "data/models/tools/axe/ironaxe.fbx",
+            scale: 0.1,
+            name: "Iron axe",
+            description: "A iron axe..",
+            consumable: false,
+            preview: "data/ui/tools/axe.png"
+        ),
+        GoldSword: (
+            model: "data/models/swords/goldsword.fbx",
+            scale: 1.0,
+            name: "Gold Sword",
+            description: "A gold sword. Can be used to kill people.",
+            consumable: false,
+            preview: "data/ui/swords/goldsword.png"
+        ),
+        GoldShovel: (
+            model: "data/models/tools/shovel/goldshovel.fbx",
+            scale: 0.1,
+            name: "Gold shovel",
+            description: "A gold shovel..",
+            consumable: false,
+            preview: "data/ui/tools/shovel.png"
+        ),
+        GoldAxe: (
+            model: "data/models/tools/axe/goldaxe.fbx",
+            scale: 0.1,
+            name: "Gold axe",
+            description: "A gold axe..",
+            consumable: false,
+            preview: "data/ui/tools/axe.png"
+        ),
+        DiamondSword: (
+            model: "data/models/swords/diamondsword.fbx",
+            scale: 1.0,
+            name: "Diamond Sword",
+            description: "A diamond sword. Can be used to kill people.",
+            consumable: false,
+            preview: "data/ui/swords/diamondsword.png"
+        ),
+        ObsidianKnife: (
+            model: "data/models/tools/knife/obsidianknife.fbx",
+            scale: 0.1,
+            name: "Obsidian knife",
+            description: "A obsidian knife..",
+            consumable: false,
+            preview: "data/ui/tools/knife.png"
+        ),
+        SteelAxe: (
+            model: "data/models/tools/axe/steelaxe.fbx",
+            scale: 0.1,
+            name: "Steel axe",
+            description: "A steel axe..",
+            consumable: false,
+            preview: "data/ui/tools/axe.png"
+        ),
+        SteelShovel: (
+            model: "data/models/tools/shovel/steelshovel.fbx",
+            scale: 0.1,
+            name: "Steel shovel",
+            description: "A steel shovel..",
+            consumable: false,
+            preview: "data/ui/tools/shovel.png"
+        ),
+        SteelSword: (
+            model: "data/models/swords/steelsword.fbx",
+            scale: 1.0,
+            name: "Steel Sword",
+            description: "A steel sword. Can be used to kill people.",
+            consumable: false,
+            preview: "data/ui/swords/steelsword.png"
+        ),
+        
+    }
+)

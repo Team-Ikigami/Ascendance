@@ -1,0 +1,16 @@
+# Rust
+/Game/build/
+/Game/Cargo.lock
+**/*.rs.bk
+
+# WASM Rust
+Web/**/pkg
+Web/**/www
+
+# Java
+*.class
+*.jar
+
+# extension generated folders
+# /.history/
+*.*~

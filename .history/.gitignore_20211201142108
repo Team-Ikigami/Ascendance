@@ -1,0 +1,16 @@
+# Rust
+/build/
+Cargo.lock
+**/*.rs.bk
+
+# Java
+*.class
+*.jar
+
+# Shared objects (inc. Windows DLLs)
+*.dll
+*.so
+
+# extension generated folders
+/.history/
+*.*~

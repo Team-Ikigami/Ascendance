@@ -1,0 +1,692 @@
+(
+    map: {
+        RustyKey: (
+            model: "data/models/keys/rustykey.fbx",
+            scale: 0.1,
+            name: "Rusty key",
+            description: "A rusty key. Can be used to open locked doors. Unsure what it unlocks.",
+            consumable: false,
+            preview: "data/ui/keys/rustykey.png"
+        ),
+        RustyPick: (
+            model: "data/models/tools/lockpick/rustypick.fbx",
+            scale: 0.1,
+            name: "Rusty pick",
+            description: "A rusty pick. Will break the lock that it is used in.",
+            consumable: false,
+            preview: "data/ui/tools/pick.png"
+        ),
+        SpecialRustyKey: (
+            model: "data/models/keys/specialrustykey.fbx",
+            scale: 0.1,
+            name: "Special rusty key",
+            description: "A special rusty key. Can be used to open locked doors. Unsure what it unlocks.",
+            consumable: false,
+            preview: "data/ui/keys/specialrustykey.png"
+        ),
+        DragonScale: (
+            model: "data/models/items/dragonscale.fbx",
+            scale: 0.1,
+            name: "Dragon scale",
+            description: "A dragon scale. Forged from the scales of the strongest beast, it's a reminder of our accomplishments.",
+            consumable: false,
+            preview: "data/ui/items/dragonscale.png"
+        ),
+        DragonBone: (
+            model: "data/models/items/dragonbone.fbx",
+            scale: 0.1,
+            name: "Dragon bone",
+            description: "The bones of the legendary beasts of the skies.",
+            consumable: false,
+            preview: "data/ui/items/dragonbone.png"
+        ),
+        IronIngot: (
+            model: "data/models/items/metal/ironingot.fbx",
+            scale: 0.1,
+            name: "Iron ingot",
+            description: "A chunk of iron. It's a bit of a mystery.",
+            consumable: false,
+            preview: "data/ui/items/metal/ironingot.png"
+        ),
+        IronOre: (
+            model: "data/models/items/metal/ironore.fbx",
+            scale: 0.1,
+            name: "Iron ore",
+            description: "A chunk of iron ore. It's a bit of a mystery.",
+            consumable: false,
+            preview: "data/ui/items/metal/ironore.png"
+        ),
+        IronBar: (
+            model: "data/models/items/metal/ironbar.fbx",
+            scale: 0.1,
+            name: "Iron bar",
+            description: "A chunk of iron. It's a bit of a mystery.",
+            consumable: false,
+            preview: "data/ui/items/metal/ironbar.png"
+        ),
+        GoldIngot: (
+            model: "data/models/items/metal/goldingot.fbx",
+            scale: 0.1,
+            name: "Gold ingot",
+            description: "A chunk of gold. It's a bit of a mystery.",
+            consumable: false,
+            preview: "data/ui/items/metal/goldingot.png"
+        ),
+        GoldBar: (
+            model: "data/models/items/metal/goldbar.fbx",
+            scale: 0.1,
+            name: "Gold bar",
+            description: "A chunk of gold. It's a bit of a mystery.",
+            consumable: false,
+            preview: "data/ui/items/metal/goldbar.png"
+        ),
+        GoldOre: (
+            model: "data/models/items/metal/goldore.fbx",
+            scale: 0.1,
+            name: "Gold ore",
+            description: "A chunk of gold ore. It's a bit of a mystery.",
+            consumable: false,
+            preview: "data/ui/items/metal/goldore.png"
+        ),
+        DiamondNugget: (
+            model: "data/models/items/gems/diamondnugget.fbx",
+            scale: 0.1,
+            name: "Diamond nugget",
+            description: "A chunk of diamond. It's a bit of a mystery.",
+            consumable: false,
+            preview: "data/ui/items/gems/diamondnugget.png"
+        ),
+        DiamondNuggetSmall: (
+            model: "data/models/items/gems/diamondnuggetsmall.fbx",
+            scale: 0.1,
+            name: "Diamond nugget",
+            description: "A chunk of diamond. It's a bit of a mystery.",
+            consumable: false,
+            preview: "data/ui/items/gems/diamondnuggetsmall.png"
+        ),
+        DiamondNuggetMedium: (
+            model: "data/models/items/gems/diamondnuggetmedium.fbx",
+            scale: 0.1,
+            name: "Diamond nugget",
+            description: "A chunk of diamond. It's a bit of a mystery.",
+            consumable: false,
+            preview: "data/ui/items/gems/diamondnuggetmedium.png"
+        ),
+        DiamondNuggetLarge: (
+            model: "data/models/items/gems/diamondnuggetlarge.fbx",
+            scale: 0.1,
+            name: "Diamond nugget",
+            description: "A chunk of diamond. It's a bit of a mystery.",
+            consumable: false,
+            preview: "data/ui/items/gems/diamondnuggetlarge.png"
+        ),
+        DiamondOre: (
+            model: "data/models/items/gems/diamondore.fbx",
+            scale: 0.1,
+            name: "Diamond ore",
+            description: "A chunk of diamond. It's a bit of a mystery.",
+            consumable: false,
+            preview: "data/ui/items/gems/diamondore.png"
+        ),
+        SteelIngot: (
+            model: "data/models/items/metal/steelingot.fbx",
+            scale: 0.1,
+            name: "Steel ingot",
+            description: "A chunk of steel. It's a bit of a mystery.",
+            consumable: false,
+            preview: "data/ui/items/metal/steelingot.png"
+        ),
+        SteelBar: (
+            model: "data/models/items/metal/steelbar.fbx",
+            scale: 0.1,
+            name: "Steel bar",
+            description: "A chunk of steel. It's a bit of a mystery.",
+            consumable: false,
+            preview: "data/ui/items/metal/steelbar.png"
+        ),
+        SteelOre: (
+            model: "data/models/items/metal/steelore.fbx",
+            scale: 0.1,
+            name: "Steel ore",
+            description: "A chunk of steel. It's a bit of a mystery.",
+            consumable: false,
+            preview: "data/ui/items/metal/steelore.png"
+        ),
+        RustySword: (
+            model: "data/models/swords/rustysword.fbx",
+            scale: 1.0,
+            name: "Rusty Sword"
+            description: "A rusty sword. Strangely sturdy and can kill people over time.",
+            consumable: false,
+            preview: "data/ui/swords/rustysword.png"
+        ),
+        RustyShovel: (
+            model: "data/models/tools/shovel/rustyshovel.fbx",
+            scale: 0.1,
+            name: "Rusty shovel",
+            description: "A rusty shovel..",
+            consumable: false,
+            preview: "data/ui/tools/shovel.png"
+        ),
+        RustyAxe: (
+            model: "data/models/tools/axe/rustyaxe.fbx",
+            scale: 0.1,
+            name: "Rusty axe",
+            description: "A rusty axe..",
+            consumable: false,
+            preview: "data/ui/tools/axe.png"
+        ),
+        IronSword: (
+            model: "data/models/swords/ironsword.fbx",
+            scale: 1.0,
+            name: "Iron Sword",
+            description: "A iron sword. Can be used to kill people.",
+            consumable: false,
+            preview: "data/ui/swords/ironsword.png"
+        ),
+        IronShovel: (
+            model: "data/models/tools/shovel/ironshovel.fbx",
+            scale: 0.1,
+            name: "Iron shovel",
+            description: "A iron shovel..",
+            consumable: false,
+            preview: "data/ui/tools/shovel.png"
+        ),
+        IronAxe: (
+            model: "data/models/tools/axe/ironaxe.fbx",
+            scale: 0.1,
+            name: "Iron axe",
+            description: "A iron axe..",
+            consumable: false,
+            preview: "data/ui/tools/axe.png"
+        ),
+        GoldSword: (
+            model: "data/models/swords/goldsword.fbx",
+            scale: 1.0,
+            name: "Gold Sword",
+            description: "A gold sword. Can be used to kill people.",
+            consumable: false,
+            preview: "data/ui/swords/goldsword.png"
+        ),
+        GoldShovel: (
+            model: "data/models/tools/shovel/goldshovel.fbx",
+            scale: 0.1,
+            name: "Gold shovel",
+            description: "A gold shovel..",
+            consumable: false,
+            preview: "data/ui/tools/shovel.png"
+        ),
+        GoldAxe: (
+            model: "data/models/tools/axe/goldaxe.fbx",
+            scale: 0.1,
+            name: "Gold axe",
+            description: "A gold axe..",
+            consumable: false,
+            preview: "data/ui/tools/axe.png"
+        ),
+        DiamondSword: (
+            model: "data/models/swords/diamondsword.fbx",
+            scale: 1.0,
+            name: "Diamond Sword",
+            description: "A diamond sword. Can be used to kill people.",
+            consumable: false,
+            preview: "data/ui/swords/diamondsword.png"
+        ),
+        ObsidianKnife: (
+            model: "data/models/tools/knife/obsidianknife.fbx",
+            scale: 0.1,
+            name: "Obsidian knife",
+            description: "A obsidian knife..",
+            consumable: false,
+            preview: "data/ui/tools/knife.png"
+        ),
+        SteelAxe: (
+            model: "data/models/tools/axe/steelaxe.fbx",
+            scale: 0.1,
+            name: "Steel axe",
+            description: "A steel axe..",
+            consumable: false,
+            preview: "data/ui/tools/axe.png"
+        ),
+        SteelShovel: (
+            model: "data/models/tools/shovel/steelshovel.fbx",
+            scale: 0.1,
+            name: "Steel shovel",
+            description: "A steel shovel..",
+            consumable: false,
+            preview: "data/ui/tools/shovel.png"
+        ),
+        SteelSword: (
+            model: "data/models/swords/steelsword.fbx",
+            scale: 1.0,
+            name: "Steel Sword",
+            description: "A steel sword. Can be used to kill people.",
+            consumable: false,
+            preview: "data/ui/swords/steelsword.png"
+        ),
+        GoldSword: (
+            model: "data/models/swords/goldsword.fbx",
+            scale: 1.0,
+            name: "Gold Sword",
+            description: "A gold sword. Can be used to kill people.",
+            consumable: false,
+            preview: "data/ui/swords/goldsword.png"
+        ),
+        GoldShovel: (
+            model: "data/models/tools/shovel/goldshovel.fbx",
+            scale: 0.1,
+            name: "Gold shovel",
+            description: "A gold shovel..",
+            consumable: false,
+            preview: "data/ui/tools/shovel.png"
+        ),
+        GoldAxe: (
+            model: "data/models/tools/axe/goldaxe.fbx",
+            scale: 0.1,
+            name: "Gold axe",
+            description: "A gold axe..",
+            consumable: false,
+            preview: "data/ui/tools/axe.png"
+        ),
+        MithrilSword: (
+            model: "data/models/swords/mithrilsword.fbx",
+            scale: 1.0,
+            name: "Mithril Sword",
+            description: "A mithril sword. Can be used to kill people.",
+            consumable: false,
+            preview: "data/ui/swords/mithrilsword.png"
+        ),
+        MithrilAxe: (
+            model: "data/models/tools/axe/mithrilaxe.fbx",
+            scale: 0.1,
+            name: "Mithril axe",
+            description: "A mithril axe..",
+            consumable: false,
+            preview: "data/ui/tools/axe.png"
+        ),
+         ObsidianSword: (
+            model: "data/models/swords/obsidiansword.fbx",
+            scale: 1.0,
+            name: "Obsidian Sword",
+            description: "A obsidian sword. Can be used to kill people.",
+            consumable: false,
+            preview: "data/ui/swords/obsidiansword.png"
+        ),
+        ObsidianAxe: (
+            model: "data/models/tools/axe/obsidianaxe.fbx",
+            scale: 0.1,
+            name: "Obsidian axe",
+            description: "A obsidian axe..",
+            consumable: false,
+            preview: "data/ui/tools/axe.png"
+        ),
+        AdamantiumSword: (
+            model: "data/models/swords/adamantiumsword.fbx",
+            scale: 1.0,
+            name: "Adamantium Sword",
+            description: "A adamantium sword. Can be used to kill people.",
+            consumable: false,
+            preview: "data/ui/swords/adamantiumsword.png"
+        ),
+        AdamantiumAxe: (
+            model: "data/models/tools/axe/adamantiumaxe.fbx",
+            scale: 0.1,
+            name: "Adamantium axe",
+            description: "A adamantium axe..",
+            consumable: false,
+            preview: "data/ui/tools/adamantiumaxe.png"
+        ),
+        IronHelmet: (
+            model: "data/models/armour/iron_helmet.fbx",
+            scale: 0.1,
+            name: "Iron helmet",
+            description: "A iron helmet..",
+            consumable: false,
+            preview: "data/ui/armour/iron_helmet.png"
+        ),
+        IronBoots: (
+            model: "data/models/armour/iron_boots.fbx",
+            scale: 0.1,
+            name: "Iron boots",
+            description: "A iron boots..",
+            consumable: false,
+            preview: "data/ui/armour/iron_boots.png"
+        ),
+        IronGreaves: (
+            model: "data/models/armour/iron_greaves.fbx",
+            scale: 0.1,
+            name: "Iron greaves",
+            description: "A iron greaves..",
+            consumable: false,
+            preview: "data/ui/armour/iron_greaves.png"
+        ),
+        IronGauntlets: (
+            model: "data/models/armour/iron_gauntlets.fbx",
+            scale: 0.1,
+            name: "Iron gauntlets",
+            description: "A iron gauntlets..",
+            consumable: false,
+            preview: "data/ui/armour/iron_gauntlets.png"
+        ),
+        IronShield: (
+            model: "data/models/armour/iron_shield.fbx",
+            scale: 0.1,
+            name: "Iron shield",
+            description: "A iron shield..",
+            consumable: false,
+            preview: "data/ui/armour/iron_shield.png"
+        ),
+        IronChestplate: (
+            model: "data/models/armour/iron_chestplate.fbx",
+            scale: 0.1,
+            name: "Iron chestplate",
+            description: "A iron chestplate..",
+            consumable: false,
+            preview: "data/ui/armour/iron_chestplate.png"
+        ),
+        IronLeggings: (
+            model: "data/models/armour/iron_leggings.fbx",
+            scale: 0.1,
+            name: "Iron leggings",
+            description: "A iron leggings..",
+            consumable: false,
+            preview: "data/ui/armour/iron_leggings.png"
+        ),
+        DragonScaleHelmet: (
+            model: "data/models/armour/dragon_scale_helmet.fbx",
+            scale: 0.1,
+            name: "Dragon scale helmet",
+            description: "A dragon scale helmet..",
+            consumable: false,
+            preview: "data/ui/armour/dragon_scale_helmet.png"
+        ),
+        DragonScaleBoots: (
+            model: "data/models/armour/dragon_scale_boots.fbx",
+            scale: 0.1,
+            name: "Dragon scale boots",
+            description: "A dragon scale boots..",
+            consumable: false,
+            preview: "data/ui/armour/dragon_scale_boots.png"
+        ),
+        DragonScaleGreaves: (
+            model: "data/models/armour/dragon_scale_greaves.fbx",
+            scale: 0.1,
+            name: "Dragon scale greaves",
+            description: "A dragon scale greaves..",
+            consumable: false,
+            preview: "data/ui/armour/dragon_scale_greaves.png"
+        ),
+        DragonScaleGauntlets: (
+            model: "data/models/armour/dragon_scale_gauntlets.fbx",
+            scale: 0.1,
+            name: "Dragon scale gauntlets",
+            description: "A dragon scale gauntlets..",
+            consumable: false,
+            preview: "data/ui/armour/dragon_scale_gauntlets.png"
+        ),
+        DragonScaleShield: (
+            model: "data/models/armour/dragon_scale_shield.fbx",
+            scale: 0.1,
+            name: "Dragon scale shield",
+            description: "A dragon scale shield..",
+            consumable: false,
+            preview: "data/ui/armour/dragon_scale_shield.png"
+        ),
+        DragonScaleChestplate: (
+            model: "data/models/armour/dragon_scale_chestplate.fbx",
+            scale: 0.1,
+            name: "Dragon scale chestplate",
+            description: "A dragon scale chestplate..",
+            consumable: false,
+            preview: "data/ui/armour/dragon_scale_chestplate.png"
+        ),
+        DragonScaleLeggings: (
+            model: "data/models/armour/dragon_scale_leggings.fbx",
+            scale: 0.1,
+            name: "Dragon scale leggings",
+            description: "A dragon scale leggings..",
+            consumable: false,
+            preview: "data/ui/armour/dragon_scale_leggings.png"
+        ),
+        GoldHelmet: (
+            model: "data/models/armour/gold_helmet.fbx",
+            scale: 0.1,
+            name: "Gold helmet",
+            description: "A gold helmet..",
+            consumable: false,
+            preview: "data/ui/armour/gold_helmet.png"
+        ),
+        GoldBoots: (
+            model: "data/models/armour/gold_boots.fbx",
+            scale: 0.1,
+            name: "Gold boots",
+            description: "A gold boots..",
+            consumable: false,
+            preview: "data/ui/armour/gold_boots.png"
+        ),
+        GoldGreaves: (
+            model: "data/models/armour/gold_greaves.fbx",
+            scale: 0.1,
+            name: "Gold greaves",
+            description: "A gold greaves..",
+            consumable: false,
+            preview: "data/ui/armour/gold_greaves.png"
+        ),
+        GoldGauntlets: (
+            model: "data/models/armour/gold_gauntlets.fbx",
+            scale: 0.1,
+            name: "Gold gauntlets",
+            description: "A gold gauntlets..",
+            consumable: false,
+            preview: "data/ui/armour/gold_gauntlets.png"
+        ),
+        GoldShield: (
+            model: "data/models/armour/gold_shield.fbx",
+            scale: 0.1,
+            name: "Gold shield",
+            description: "A gold shield..",
+            consumable: false,
+            preview: "data/ui/armour/gold_shield.png"
+        ),
+        GoldChestplate: (
+            model: "data/models/armour/gold_chestplate.fbx",
+            scale: 0.1,
+            name: "Gold chestplate",
+            description: "A gold chestplate..",
+            consumable: false,
+            preview: "data/ui/armour/gold_chestplate.png"
+        ),
+        GoldLeggings: (
+            model: "data/models/armour/gold_leggings.fbx",
+            scale: 0.1,
+            name: "Gold leggings",
+            description: "A gold leggings..",
+            consumable: false,
+            preview: "data/ui/armour/gold_leggings.png"
+        ),
+        MithrilHelmet: (
+            model: "data/models/armour/mithril_helmet.fbx",
+            scale: 0.1,
+            name: "Mithril helmet",
+            description: "A mithril helmet..",
+            consumable: false,
+            preview: "data/ui/armour/mithril_helmet.png"
+        ),
+        MithrilBoots: (
+            model: "data/models/armour/mithril_boots.fbx",
+            scale: 0.1,
+            name: "Mithril boots",
+            description: "A mithril boots..",
+            consumable: false,
+            preview: "data/ui/armour/mithril_boots.png"
+        ),
+        MithrilGreaves: (
+            model: "data/models/armour/mithril_greaves.fbx",
+            scale: 0.1,
+            name: "Mithril greaves",
+            description: "A mithril greaves..",
+            consumable: false,
+            preview: "data/ui/armour/mithril_greaves.png"
+        ),
+        MithrilGauntlets: (
+            model: "data/models/armour/mithril_gauntlets.fbx",
+            scale: 0.1,
+            name: "Mithril gauntlets",
+            description: "A mithril gauntlets..",
+            consumable: false,
+            preview: "data/ui/armour/mithril_gauntlets.png"
+        ),
+        MithrilShield: (
+            model: "data/models/armour/mithril_shield.fbx",
+            scale: 0.1,
+            name: "Mithril shield",
+            description: "A mithril shield..",
+            consumable: false,
+            preview: "data/ui/armour/mithril_shield.png"
+        ),
+        MithrilChestplate: (
+            model: "data/models/armour/mithril_chestplate.fbx",
+            scale: 0.1,
+            name: "Mithril chestplate",
+            description: "A mithril chestplate..",
+            consumable: false,
+            preview: "data/ui/armour/mithril_chestplate.png"
+        ),
+        MithrilLeggings: (
+            model: "data/models/armour/mithril_leggings.fbx",
+            scale: 0.1,
+            name: "Mithril leggings",
+            description: "A mithril leggings..",
+            consumable: false,
+            preview: "data/ui/armour/mithril_leggings.png"
+        ),
+        SteelHelmet: (
+            model: "data/models/armour/steel_helmet.fbx",
+            scale: 0.1,
+            name: "Steel helmet",
+            description: "A steel helmet..",
+            consumable: false,
+            preview: "data/ui/armour/steel_helmet.png"
+        ),
+        SteelBoots: (
+            model: "data/models/armour/steel_boots.fbx",
+            scale: 0.1,
+            name: "Steel boots",
+            description: "A steel boots..",
+            consumable: false,
+            preview: "data/ui/armour/steel_boots.png"
+        ),
+        SteelGreaves: (
+            model: "data/models/armour/steel_greaves.fbx",
+            scale: 0.1,
+            name: "Steel greaves",
+            description: "A steel greaves..",
+            consumable: false,
+            preview: "data/ui/armour/steel_greaves.png"
+        ),
+        SteelGauntlets: (
+            model: "data/models/armour/steel_gauntlets.fbx",
+            scale: 0.1,
+            name: "Steel gauntlets",
+            description: "A steel gauntlets..",
+            consumable: false,
+            preview: "data/ui/armour/steel_gauntlets.png"
+        ),
+        SteelShield: (
+            model: "data/models/armour/steel_shield.fbx",
+            scale: 0.1,
+            name: "Steel shield",
+            description: "A steel shield..",
+            consumable: false,
+            preview: "data/ui/armour/steel_shield.png"
+        ),
+        SteelChestplate: (
+            model: "data/models/armour/steel_chestplate.fbx",
+            scale: 0.1,
+            name: "Steel chestplate",
+            description: "A steel chestplate..",
+            consumable: false,
+            preview: "data/ui/armour/steel_chestplate.png"
+        ),
+        SteelLeggings: (
+            model: "data/models/armour/steel_leggings.fbx",
+            scale: 0.1,
+            name: "Steel leggings",
+            description: "A steel leggings..",
+            consumable: false,
+            preview: "data/ui/armour/steel_leggings.png"
+        ),
+        RingOfHealth: (
+            model: "data/models/apparel/rings/ring_of_health.fbx",
+            scale: 0.1,
+            name: "Ring of health",
+            description: "A ring of health..",
+            consumable: false,
+            preview: "data/ui/apparel/rings/ring_of_health.png"
+        ),
+        RingOfMana: (
+            model: "data/models/apparel/rings/ring_of_mana.fbx",
+            scale: 0.1,
+            name: "Ring of mana",
+            description: "A ring of mana..",
+            consumable: false,
+            preview: "data/ui/apparel/rings/ring_of_mana.png"
+        ),
+        RingOfStrength: (
+            model: "data/models/apparel/rings/ring_of_strength.fbx",
+            scale: 0.1,
+            name: "Ring of strength",
+            description: "A ring of strength..",
+            consumable: false,
+            preview: "data/ui/apparel/rings/ring_of_strength.png"
+        ),
+        RingOfAgility: (
+            model: "data/models/apparel/rings/ring_of_agility.fbx",
+            scale: 0.1,
+            name: "Ring of agility",
+            description: "A ring of agility..",
+            consumable: false,
+            preview: "data/ui/apparel/rings/ring_of_agility.png"
+        ),
+        RingOfTheSilentThief: (
+            model: "data/models/apparel/rings/ring_of_the_silent_thief.fbx",
+            scale: 0.1,
+            name: "Ring of the silent thief",
+            description: "A ring of the silent thief..",
+            consumable: false,
+            preview: "data/ui/apparel/rings/ring_of_the_silent_thief.png"
+        ),
+        RingOfTheSorcerer: (
+            model: "data/models/apparel/rings/ring_of_the_sorcerer.fbx",
+            scale: 0.1,
+            name: "Ring of the sorcerer",
+            description: "A ring of the sorcerer..",
+            consumable: false,
+            preview: "data/ui/apparel/rings/ring_of_the_sorcerer.png"
+        ),
+        RingOfTheWarrior: (
+            model: "data/models/apparel/rings/ring_of_the_warrior.fbx",
+            scale: 0.1,
+            name: "Ring of the warrior",
+            description: "A ring of the warrior..",
+            consumable: false,
+            preview: "data/ui/apparel/rings/ring_of_the_warrior.png"
+        ),
+        RingOfVitality: (
+            model: "data/models/apparel/rings/ring_of_vitality.fbx",
+            scale: 0.1,
+            name: "Ring of vitality",
+            description: "A ring of vitality..",
+            consumable: false,
+            preview: "data/ui/apparel/rings/ring_of_vitality.png"
+        ),
+        RingOfLuck: (
+            model: "data/models/apparel/rings/ring_of_luck.fbx",
+            scale: 0.1,
+            name: "Ring of luck",
+            description: "A ring of luck..",
+            consumable: false,
+            preview: "data/ui/apparel/rings/ring_of_luck.png"
+        ),
+    }
+)

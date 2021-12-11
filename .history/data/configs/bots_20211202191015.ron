@@ -1,0 +1,41 @@
+(
+    map: {
+        Spider: (
+            model: "data/model/spider/Spider.fbx",
+            texture: "data/texture/spider/spider.png",
+            scale: 0.1,
+            position: { x: 0, y: 0, z: 0 },
+            rotation: { x: 0, y: 0, z: 0 },
+            animation: {
+                idle: {
+                    start: 0,
+                    end: 0,
+                    speed: 1,
+                    loop: true,
+                    animation: "data/animations/spider/idle.fbx",
+                },
+                walk: {
+                    start: 0,
+                    end: 0,
+                    speed: 1,
+                    loop: true,
+                    animation: "data/animations/spider/walk.fbx",
+                },
+                attack: {
+                    start: 0,
+                    end: 0,
+                    speed: 1,
+                    loop: true,
+                    animation: "data/animations/spider/attack.fbx",
+                },
+                death: {
+                    start: 0,
+                    end: 0,
+                    speed: 1,
+                    loop: true,
+                    animation: "data/animations/spider/death.fbx",
+                },
+            },
+        )
+    }
+)

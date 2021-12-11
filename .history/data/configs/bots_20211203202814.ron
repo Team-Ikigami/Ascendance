@@ -1,0 +1,99 @@
+(
+    map: {
+        Spider: (
+            model: "data/model/spider/Spider.fbx",
+            attack_animation: [
+                (
+                    path: "animations/spider/jumpattack.fbx",
+                    stick_timestamp: 0.9,
+                    timestamp: 1.1,
+                    damage: Point(70.0),
+                    speed: 1.1
+                ),
+                (
+                    path: "animations/spider/spit.fbx",
+                )
+            ],
+            idle_animation: "animations/spider/idle.fbx",
+            walk_animation: "animations/spider/walk.fbx",
+            aim_animation: "animations/spider/aim.fbx",
+            dying_animation: "animations/spider/dying.fbx",
+            bite_name: "Spider:Head"
+            left_leg_name: "Spider:LeftUpLeg",
+            right_leg_name: "Spider:RightUpLeg",
+            head_name: "Spider:Head",
+            hips: "Spider:Hips",
+            spine: "Spider:Spine", // Empty because cannot use weapons.
+            walk_speed: 0.7,
+            scale: 1.0,
+            weapon_scale: 130.0,
+            health: 1000.0,
+            v_aim_angle_hack: 0.0,
+            can_use_weapons: false,
+            close_combat_distance: 0.9,
+            pain_sounds: [
+                "data/sounds/spider_pain_1.wav",
+                "data/sounds/spider_pain_2.wav"
+            ],
+            scream_sounds: [
+                "data/sounds/spider_scream_1.wav"
+            ],
+            idle_sounds: [
+                "data/sounds/spider_idle_1.wav",
+                "data/sounds/spider_idle_2.wav",
+                "data/sounds/spider_idle_3.wav",
+            ],
+            attack_sounds: [
+                "data/sounds/spider_attack.ogg",
+            ],
+
+        ),
+        CheeseBread: (
+            model: "data/model/cheesebread/cheesebread.fbx",
+            attack_animation: [
+                (
+                    path: "animations/cheesebread/attack.fbx",
+                    stick_timestamp: 0.9,
+                    timestamp: 1.1,
+                    damage: Point(70.0),
+                    speed: 1.1
+                ),
+                (
+                    path: "animations/cheesebread/spit.fbx",
+                )
+            ],
+            idle_animation: "animations/cheesebread/idle.fbx",
+            walk_animation: "animations/cheesebread/walk.fbx",
+            aim_animation: "animations/cheesebread/aim.fbx",
+            dying_animation: "animations/cheesebread/dying.fbx",
+            bite_name: "CheeseBread:Head",
+            left_leg_name: "CheeseBread:LeftUpLeg",
+            right_leg_name: "CheeseBread:RightUpLeg",
+            head_name: "CheeseBread:Head",
+            hips: "CheeseBread:Hips",
+            spine: "CheeseBread:Spine", // Empty because cannot use weapons.
+            walk_speed: 0.7,
+            scale: 1.0,
+            weapon_scale: 130.0,
+            health: 1000.0,
+            v_aim_angle_hack: 0.0,
+            can_use_weapons: false,
+            close_combat_distance: 0.9,
+            pain_sounds: [
+                "data/sounds/cheesebread_pain_1.wav",
+                "data/sounds/cheesebread_pain_2.wav"
+            ],
+            scream_sounds: [
+                "data/sounds/cheesebread_scream_1.wav"
+            ],
+            idle_sounds: [
+                "data/sounds/cheesebread_idle_1.wav",
+                "data/sounds/cheesebread_idle_2.wav",
+                "data/sounds/cheesebread_idle_3.wav",
+            ],
+            attack_sounds: [
+                "data/sounds/cheesebread_attack.ogg",
+            ],
+        ),
+    }
+)

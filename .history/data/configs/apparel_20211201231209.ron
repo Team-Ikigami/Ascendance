@@ -1,0 +1,60 @@
+(
+    map: {
+        IronHelmet: (
+            model: "data/models/armour/iron_helmet.fbx",
+            scale: 0.1,
+            name: "Iron helmet",
+            description: "A iron helmet..",
+            consumable: false,
+            preview: "data/ui/armour/iron_helmet.png"
+        ),
+        IronBoots: (
+            model: "data/models/armour/iron_boots.fbx",
+            scale: 0.1,
+            name: "Iron boots",
+            description: "A iron boots..",
+            consumable: false,
+            preview: "data/ui/armour/iron_boots.png"
+        ),
+        IronGreaves: (
+            model: "data/models/armour/iron_greaves.fbx",
+            scale: 0.1,
+            name: "Iron greaves",
+            description: "A iron greaves..",
+            consumable: false,
+            preview: "data/ui/armour/iron_greaves.png"
+        ),
+        IronGauntlets: (
+            model: "data/models/armour/iron_gauntlets.fbx",
+            scale: 0.1,
+            name: "Iron gauntlets",
+            description: "A iron gauntlets..",
+            consumable: false,
+            preview: "data/ui/armour/iron_gauntlets.png"
+        ),
+        IronShield: (
+            model: "data/models/armour/iron_shield.fbx",
+            scale: 0.1,
+            name: "Iron shield",
+            description: "A iron shield..",
+            consumable: false,
+            preview: "data/ui/armour/iron_shield.png"
+        ),
+        IronChestplate: (
+            model: "data/models/armour/iron_chestplate.fbx",
+            scale: 0.1,
+            name: "Iron chestplate",
+            description: "A iron chestplate..",
+            consumable: false,
+            preview: "data/ui/armour/iron_chestplate.png"
+        ),
+        IronLeggings: (
+            model: "data/models/armour/iron_leggings.fbx",
+            scale: 0.1,
+            name: "Iron leggings",
+            description: "A iron leggings..",
+            consumable: false,
+            preview: "data/ui/armour/iron_leggings.png"
+        ),
+    }
+)

@@ -1,0 +1,23 @@
+(
+    //! effects here
+    //! 0 = self-healing
+    //! 1 = self-damage
+    //! 3 = damage-other
+    //! 4 = fire damage
+    //! 5 = poison damage
+    //! 6 = freeze damage
+    //! 7 = electric damage
+    map: {
+        IceSpike: (
+            animation: "data/animations/magic/ice_spike.fbx",
+            penetration: = 0,
+            damage: = 10,
+            effect: = 6,
+            range: = 25,
+            speed: = 10,
+            cooldown: = 1,
+            mana: = 10,
+            castTime: = 0.5,
+        ),
+    }
+)

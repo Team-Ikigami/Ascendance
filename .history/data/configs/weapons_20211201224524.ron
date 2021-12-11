@@ -1,0 +1,12 @@
+(
+    map: {
+        RustySword: (
+            model: "data/models/swords/rustysword.fbx",
+            scale: 1.0,
+            name: "Rusty Sword"
+            description: "A rusty sword. Strangely sturdy and can kill people over time.",
+            consumable: false,
+            preview: "data/ui/swords/rustysword.png"
+        ),
+    }
+)

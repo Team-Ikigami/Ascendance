@@ -1,0 +1,103 @@
+(
+    map: {
+        HealthPotion: {
+            model: "data/models/potion/health_potion.fbx",
+            name: 'Health Potion',
+            description: 'Restores 50 HP',
+            price: 10,
+            type: 'consumable',
+            effect: {
+                hp: 50
+            },
+            preview: "data/ui/potions/health_potion.png"
+        },
+        ManaPotion: {
+            model: "data/models/potion/mana_potion.fbx",
+            name: 'Mana Potion',
+            description: 'Restores 50 MP',
+            price: 10,
+            type: 'consumable',
+            effect: {
+                mp: 50
+            },
+            preview: "data/ui/potions/mana_potion.png"
+        },
+        AttackPotion: {
+            model: "data/models/potion/attack_potion.fbx",
+            name: 'Attack Potion',
+            description: 'Increases attack by 10',
+            price: 10,
+            type: 'consumable',
+            effect: {
+                attack: 10
+            },
+            preview: "data/ui/potions/attack_potion.png"
+        },
+        DefensePotion: {
+            model: "data/models/potion/defense_potion.fbx",
+            name: 'Defense Potion',
+            description: 'Increases defense by 10',
+            price: 10,
+            type: 'consumable',
+            effect: {
+                defense: 10
+            },
+            preview: "data/ui/potions/defense_potion.png"
+        },
+        SpeedPotion: {
+            model: "data/models/potion/speed_potion.fbx",
+            name: 'Speed Potion',
+            description: 'Increases speed by 10',
+            price: 10,
+            type: 'consumable',
+            effect: {
+                speed: 10
+            },
+            preview: "data/ui/potions/speed_potion.png"
+        },
+        LuckPotion: {
+            model: "data/models/potion/luck_potion.fbx",
+            name: 'Luck Potion',
+            description: 'Increases luck by 10',
+            price: 10,
+            type: 'consumable',
+            effect: {
+                luck: 10
+            },
+            preview: "data/ui/potions/luck_potion.png"
+        },
+        StrengthPotion: {
+            model: "data/models/potion/strength_potion.fbx",
+            name: 'Strength Potion',
+            description: 'Increases strength by 10',
+            price: 10,
+            type: 'consumable',
+            effect: {
+                strength: 10
+            },
+            preview: "data/ui/potions/strength_potion.png"
+        },
+        IntelligencePotion: {
+            model: "data/models/potion/intelligence_potion.fbx",
+            name: 'Intelligence Potion',
+            description: 'Increases intelligence by 10',
+            price: 10,
+            type: 'consumable',
+            effect: {
+                intelligence: 10
+            },
+            preview: "data/ui/potions/intelligence_potion.png"
+        },
+        AgilityPotion: {
+            model: "data/models/potion/agility_potion.fbx",
+            name: 'Agility Potion',
+            description: 'Increases agility by 10',
+            price: 10,
+            type: 'consumable',
+            effect: {
+                agility: 10
+            },
+            preview: "data/ui/potions/agility_potion.png"
+        },
+    }
+)

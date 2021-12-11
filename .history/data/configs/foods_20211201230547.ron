@@ -1,0 +1,179 @@
+(
+    map: {
+        FowlEgg: (
+            model: "data/models/food/bird/egg1.fbx",
+            scale: 0.025,
+            name: "Fowl egg",
+            description: "A fowl egg",
+            consumable: true,
+            preview: "data/ui/food/egg.png"
+        ),
+        FriedFowlEgg: (
+            model: "data/models/food/bird/egg2.fbx",
+            scale: 0.025,
+            name: "Fried fowl egg",
+            description: "A fried fowl egg. Good for a quick snack and tastes best with salt.",
+            consumable: true,
+            preview: "data/ui/food/egg.png"
+        ),
+        Apple: (
+            model: "data/models/food/fruit/apple.fbx",
+            scale: 0.025,
+            name: "Apple",
+            description: "An apple",
+            consumable: true,
+            preview: "data/ui/food/apple.png"
+        ),
+        Bread: (
+            model: "data/models/food/grain/bread.fbx",
+            scale: 0.025,
+            name: "Bread",
+            description: "A loaf of bread",
+            consumable: true,
+            preview: "data/ui/food/bread.png"
+        ),
+        Cheese: (
+            model: "data/models/food/dairy/cheese.fbx",
+            scale: 0.025,
+            name: "Cheese",
+            description: "A slice of cheese",
+            consumable: true,
+            preview: "data/ui/food/cheese.png"
+        ),
+        Meat: (
+            model: "data/models/food/meat/meat.fbx",
+            scale: 0.025,
+            name: "Meat",
+            description: "A piece of meat",
+            consumable: true,
+            preview: "data/ui/food/meat.png"
+        ),
+        Potato: (
+            model: "data/models/food/vegetable/potato.fbx",
+            scale: 0.025,
+            name: "Potato",
+            description: "A potato",
+            consumable: true,
+            preview: "data/ui/food/potato.png"
+        ),
+        Carrot: (
+            model: "data/models/food/vegetable/carrot.fbx",
+            scale: 0.025,
+            name: "Carrot",
+            description: "A carrot",
+            consumable: true,
+            preview: "data/ui/food/carrot.png"
+        ),
+        CookedMeat: (
+            model: "data/models/food/meat/meat2.fbx",
+            scale: 0.025,
+            name: "Cooked meat",
+            description: "A cooked piece of meat",
+            consumable: true,
+            preview: "data/ui/food/meat.png"
+        ),
+        CookedPotato: (
+            model: "data/models/food/vegetable/potato2.fbx",
+            scale: 0.025,
+            name: "Cooked potato",
+            description: "A cooked potato",
+            consumable: true,
+            preview: "data/ui/food/potato.png"
+        ),
+        CookedCarrot: (
+            model: "data/models/food/vegetable/carrot2.fbx",
+            scale: 0.025,
+            name: "Cooked carrot",
+            description: "A cooked carrot",
+            consumable: true,
+            preview: "data/ui/food/carrot.png"
+        ),
+        CookedBread: (
+            model: "data/models/food/grain/bread2.fbx",
+            scale: 0.025,
+            name: "Cooked bread",
+            description: "A cooked loaf of bread",
+            consumable: true,
+            preview: "data/ui/food/bread.png"
+        ),
+        CookedApple: (
+            model: "data/models/food/fruit/apple2.fbx",
+            scale: 0.025,
+            name: "Cooked apple",
+            description: "A cooked apple",
+            consumable: true,
+        ),
+        CookedMeatPotato: (
+            model: "data/models/food/vegetable/potato3.fbx",
+            scale: 0.025,
+            name: "Cooked meat and potato",
+            description: "A cooked meat potato",
+            consumable: true,
+            preview: "data/ui/food/potato3.png"
+        ),
+        Beans: (
+            model: "data/models/food/vegetable/beans.fbx",
+            scale: 0.025,
+            name: "Beans",
+            description: "A can of beans",
+            consumable: true,
+            preview: "data/ui/food/beans.png"
+        ),
+        CookedBeans: (
+            model: "data/models/food/vegetable/beans2.fbx",
+            scale: 0.025,
+            name: "Cooked beans",
+            description: "A cooked can of beans",
+            consumable: true,
+            preview: "data/ui/food/beans.png"
+        ),
+        Chicken: (
+            model: "data/models/food/bird/chicken.fbx",
+            scale: 0.025,
+            name: "Chicken",
+            description: "A chicken",
+            consumable: true,
+            preview: "data/ui/food/chicken.png"
+        ),
+        CookedChicken: (
+            model: "data/models/food/bird/chicken2.fbx",
+            scale: 0.025,
+            name: "Cooked chicken",
+            description: "A cooked chicken",
+            consumable: true,
+            preview: "data/ui/food/chicken.png"
+        ),
+        Pork: (
+            model: "data/models/food/meat/pork.fbx",
+            scale: 0.025,
+            name: "Pork",
+            description: "A piece of pork",
+            consumable: true,
+            preview: "data/ui/food/pork.png"
+        ),
+        CookedPork: (
+            model: "data/models/food/meat/pork2.fbx",
+            scale: 0.025,
+            name: "Cooked pork",
+            description: "A cooked piece of pork",
+            consumable: true,
+            preview: "data/ui/food/pork.png"
+        ),
+        Beef: (
+            model: "data/models/food/meat/beef.fbx",
+            scale: 0.025,
+            name: "Beef",
+            description: "A piece of beef",
+            consumable: true,
+            preview: "data/ui/food/beef.png"
+        ),
+        CookedBeef: (
+            model: "data/models/food/meat/beef2.fbx",
+            scale: 0.025,
+            name: "Cooked beef",
+            description: "A cooked piece of beef",
+            consumable: true,
+            preview: "data/ui/food/beef.png"
+        ),
+    }
+)

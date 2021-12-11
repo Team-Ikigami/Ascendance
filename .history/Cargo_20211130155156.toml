@@ -1,0 +1,26 @@
+[package]
+name = "atg"
+version = "0.1.0"
+edition = "2018"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+rg3d = { git = "https://github.com/rg3dengine/rg3d", rev = "17e1b2360302ad76e436f4b3948b8150682b0011" }
+savefile = "0.8.3"
+ron = "0.7.0"
+quinn = "0.8.0" # for multiplayer
+structopt = "0.3.13"
+serde = { version = "1.0.130", features = ["derive"] }
+serde_any = "0.5.0"
+glam = "0.20.1"
+laminar = "0.5.0"
+tokio = "0.14.0"
+
+[[bin]]
+name = "log"
+path = "src/bin/logiso.rs"
+
+[[bin]]
+name = "crha"
+path = "src/bin/crash-handler.rs"

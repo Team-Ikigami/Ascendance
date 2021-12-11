@@ -1,0 +1,85 @@
+(
+    map: {
+        HealthPotion: {
+            name: 'Health Potion',
+            description: 'Restores 50 HP',
+            price: 10,
+            type: 'consumable',
+            effect: {
+                hp: 50
+            }
+        },
+        ManaPotion: {
+            name: 'Mana Potion',
+            description: 'Restores 50 MP',
+            price: 10,
+            type: 'consumable',
+            effect: {
+                mp: 50
+            }
+        },
+        AttackPotion: {
+            name: 'Attack Potion',
+            description: 'Increases attack by 10',
+            price: 10,
+            type: 'consumable',
+            effect: {
+                attack: 10
+            }
+        },
+        DefensePotion: {
+            name: 'Defense Potion',
+            description: 'Increases defense by 10',
+            price: 10,
+            type: 'consumable',
+            effect: {
+                defense: 10
+            }
+        },
+        SpeedPotion: {
+            name: 'Speed Potion',
+            description: 'Increases speed by 10',
+            price: 10,
+            type: 'consumable',
+            effect: {
+                speed: 10
+            }
+        },
+        LuckPotion: {
+            name: 'Luck Potion',
+            description: 'Increases luck by 10',
+            price: 10,
+            type: 'consumable',
+            effect: {
+                luck: 10
+            }
+        },
+        StrengthPotion: {
+            name: 'Strength Potion',
+            description: 'Increases strength by 10',
+            price: 10,
+            type: 'consumable',
+            effect: {
+                strength: 10
+            }
+        },
+        IntelligencePotion: {
+            name: 'Intelligence Potion',
+            description: 'Increases intelligence by 10',
+            price: 10,
+            type: 'consumable',
+            effect: {
+                intelligence: 10
+            }
+        },
+        AgilityPotion: {
+            name: 'Agility Potion',
+            description: 'Increases agility by 10',
+            price: 10,
+            type: 'consumable',
+            effect: {
+                agility: 10
+            }
+        },
+    }
+)

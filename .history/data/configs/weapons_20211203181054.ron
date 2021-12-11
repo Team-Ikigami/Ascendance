@@ -1,0 +1,19 @@
+(
+    {
+        RustySword: (
+            model: "data/models/swords/rustysword.fbx",
+            shot_sounds: [
+                // Not M4 sounds, but ok.
+                "data/sounds/enfield_l85_shot_1.wav",
+                "data/sounds/enfield_l85_shot_2.wav",
+                "data/sounds/enfield_l85_shot_3.wav"
+            ],
+            swipe_interval: 0.15,
+            yaw_correction: -4.0,
+            pitch_correction: -12.0,
+            v_recoil: (-2.0, 4.0),
+            h_recoil: (-1.0, 1.0),
+            base_critical_shot_probability: 0.028
+        ),
+    }
+)

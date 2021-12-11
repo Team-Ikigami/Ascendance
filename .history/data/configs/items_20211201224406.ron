@@ -1,0 +1,28 @@
+(
+    map: {
+        RustySword: (
+            model: "data/models/swords/rustysword.fbx",
+            scale: 1.0,
+            name: "Rusty Sword"
+            description: "A rusty sword. Strangely sturdy and can kill people over time.",
+            consumable: false,
+            preview: "data/ui/swords/rustysword.png"
+        ),
+        RustyKey: (
+            model: "data/models/keys/rustykey.fbx",
+            scale: 0.1,
+            name: "Rusty key",
+            description: "A rusty key. Can be used to open locked doors. Unsure what it unlocks.",
+            consumable: false,
+            preview: "data/ui/keys/rustykey.png"
+        ),
+        RustyPick: (
+            model: "data/models/tools/pick/rustypick.fbx",
+            scale: 0.1,
+            name: "Rusty pick",
+            description: "A rusty pick. Will break the lock that it is used in.",
+            consumable: false,
+            preview: "data/ui/tools/pick.png"
+        ),
+    }
+)
