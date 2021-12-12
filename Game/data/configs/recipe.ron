@@ -15,6 +15,11 @@
             result: CookedMeat
         ),
         CookedPotatoRecipe: (
-
+            ingredients: [
+                item: Potato,
+                amount: 1
+            ],
+            result: CookedPotato
+        ),
     ]
 )
