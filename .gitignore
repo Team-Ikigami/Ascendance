@@ -12,7 +12,7 @@ Web/**/www
 *.jar
 
 # extension generated folders
-# /.history/
+/.history/
 *.*~
 
 # See http://help.github.com/ignore-files/ for more about ignoring files.
