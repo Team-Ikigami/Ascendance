@@ -12,7 +12,7 @@ Web/**/www
 *.jar
 
 # extension generated folders
-# /.history/
+/.history/
 *.*~
 
 Web/Website/node_modules
