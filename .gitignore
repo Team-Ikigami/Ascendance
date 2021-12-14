@@ -14,3 +14,50 @@ Web/**/www
 # extension generated folders
 # /.history/
 *.*~
+
+# See http://help.github.com/ignore-files/ for more about ignoring files.
+
+# compiled output
+/Web/Website/dist
+/Web/Website/tmp
+/Web/Website/out-tsc
+# Only exists if Bazel was run
+/Web/Website/bazel-out
+
+# dependencies
+/Web/Website/node_modules
+
+# profiling files
+/Web/Website/chrome-profiler-events*.json
+
+# IDEs and editors
+/Web/Website/.idea
+/Web/Website/.project
+/Web/Website/.classpath
+/Web/Website/.c9/
+/Web/Website/*.launch
+/Web/Websit/.settings/
+/Web/Website/*.sublime-workspace
+
+# IDE - VSCode
+/Web/Website/.vscode/*
+/Web/Website/!.vscode/settings.json
+/Web/Website/!.vscode/tasks.json
+/Web/Website/!.vscode/launch.json
+/Web/Website/!.vscode/extensions.json
+/Web/Website/.history/*
+
+# misc
+/Web/Website/.angular/cache
+/Web/Website/.sass-cache
+/Web/Website/connect.lock
+/Web/Website/coverage
+/Web/Website/libpeerconnection.log
+/Web/Website/npm-debug.log
+/Web/Website/yarn-error.log
+/Web/Website/testem.log
+/Web/Website/typings
+
+# System Files
+/Web/Website/.DS_Store
+/Web/Website/Thumbs.db
