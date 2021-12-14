@@ -14,3 +14,6 @@ Web/**/www
 # extension generated folders
 # /.history/
 *.*~
+
+Web/Website/node_modules
+Web/Website/.vscode/
