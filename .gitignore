@@ -7,10 +7,6 @@
 Web/**/pkg
 Web/**/www
 
-# Java
-*.class
-*.jar
-
 # extension generated folders
 /.history/
 *.*~
