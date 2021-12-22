@@ -111,6 +111,17 @@ struct Game {	}
 impl GameState for Game {
     fn init(engine: &mut Engine) -> Self where Self: Sized {
         let ctx = &mut engine.user_interface.build_ctx();
+        let soundcontenttest = SoundContext::new();
+        let sound_buffer_test = SoundBufferResource::new_generic(rg3d_sound::futures::executor::block_on(DataSource::from_file("./data/music/theme-test.wav")).unwrap()).unwrap();
+        let sourcetest = GenericSourceBuilder::new()
+            .with_buffer(sound_buffer_test)
+            .with_looping(true)
+            .with_status(Status::Playing)
+            .build_source()
+            .unwrap();
+        soundcontenttest.state()
+            .add_source(sourcetest);
+        thread::sleep(Duration::from_secs(1));
         Self {	}
 	}
 	fn on_tick(&mut self, engine: &mut Engine, dt: f32, control_flow: &mut ControlFlow) {}

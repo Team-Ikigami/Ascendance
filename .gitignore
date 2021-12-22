@@ -1,12 +1,8 @@
 # Rust
-/Game/build/
-/Game/Cargo.lock
+build/
+Cargo.lock
 **/*.rs.bk
-
-# WASM Rust
-Web/**/pkg
-Web/**/www
-
+**/*.log
 # extension generated folders
 /.history/
 *.*~

@@ -57,6 +57,7 @@ regex = "1.5.4"
 regex-syntax = "0.6.25"
 remove_dir_all = "0.7.0"
 rg3d = { git = "https://github.com/rg3dengine/rg3d", rev="90309500ee40b1e0eb492f3ad20e0f4c363b9f55" }
+rg3d-sound = "0.25.0"
 ron = "0.7.0"
 savefile = "0.8.3"
 serde = { version = "1.0.131", features = ["derive"] }
