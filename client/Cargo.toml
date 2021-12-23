@@ -1,5 +1,5 @@
 [package]
-name = "client"
+name = "ascendance-client"
 version = "0.1.0"
 edition = "2021"
 
