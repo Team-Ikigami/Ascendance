@@ -14,3 +14,82 @@ members = [
 	"server-cli",
 	"world",
 ]
+# default profile for devs, fast to compile, okay enough to run, no debug information
+[profile.dev]
+opt-level = 2
+overflow-checks = true
+debug-assertions = true
+panic = "abort"
+debug = false
+codegen-units = 8
+lto = false
+incremental = true
+# All packages that aren't members of this workspace
+[profile.dev.package."*"]
+# TODO: seems like opt-level=2 should be sufficient here....
+opt-level = 3
+[profile.dev.package."ascendance-network-protocol"]
+opt-level = 3
+# this profile is used by developers if dev doesn't has enough debug information,
+# the name must != debug, as debug is used by dev because....
+[profile.debuginfo]
+inherits= 'dev'
+debug = true
+# used to perform things that do a *lot* of math (i.e. worldgen) but still need reasonable compilation time.  Ideally this would also
+# add -C target-cpu=native, but I don't think you can set this by profile currently.
+[profile.no_overflow]
+inherits= 'dev'
+overflow-checks = false
+debug-assertions = false
+[profile.no_overflow.package."ascendance-world"]
+opt-level = 3
+
+# this profile is used for veloren releases, compile time doesn't matter
+# we need stacktraces, light debug information, as much checks as possible
+# I would like to put it in a seperate `official_release` target, but that doesnt share caches with `cargo test` and `cargo bench`
+[profile.release]
+opt-level = 3
+overflow-checks = false
+debug-assertions = false
+lto = true
+debug = false
+panic = "abort" # don't need unwinding so we can skip including the landing pads for that
+# line tables so we can have useful backtraces for in-house crates
+[profile.release.package."ascendance-network"]
+debug = 1
+[profile.release.package."ascendance-network-protocol"]
+debug = 1
+[profile.release.package."ascendance-common"]
+debug = 1
+[profile.release.package."ascendance-client"]
+debug = 1
+[profile.release.package."ascendance-server"]
+debug = 1
+[profile.release.package."ascendance-server-cli"]
+debug = 1
+[profile.release.package."ascendance-game"]
+debug = 1
+[profile.release.package."ascendance-world"]
+debug = 1
+# used for cargo bench
+[profile.bench]
+opt-level = 2
+incremental = true
+# this profile is used by developers for release profiling
+[profile.releasedebuginfo]
+inherits =  'release'
+debug = 1
+
+# [workspace.metadata.nix]
+# systems = ["x86_64-linux"]
+# [workspace.metadata.nix.cachix]
+# name = "veloren-nix"
+# key = "veloren-nix.cachix.org-1:zokfKJqVsNV6kI/oJdLF6TYBdNPYGSb+diMVQPn/5Rc="
+# [workspace.metadata.nix.crateOverride.veloren-network]
+# buildInputs = ["openssl"]
+# nativeBuildInputs = ["pkg-config"]
+
+[patch.crates-io]
+vek = { git = "https://gitlab.com/veloren/vek.git", branch = "fix_intrinsics2" }
+# patch wgpu so we can use wgpu-profiler crate
+wgpu = { git = "https://github.com/gfx-rs/wgpu.git", rev = "a92b8549a8e2cb9dac781bafc5ed32828f3caf46" }
