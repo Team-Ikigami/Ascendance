@@ -1,4 +1,0 @@
-struct AdventurerBuilder;
-
-impl AdventurerBuilder{}
-

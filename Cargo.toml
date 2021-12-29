@@ -1,94 +1,83 @@
-cargo-features = ["named-profiles","profile-overrides"]
+[package]
+name = "ascendance-game"
+version = "0.1.0"
+edition = "2018"
 
-[workspace]
-members = [
-	"AscendingToGodhood",
-	"client",
-	"common",
-	"common/logging",
-	"common/net",
-	"network",
-	"network/protocol",
-	"plugin",
-	"server",
-	"server-cli",
-	"world",
-]
-# default profile for devs, fast to compile, okay enough to run, no debug information
-[profile.dev]
-opt-level = 2
-overflow-checks = true
-debug-assertions = true
-panic = "abort"
-debug = false
-codegen-units = 8
-lto = false
-incremental = true
-# All packages that aren't members of this workspace
-[profile.dev.package."*"]
-# TODO: seems like opt-level=2 should be sufficient here....
-opt-level = 3
-[profile.dev.package."ascendance-network-protocol"]
-opt-level = 3
-# this profile is used by developers if dev doesn't has enough debug information,
-# the name must != debug, as debug is used by dev because....
-[profile.debuginfo]
-inherits= 'dev'
-debug = true
-# used to perform things that do a *lot* of math (i.e. worldgen) but still need reasonable compilation time.  Ideally this would also
-# add -C target-cpu=native, but I don't think you can set this by profile currently.
-[profile.no_overflow]
-inherits= 'dev'
-overflow-checks = false
-debug-assertions = false
-[profile.no_overflow.package."ascendance-world"]
-opt-level = 3
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
-# this profile is used for veloren releases, compile time doesn't matter
-# we need stacktraces, light debug information, as much checks as possible
-# I would like to put it in a seperate `official_release` target, but that doesnt share caches with `cargo test` and `cargo bench`
-[profile.release]
-opt-level = 3
-overflow-checks = false
-debug-assertions = false
-lto = true
-debug = false
-panic = "abort" # don't need unwinding so we can skip including the landing pads for that
-# line tables so we can have useful backtraces for in-house crates
-[profile.release.package."ascendance-network"]
-debug = 1
-[profile.release.package."ascendance-network-protocol"]
-debug = 1
-[profile.release.package."ascendance-common"]
-debug = 1
-[profile.release.package."ascendance-client"]
-debug = 1
-[profile.release.package."ascendance-server"]
-debug = 1
-[profile.release.package."ascendance-server-cli"]
-debug = 1
-[profile.release.package."ascendance-game"]
-debug = 1
-[profile.release.package."ascendance-world"]
-debug = 1
-# used for cargo bench
-[profile.bench]
-opt-level = 2
-incremental = true
-# this profile is used by developers for release profiling
-[profile.releasedebuginfo]
-inherits =  'release'
-debug = 1
-
-# [workspace.metadata.nix]
-# systems = ["x86_64-linux"]
-# [workspace.metadata.nix.cachix]
-# name = "veloren-nix"
-# key = "veloren-nix.cachix.org-1:zokfKJqVsNV6kI/oJdLF6TYBdNPYGSb+diMVQPn/5Rc="
-# [workspace.metadata.nix.crateOverride.veloren-network]
-# buildInputs = ["openssl"]
-# nativeBuildInputs = ["pkg-config"]
-
-[patch.crates-io]
-# patch wgpu so we can use wgpu-profiler crate
-wgpu = { git = "https://github.com/gfx-rs/wgpu.git", rev = "a92b8549a8e2cb9dac781bafc5ed32828f3caf46" }
+[dependencies]
+base64 = "0.13.0"
+bindgen = "0.59.2"
+bytes = "1.1.0"
+check-if-email-exists = "0.8.25"
+chrono = "0.4.19"
+clap = "2.34.0"
+cmake = "0.1.46"
+config = "0.11.0"
+configparser = "3.0.0"
+console = "0.15.0"
+csv = "1.1.6"
+directories = "4.0.1"
+dirs = "4.0.0"
+env_logger = "0.9.0"
+fastrand = "1.6.0"
+flexi_logger = "0.22.0"
+fsio = "0.3.0"
+futures = { version = "0.3.19", default-features = false }
+futures-channel = "0.3.19"
+futures-sink = "0.3.19"
+futures-task = "0.3.19"
+futures-util = "0.3.19"
+git-version = "0.3.5"
+glam = "0.20.2"
+glob = "0.3.0"
+heck = "0.4.0"
+hex = "0.4.3"
+humantime = "2.1.0"
+ignore = "0.4.18"
+indexmap = "1.7.0"
+jni = "0.19.0"
+jobserver = "0.1.24"
+js-sys = "0.3.55"
+keyring = "1.0.0"
+laminar = "0.5.0"
+lazy_static = "1.4.0"
+lettre = "0.10.0-rc.4"
+log = "0.4.14"
+mailchecker = "4.1.6"
+mio = "0.8.0"
+num-iter = "0.1.42"
+parity-wasm = "0.42.2"
+pkg-config = "0.3.24"
+quick-xml = "0.22.0"
+quinn = "0.8.0"
+rand = "0.8.4"
+rand_core = "0.6.3"
+regex = "1.5.4"
+regex-syntax = "0.6.25"
+remove_dir_all = "0.7.0"
+rg3d = { git = "https://github.com/rg3dengine/rg3d", rev="90309500ee40b1e0eb492f3ad20e0f4c363b9f55" }
+rg3d-sound = "0.25.0"
+ron = "0.7.0"
+savefile = "0.8.3"
+serde = { version = "1.0.132", features = ["derive"] }
+serde_any = "0.5.0"
+serde_json = "1.0.73"
+serde_yaml = "0.8.23"
+socket2 = "0.4.2"
+structopt = "0.3.25"
+syn = "1.0.83"
+textwrap = "0.14.2"
+thiserror = "1.0.30"
+thread_local = "1.1.3"
+time = "0.3.5"
+tokio = "1.15.0"
+toml = "0.5.8"
+tracing = "0.1.29"
+tracing-subscriber = "0.3.4"
+url = "2.2.2"
+utf8parse = "0.2.0"
+uuid = { version = "0.8.2", features = ["v4"] }
+vec_map = "0.8.2"
+warp = "0.3.2"
+yup-oauth2 = "6.1.0"
