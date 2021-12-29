@@ -1,0 +1,12 @@
+(
+    files: [
+        (
+            zipaddr: "./tmpzip/insect.zip",
+            extract: "./data/models/",
+        ),
+        (
+            zipaddr: "./tmpzip/trainingarea.zip",
+            extract: "data/scenes/trainingarea",
+        ),
+    ].
+)
