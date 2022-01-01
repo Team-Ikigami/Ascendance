@@ -1,7 +1,6 @@
 // mod items;
-// mod player;
-// mod server;
-// mod sound;
+mod player;
+mod sound;
 // mod ui;
 // mod world;
 use rg3d::{
