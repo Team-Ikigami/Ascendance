@@ -1,4 +1,23 @@
-#[derive(debug)]
+use super::message::Message;
+use rg3d::core::sstorage::ImmutableString;
+use rg3d::material::PropertyValue;
+use rg3d::scene::graph::physics::FeatureId;
+use rg3d::{
+    core::{algebra::Vector3, pool::Handle, visitor::prelude::*},
+    engine::resource_manager::ResourceManager,
+    rand::{self, seq::SliceRandom},
+    scene::{node::Node, Scene},
+    sound::{
+        context::SoundContext,
+        effects::{BaseEffect, Effect, EffectInput},
+        source::{generic::GenericSourceBuilder, spatial::SpatialSourceBuilder, Status},
+    },
+    utils::log::{Log, MessageKind},
+};
+use serde::Deserialize;
+use std::{collections::HashMap, fs::File, ops::Range, path::Path, path::PathBuf, time::Duration};
+
+#[derive(Debug)]
 pub struct TriangleRange {
     range: Range<u32>,
     material: MaterialType,
@@ -35,7 +54,7 @@ impl SoundBase {
             .texture_to_material
             .iter()
             .filter_map(|(path, material_type)| match path.canonicalize() {
-                Ok(canonicalized) =>  Some((canonicalized, material_type_clone())),
+                Ok(canonicalized) =>  Some((canonicalized, material_type.clone())),
                 Err(e) => {
                     Log::writeln(
                         MessageKind::Error,
@@ -62,7 +81,7 @@ pub struct SoundMap {
 
 impl SoundMap {
     pub fn new(scene: &Scene, sound_base: &SoundBase) -> Self {
-        let mut sound_map = HashMap::New();
+        let mut sound_map = HashMap::new();
 
         let mut stack = Vec::new();
 
@@ -138,7 +157,7 @@ impl SoundMap {
                             }
                         }
 
-                        stack.extend_from)slice(descendant.children());
+                        stack.extend_from_slice(descendant.children());
                     }
 
                     sound_map.insert(collider, ranges);
@@ -153,4 +172,179 @@ impl SoundMap {
     }
 }
 
-// SoundmManager struct @ StationIapetus\src\sound.rs
+#[derive(Default, Visit)]
+pub struct SoundManager {
+    context: SoundContext,
+    reverb: Handle<Effect>,
+    #[visit(skip)]
+    sound_base: SoundBase,
+    #[visit(skip)]
+    sound_map: SoundMap,
+}
+
+impl SoundManager {
+    pub fn new(context: SoundContext, scene: &Scene) -> Self {
+        let mut base_effect = BaseEffect::default();
+        base_effect.set_gain(0.7);
+        let mut reverb = rg3d::sound::effects::reverb::Reverb::new(base_effect);
+        reverb.set_dry(0.5);
+        reverb.set_wet(0.5);
+        reverb.set_decay_time(Duration::from_secs_f32(3.0));
+        let reverb = context
+            .state()
+            .add_effect(rg3d::sound::effects::Effect::Reverb(reverb));
+
+        let sound_base = SoundBase::load();
+
+        Self {
+            context,
+            reverb,
+            sound_map: SoundMap::new(scene, &sound_base),
+            sound_base,
+        }
+    }
+
+    async fn play_sound(
+        &self,
+        path: &Path,
+        position: Vector3<f32>,
+        gain: f32,
+        rolloff_factor: f32,
+        radius: f32,
+        resource_manager: ResourceManager,
+    ) {
+        // We use spatialsourcebuilder because we want our sound to be affected by the distance
+        // from which the stabbing occured. I am currently using the rusty-shooter repository as an
+        // example so i might consider changing it later. For now this should be fine and work.
+        if let Ok(buffer) = resource_manager.request_sound_buffer(path, false).await {
+            let stabbed_sound = SpatialSourceBuilder::new(
+                GenericSourceBuilder::new()
+                    .with_buffer(buffer.into())
+                    .with_status(Status::Playing)
+                    .with_play_once(true)
+                    .with_gain(gain)
+                    .build()
+                    .unwrap(),
+            )
+            .with_position(position)
+            .with_radius(radius)
+            .with_rolloff_factor(rolloff_factor)
+            .build_source();
+            
+            let mut state = self.context.state();
+            let source = state.add_source(stabbed_sound);
+            state
+                .effect_mut(self.reverb)
+                .add_input(EffectInput::direct(source));
+        } else {
+            Log::writeln(
+                MessageKind::Error,
+                format!("Unable to play sound {:?}", path),
+            );
+        }
+    }
+
+    pub async fn handle_message(&mut self, resource_manager: ResourceManager, message: &Message) {
+        match message {
+            Message::PlaySound {
+                path,
+                position,
+                gain,
+                rolloff_factor,
+                radius,
+            } => {
+                self.play_sound(
+                    path,
+                    *position,
+                    *gain,
+                    *rolloff_factor,
+                    *radius,
+                    resource_manager,
+                )
+                .await;
+            }
+            &Message::PlayEnvironmentSound {
+                collider,
+                feature,
+                position,
+                sound_kind,
+                gain,
+                rolloff_factor,
+                radius,
+            } => {
+                let material = self
+                    .sound_map
+                    .ranges_of(collider)
+                    .map(|ranges| {
+                        match feature {
+                            FeatureId::Face(idx) => {
+                                // FeatureId::Face(idx) is
+                                let mut material = None;
+                                for range in ranges {
+                                    if range.range.contains(&idx) {
+                                        material = Some(range.material);
+                                        break;
+                                    }
+                                }
+                                material
+                            }
+                            _ => {
+                                // Some things have odd colliders, they dont provide useful info
+                                // about impact locationm we have to use first available material.
+                                ranges.first().map(|first_range| first_range.material)
+                            }
+                        }
+                    })
+                    .flatten();
+
+                if let Some(material) = material {
+                    if let Some(map) = self.sound_base.material_to_sound.get(&material) {
+                        if let Some(sound_list) = map.get(&sound_kind) {
+                            if let Some(sound) = sound_list.choose(&mut rand::thread_rng()) {
+                                self.play_sound(
+                                    sound.as_ref(),
+                                    position,
+                                    gain,
+                                    rolloff_factor,
+                                    radius,
+                                    resource_manager,
+                                )
+                                .await;
+                            }
+                        } else {
+                            Log::writeln(
+                                MessageKind::Warning,
+                                format!(
+                                    "Unable to play environment sound there \
+                                is no respective mapping for {:?} sound kind!",
+                                    sound_kind
+                                ),
+                            );
+                        }
+                    } else {
+                        Log::writeln(
+                            MessageKind::Warning,
+                            format!(
+                                "Unable to play environment sound: there \
+                                is no respective mapping for {:?} material!",
+                                material
+                            ),
+                        );
+                    }
+                } else {
+                    Log::writeln(
+                        MessageKind::Warning,
+                        "Unable to play environment sound: unable to fetch material type!"
+                            .to_owned(),
+                    );
+                }
+            }
+            _ => {}
+        }
+    }
+    
+    pub fn resolve(&mut self, scene: &Scene) {
+        self.sound_base = SoundBase::load();
+        self.sound_map = SoundMap::new(scene, &self.sound_base);
+    }
+}

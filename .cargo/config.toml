@@ -1,7 +1,7 @@
 [alias]
-b = "build --workspace"
+b = "build"
 fv = "run --release"
-updep = "upgrade --workspace --exclude=rg3d"
+updep = "upgrade"
 uplock = "update"
 cl = "clean"
 
