@@ -41,7 +41,7 @@ impl LoadingScreen {
                             .with_child(
                                 TextBuilder::new(WidgetBuilder::new().on_row(0))
                                     .with_horizontal_text_alignment(HorizontalAlignment::Center)
-                                    .with_vertical_text_alignment(HorizontalAlignment::Center)
+                                    .with_vertical_text_alignment(VerticalAlignment::Center)
                                     .with_text("Loading asssets. Please wait")
                                     .build(ctx),
                             ),
@@ -53,7 +53,7 @@ impl LoadingScreen {
                 ),
         )
         .add_column(Column::stretch())
-        .add_column(Column::stretch(400.0))
+        .add_column(Column::strict(400.0))
         .add_column(Column::stretch())
         .add_row(Row::stretch())
         .add_row(Row::strict(100.0))

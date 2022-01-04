@@ -1,5 +1,20 @@
 use rg3d::engine::Engine;
-use rg3d::gui::UserInterface;
+use rg3d::core::Handle;
+use rg3d::utils::into_gui_texture;
+use rg3d::gui::{
+    widget::WidgetBuilder,
+    grid::{
+        GridBuilder,
+        Row,
+        Column,
+    },
+    image::ImageBuilder,
+    menu::{MenuItemBuilder, MenuBuilder},
+    node::UiNode,
+    VerticalAlignment,
+    HorizontalAlignment,
+    UserInterface,
+};
 // functions
 fn ThreeCoreBasicBrewingTable(ui: &mut UserInterface) -> Handle<UiNode> {
     let ctx = &mut ui.build_ctx();
@@ -91,11 +106,7 @@ fn NobleAdvancedAnvil(ui: &mut UserInterface) {
 fn NobleGodlyAnvil(ui: &mut UserInterface) {
     let ctx = &mut ui.build_ctx();
 }
-fn anvil_recipe_get(id: u32) -> RecipeStruct {}
-fn cooking_recipe_get(id: u32) -> RecipeStruct {}
-fn potion_recipe_get(id: u32) -> RecipeStruct {}
-fn smelting_recipe_get(id: u32) -> RecipeStruct {}
-pub fn OpeningUI(ui: &mut UserInterface) -> Openinguibuttons, Handle<UiNode> {
+pub fn OpeningUI(ui: &mut UserInterface) -> Handle<UiNode> {
     let ctx = &mut ui.build_ctx();
     GridBuilder::new(
         WidgetBuilder::new()
@@ -110,16 +121,17 @@ pub fn OpeningUI(ui: &mut UserInterface) -> Openinguibuttons, Handle<UiNode> {
             )
             .with_child(
                 newgame = MenuBuilder::new(WidgetBuilder::new().with_vertical_alignment(VerticalAlignment::Center).with_horizontal_alignment(HorizontalAlignment::Center))
-                    .with_items(
-                        newgame = MenuItemBuilder::new(WidgetBuilder::new()
+                    .with_items({
+                        let newgame = MenuItemBuilder::new(WidgetBuilder::new()
                                 .on_row(1)
                                 .on_column(1)
                                 .with_vertical_alignment(VerticalAlignment::Center),
                         )
                         .with_content(text("New Game").shortcut("NewgameUI").icon("assets/textures/widgetbackgrounds/newgame.png"))
                         .with_back("assets/textures/backgrounds/itemsrectanglebackgound.png")
-                        .build(ctx),
-                        settings = MenuItemBuilder::new(
+                        .build(ctx);
+                        newgame;
+                        let setting = MenuItemBuilder::new(
                             WidgetBuilder::new()
                                 .on_row(0)
                                 .on_column(0)
@@ -127,8 +139,9 @@ pub fn OpeningUI(ui: &mut UserInterface) -> Openinguibuttons, Handle<UiNode> {
                         )
                         .with_content(text("Settings").shortcut("SettingsUI").icon("/assets/textures/icons/settings.png"))
                         .with_back("assets/textures/backgrounds/itemsrectanglebackgound.png")
-                        .build(ctx),
-                        exit = MenuItemBuilder::new(
+                        .build(ctx);
+                        setting;
+                        let exit = MenuItemBuilder::new(
                             WidgetBuilder::new()
                                 .on_row(0)
                                 .on_column(1)
@@ -136,8 +149,9 @@ pub fn OpeningUI(ui: &mut UserInterface) -> Openinguibuttons, Handle<UiNode> {
                         )
                         .with_content(text("Exit").shortcut("").icon("assets/textures/icons/exitdoor.png"))
                         .with_back("assets/textures/backgrounds/itemsrectanglebackgound.png")
-                        .build(ctx),
-                    )
+                        .build(ctx);
+                        exit;
+                    })
                     .build(ctx),
             )
     )

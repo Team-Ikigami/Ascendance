@@ -1,9 +1,20 @@
-// mod items;
+#![allow(clippy::too_many_arguments)]
+
+mod items;
 mod message;
 mod player;
 mod sound;
 // mod ui;
-// mod world;
+mod world;
+mod entitygen;
+mod loading_screen;
+mod inventory;
+mod weapon;
+mod door;
+mod light;
+mod config;
+mod save_load;
+
 use rg3d::{
     engine::{
         Engine,
