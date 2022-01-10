@@ -80,6 +80,7 @@ use rand::Rng;
 // Structs
 
 struct Game {
+    grid: Handle<UiNode>,
     bgm: Handle<UiNode>,
     voice: Handle<UiNode>,
     sfx: Handle<UiNode>,
@@ -150,7 +151,7 @@ impl GameState for Game {
         soundcontenttest.state().add_source(sourcetest);
         thread::sleep(Duration::from_secs(1));
         
-        GridBuilder::new(
+        let grid = GridBuilder::new(
             WidgetBuilder::new()
                 .with_width(600.0)
                 .with_height(600.0)
@@ -173,6 +174,7 @@ impl GameState for Game {
             .with_text("Sound Effects")
             .build(ctx);
         Self {
+            grid,
             bgm,
             voice,
             sfx,
