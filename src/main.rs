@@ -1,8 +1,9 @@
-#[allow(clippy::too_many_arguments)]
-#[allow(unused_variables)]
-#[allow(unused_mut)]
-#[allow(unreachable_patterns)]
-#[allow(dead_code)]
+#![allow(clippy::too_many_arguments)]
+#![allow(unused_variables)]
+#![allow(unused_mut)]
+#![allow(unreachable_patterns)]
+#![allow(dead_code)]
+#![allow(unused_imports)]
 
 mod items;
 mod message;
@@ -108,7 +109,7 @@ fn bgmloop() {
     let mut randbgmint = rand::thread_rng().gen_range(1..6);
     match randbgmint {
         1 => {
-            let sound_buffer = SoundBufferResource::new_generic(rg3d_sound::futures::executor::block_on(DataSource::from_file("data/music/theme.wav")).unwrap()).unwrap();
+            let sound_buffer = SoundBufferResource::new_generic(rg3d_sound::futures::executor::block_on(DataSource::from_file("data/music/themetest.wav")).unwrap()).unwrap();
             let source = GenericSourceBuilder::new()
                 .with_buffer(sound_buffer)
                 .with_status(Status::Playing)
@@ -139,7 +140,7 @@ impl GameState for Game {
     {
         let ctx = &mut engine.user_interface.build_ctx();
         let soundcontenttest = SoundContext::new();
-        let sound_buffer_test = SoundBufferResource::new_generic(fyrox::sound::futures::executor::block_on(DataSource::from_file("data/music/theme-test.wav")).unwrap()).unwrap();
+        let sound_buffer_test = SoundBufferResource::new_generic(fyrox::sound::futures::executor::block_on(DataSource::from_file("data/music/themetest.wav")).unwrap()).unwrap();
         let sourcetest = GenericSourceBuilder::new()
             .with_buffer(sound_buffer_test)
             .with_looping(true)
@@ -149,25 +150,32 @@ impl GameState for Game {
         soundcontenttest.state().add_source(sourcetest);
         thread::sleep(Duration::from_secs(1));
         
-        GridBuilder::new(WidgetBuilder::new())
-            .add_column(GridDimension::strict(200.0))
-            .add_column(GridDimension::strict(200.0))
-            .add_column(GridDimension::strict(200.0))
-            .add_row(GridDimension::strict(100.0))
-            .add_row(GridDimension::strict(100.0))
-            .add_row(GridDimension::strict(100.0))
-            .build(ctx);
+        GridBuilder::new(
+            WidgetBuilder::new()
+                .with_width(600.0)
+                .with_height(600.0)
+        )
+        .add_column(GridDimension::strict(200.0))
+        .add_column(GridDimension::strict(200.0))
+        .add_column(GridDimension::strict(200.0))
+        .add_row(GridDimension::strict(100.0))
+        .add_row(GridDimension::strict(100.0))
+        .add_row(GridDimension::strict(100.0))
+        .build(ctx);
 
+        let bgm = ButtonBuilder::new(WidgetBuilder::new().on_row(2).on_column(1))
+            .with_text("bgm")
+            .build(ctx);
+        let voice = ButtonBuilder::new(WidgetBuilder::new().on_row(2).on_column(2))
+            .with_text("Voice Lines")
+            .build(ctx);
+        let sfx = ButtonBuilder::new(WidgetBuilder::new().on_row(2).on_column(3))
+            .with_text("Sound Effects")
+            .build(ctx);
         Self {
-            bgm: ButtonBuilder::new(WidgetBuilder::new().on_row(2).on_column(1))
-                .with_text("bgm")
-                .build(ctx),
-            voice: ButtonBuilder::new(WidgetBuilder::new().on_row(2).on_column(2))
-                .with_text("Voice Lines")
-                .build(ctx),
-            sfx: ButtonBuilder::new(WidgetBuilder::new().on_row(2).on_column(3))
-                .with_text("Sound Effects")
-                .build(ctx),
+            bgm,
+            voice,
+            sfx,
         }
     }
 	fn on_tick(&mut self, engine: &mut Engine, dt: f32, control_flow: &mut ControlFlow) {}
