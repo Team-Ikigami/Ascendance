@@ -141,7 +141,7 @@ impl GameState for Game {
     {
         let ctx = &mut engine.user_interface.build_ctx();
         let soundcontenttest = SoundContext::new();
-        let sound_buffer_test = SoundBufferResource::new_generic(fyrox::sound::futures::executor::block_on(DataSource::from_file("data/music/themetest.wav")).unwrap()).unwrap();
+        let sound_buffer_test = SoundBufferResource::new_generic(rg3d_sound::futures::executor::block_on(DataSource::from_file("data/music/themetest.wav")).unwrap()).unwrap();
         let sourcetest = GenericSourceBuilder::new()
             .with_buffer(sound_buffer_test)
             .with_looping(true)
