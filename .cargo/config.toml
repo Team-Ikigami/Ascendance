@@ -1,6 +1,5 @@
 [alias]
-b = "build"
-fv = "run --release"
+b = "run --release"
 updep = "upgrade"
 uplock = "update"
 cl = "clean"

@@ -39,12 +39,12 @@ log = "0.4.14"
 num-iter = "0.1.42"
 pkg-config = "0.3.24"
 quick-xml = "0.22.0"
-rand = "0.8.4"
-rand_core = "0.6.3"
+rand = "0.8.3"
 regex = "1.5.4"
 regex-syntax = "0.6.25"
 remove_dir_all = "0.7.0"
-rg3d = { git = "https://github.com/rg3dengine/rg3d", rev="930eac8ab41d1a64d2dfef139de67b13b9f786b3" }
+fyrox = { git = "https://github.com/FyroxEngine/Fyrox", rev="b33786966ddd302169558e6acf1af7efde1f6f19" }
+rg3d-sound = "0.26.0"
 ron = "0.7.0"
 savefile = "0.8.3"
 serde = { version = "1.0.132", features = ["derive"] }
@@ -61,8 +61,3 @@ tracing = "0.1.29"
 tracing-subscriber = "0.3.4"
 utf8parse = "0.2.0"
 vec_map = "0.8.2"
-
-[lib]
-name = "AscendanceLib"
-crate-type = ["lib"]
-required-features = []
