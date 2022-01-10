@@ -149,7 +149,7 @@ impl GameState for Game {
             .build_source()
             .unwrap();
         soundcontenttest.state().add_source(sourcetest);
-        thread::sleep(Duration::from_secs(1));
+        thread::sleep(Duration::from_secs(17));
         
         let grid = GridBuilder::new(
             WidgetBuilder::new()
