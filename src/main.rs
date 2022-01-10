@@ -140,9 +140,9 @@ impl GameState for Game {
             Self: Sized 
     {
         let ctx = &mut engine.user_interface.build_ctx();
-        let AudioEngine = SoundEngine::new();
+        let audioengine = SoundEngine::new();
         let soundcontenttest = SoundContext::new();
-        AudioEngine.lock().unwrap().add_context(soundcontenttest.clone());
+        audioengine.lock().unwrap().add_context(soundcontenttest.clone());
         let sound_buffer_test = SoundBufferResource::new_generic(rg3d_sound::futures::executor::block_on(DataSource::from_file("data/music/themetest.wav")).unwrap()).unwrap();
         let sourcetest = GenericSourceBuilder::new()
             .with_buffer(sound_buffer_test)
