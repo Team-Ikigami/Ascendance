@@ -80,7 +80,6 @@ use rand::Rng;
 // Structs
 
 struct Game {
-    grid: Handle<UiNode>,
     bgm: Handle<UiNode>,
     voice: Handle<UiNode>,
     sfx: Handle<UiNode>,
@@ -110,13 +109,17 @@ fn bgmloop() {
     let mut randbgmint = rand::thread_rng().gen_range(1..6);
     match randbgmint {
         1 => {
-            let sound_buffer = SoundBufferResource::new_generic(rg3d_sound::futures::executor::block_on(DataSource::from_file("data/music/themetest.wav")).unwrap()).unwrap();
+            let sound_buffer = SoundBufferResource::new_generic(rg3d_sound::futures::executor::block_on(DataSource::from_file("data/music/themetest.wav"))
+                .unwrap())
+                .unwrap();
+            
             let source = GenericSourceBuilder::new()
                 .with_buffer(sound_buffer)
                 .with_status(Status::Playing)
                 .build_source()
                 .unwrap();
             let _source_handle: CoreSoundHandle<SoundSource> = context.state().add_source(source);
+            
             thread::sleep(Duration::from_secs(17));
         }
         2 => bgmloop(),
@@ -152,31 +155,30 @@ impl GameState for Game {
             .unwrap();
         let _source_handle: CoreSoundHandle<SoundSource> = soundcontenttest.state().add_source(sourcetest);
         thread::sleep(Duration::from_secs(17));
-        
-        let grid = GridBuilder::new(
+
+        let bgm;
+        let voice;
+        let sfx;
+        GridBuilder::new(
             WidgetBuilder::new()
-                .with_width(600.0)
-                .with_height(600.0)
+                .with_children(&[
+                    {
+                        bgm = ButtonBuilder::new(WidgetBuilder::new().with_width(200.0).with_height(100.0)).with_text("bgm").build(ctx);
+                        bgm
+                    },
+                    {
+                        voice = ButtonBuilder::new(WidgetBuilder::new().with_width(200.0).with_height(100.0)).with_text("voice lines").build(ctx);
+                        voice
+                    },
+                    {
+                        sfx = ButtonBuilder::new(WidgetBuilder::new().with_width(200.0).with_height(100.0)).with_text("sound effects").build(ctx);
+                        sfx
+                    },
+                ])
         )
-        .add_column(GridDimension::strict(200.0))
-        .add_column(GridDimension::strict(200.0))
-        .add_column(GridDimension::strict(200.0))
-        .add_row(GridDimension::strict(100.0))
-        .add_row(GridDimension::strict(100.0))
-        .add_row(GridDimension::strict(100.0))
         .build(ctx);
 
-        let bgm = ButtonBuilder::new(WidgetBuilder::new().on_row(2).on_column(1))
-            .with_text("bgm")
-            .build(ctx);
-        let voice = ButtonBuilder::new(WidgetBuilder::new().on_row(2).on_column(2))
-            .with_text("Voice Lines")
-            .build(ctx);
-        let sfx = ButtonBuilder::new(WidgetBuilder::new().on_row(2).on_column(3))
-            .with_text("Sound Effects")
-            .build(ctx);
         Self {
-            grid,
             bgm,
             voice,
             sfx,
