@@ -77,6 +77,9 @@ use serde::{Serialize, Deserialize};
 use rand::prelude::*;
 use rand::Rng;
 
+use git_version::git_version;
+const GIT_VERSION: &str = git_version!();
+
 // Structs
 
 struct Game {
@@ -161,21 +164,26 @@ impl GameState for Game {
         let sfx;
         GridBuilder::new(
             WidgetBuilder::new()
-                .with_children(&[
+                .with_children([
                     {
-                        bgm = ButtonBuilder::new(WidgetBuilder::new().with_width(200.0).with_height(100.0)).with_text("bgm").build(ctx);
+                        bgm = ButtonBuilder::new(WidgetBuilder::new().with_width(200.0).with_height(100.0).on_row(0)).with_text("bgm").build(ctx);
                         bgm
                     },
                     {
-                        voice = ButtonBuilder::new(WidgetBuilder::new().with_width(200.0).with_height(100.0)).with_text("voice lines").build(ctx);
+                        voice = ButtonBuilder::new(WidgetBuilder::new().with_width(200.0).with_height(100.0).on_row(1)).with_text("voice lines").build(ctx);
                         voice
                     },
                     {
-                        sfx = ButtonBuilder::new(WidgetBuilder::new().with_width(200.0).with_height(100.0)).with_text("sound effects").build(ctx);
+                        sfx = ButtonBuilder::new(WidgetBuilder::new().with_width(200.0).with_height(100.0).on_row(2)).with_text("sound effects").build(ctx);
                         sfx
                     },
                 ])
         )
+        .add_row(GridDimension::auto())
+        .add_row(GridDimension::auto())
+        .add_row(GridDimension::auto())
+        .add_row(GridDimension::auto())
+        .add_column(GridDimension::auto())
         .build(ctx);
 
         Self {
