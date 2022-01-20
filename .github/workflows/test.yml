@@ -1,0 +1,5 @@
+name: test errors
+
+runs-on:
+  push:
+    branch: master-(racism)
