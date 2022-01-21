@@ -1,4 +1,4 @@
-e fyrox::{
+use fyrox::{
     core::{
         algebra::{UnitQuaternion, Vector3},
         pool::Handle,
@@ -52,5 +52,43 @@ pub struct CameraController {
     camera: Handle<Node>,
 }
 
-// https://fyrox-book.github.io/fyrox/tutorials/rpg/tutorial-1/tutorial-part-1.html#player-and-camera-controller
-// part 2
+impl CameraController {
+    pub async fn new (graph: &mut Graph, resource_manager: ResourceManager) -> Self {
+        let camera;
+        let hinge;
+        let pivot = BaseBuilder::new()
+            .with_children(&[{
+                hinge = BaseBuilder::new()
+                    .with_local_transform(
+                        TransformBuilder::new()
+                            // move the hinge of the pivot & camera up to the characters head/body
+                            .with_local_position(Vector3::new(0.0, 0.55, 0.0))
+                            .build(),
+                        ),
+                        .with_children(&[{
+                            camera = CameraBuilder::new(
+                                BaseBuilder::new()
+                                    .with_local_transform(
+                                        TransformBuilder::new()
+                                            // move Camera to behind the characters head
+                                            .with_local_position(Vector3::new(0.0, 0.0, -2.0))
+                                            .build(),
+                                    ),
+                            )
+                            .with_skybox(create_skybox(resource_manager).await)
+                            .build(graph);
+                            
+                            camera
+                        }])
+                        .build(graph);
+                hinge
+            }])
+            .build(graph);
+        
+        Self {
+            pivot,
+            hinge,
+            camera,
+        }
+    }
+}
