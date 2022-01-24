@@ -1,5 +1,54 @@
 name: test errors
-
-runs-on:
+on: 
   push:
-    branch: master-(racism)
+    branches:
+      - master-(racim)
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    name: Windows Test
+    steps:
+      - uses: actions/checkout@v2.4.0
+      - name: WinBuild
+        uses: actions-rs/cargo@v1.0.1
+        with:
+          command: build 
+          toolchain: stable
+          args: --all-features --release --all-targets --target=x86_64-pc-windows-msvc
+      - name: WinCheck
+        with:
+          command: check
+          args: --all-features --release --all-targets --target=x86_64-pc-windows-msvc
+  macos:
+    runs-on: macos-latest
+    name: MacOSX Test
+    steps:
+      - uses: actions/checkout@v2.4.0
+      - name: MacOSXBuild
+        uses: actions-rs/cargo@v1.0.1
+        with: 
+          command: build
+          toolchain: stable
+          args: --all-features --release --all-targets --target=x86_64-apple-darwin
+      - name: MacOSX Test
+        uses: actions-rs/cargo@v1.0.1
+        with:
+          command: check
+          toolchain: stable
+          args: --all-features --release --all-targets --target=x86_64-apple-darwin
+  linux:
+    runs-on: ubuntu-latest
+    name: UnixTest
+    steps:
+      - uses: actions/checkout@v2.4.0
+      - name: WinBuild
+        uses: actions-rs/cargo@v1.0.1
+        with:
+          command: build 
+          toolchain: stable
+          args: --all-features --release --all-targets --target=x86_64-unknown-linux-gnu
+      - name: WinCheck
+        with:
+          command: check
+          args: --all-features --release --all-targets --target=x86_64-unknown-linux-gnu
