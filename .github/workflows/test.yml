@@ -16,10 +16,14 @@ jobs:
           command: build 
           toolchain: stable
           args: --all-features --release --all-targets --target=x86_64-pc-windows-msvc
+      - run: |
+          cargo build --all-features --release --all-targets --target=x86_64-pc-windows-msvc
       - name: WinCheck
         with:
           command: check
           args: --all-features --release --all-targets --target=x86_64-pc-windows-msvc
+      - run: |
+          cargo check --all-features --release --all-targets --target=x86_64-pc-windows-msvc
   macos:
     runs-on: macos-latest
     name: MacOSX Test
@@ -31,12 +35,16 @@ jobs:
           command: build
           toolchain: stable
           args: --all-features --release --all-targets --target=x86_64-apple-darwin
+      - run: |
+          cargo build --all-features --release --all-targets --target=x86_64-apple-darwin
       - name: MacOSX Test
         uses: actions-rs/cargo@v1.0.1
         with:
           command: check
           toolchain: stable
           args: --all-features --release --all-targets --target=x86_64-apple-darwin
+      - run: |
+          cargo check --all-features --release --all-targets --target=x86_64-apple-darwin
   linux:
     runs-on: ubuntu-latest
     name: UnixTest
@@ -48,7 +56,12 @@ jobs:
           command: build 
           toolchain: stable
           args: --all-features --release --all-targets --target=x86_64-unknown-linux-gnu
+      - run: |
+          cargo build --all-features --release --all-targets --target=x86_64-unknown-linux-gnu
       - name: WinCheck
         with:
           command: check
+          toolchain: stable
           args: --all-features --release --all-targets --target=x86_64-unknown-linux-gnu
+      - run: |
+          cargo check --all-features --release --all-targets --target=x86_64-unknown-linux-gnu
