@@ -1,13 +1,7 @@
 
-# Ascending to Godhood. Demo Version
+# Ascending to Godhood
 
 PLEASE READ THIS BEFORE PUSHING TO GITHUB. MAKE SURE YOU ARE PUSHING TO THE BRANCH YOU WANT TO PUSH TO. ALSO, DO NOT DRASTICALLY ALTER DIRECTORY STRUCTURE PLEASE FOR THE LOVE OF GOD.
-
-## Information
-
-This repository only contains a demo of the game which includes roughly 3-20 hours of playtime. Please report issues with both the Demo version and the official licensed version here. To gain permission to view the official versions source code, please open an issue with the Source Request template and with the title Request Permission View Access. Any other title (case sensitive) will be closed and ignored. 
-
-This repository contains information on what has not been completed for the demo.
 
 ## Tasks
 
@@ -15,7 +9,7 @@ DuckEater54 is working on the Team-Ikigami website
 
 # Documentation
 
-Documentation at [ATG-RPG.com/SFTB](AscensionRPG.github.io)
+Documentation at [team-ikigami.github.io](team-ikigami.github.io)
 
 # License
 
