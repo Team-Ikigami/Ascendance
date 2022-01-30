@@ -2,7 +2,7 @@ name: test errors
 on: 
   push:
     branches:
-      - master-(racim)
+      - master-(racism)
 
 jobs:
   windows:
