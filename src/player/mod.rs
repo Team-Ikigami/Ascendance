@@ -43,7 +43,7 @@ impl Player {
         scene.graph[model]
             .local_transform_mut()
             // the center starts at its feet so we lower the model
-            .set_position(Vector3::New(0.0, -0.75, 0.0))
+            .set_position(Vector3::new(0.0, -0.75, 0.0))
             // make model smaller
             .set_scale(Vector3::new(0.02, 0.02, 0.02));
         Self {

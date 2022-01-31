@@ -22,7 +22,7 @@ async fn create_skybox(resource_manager: ResourceManager) -> SkyBox {
         resource_manager.request_texture("data/textures/skybox/left.jpg"),
         resource_manager.request_texture("data/textures/skybox/right.jpg"),
         resource_manager.request_texture("data/textures/skybox/up.jpg"),
-        resource_manager.request_texture("data/textures/skybox/down.jpg"),
+        resource_manager.request_texture("data/textures/skybox/down.jpg")
     );
     
     // Unwrap(?)
@@ -42,7 +42,6 @@ async fn create_skybox(resource_manager: ResourceManager) -> SkyBox {
     let mut data = cubemap.as_ref().unwrap().data_ref();
     data.set_s_wrap_mode(TextureWrapMode::ClampToEdge);
     data.set_t_wrap_mode(TextureWrapMode::ClampToEdge);
-    
     skybox
 }
 
@@ -64,7 +63,7 @@ impl CameraController {
                             // move the hinge of the pivot & camera up to the characters head/body
                             .with_local_position(Vector3::new(0.0, 0.55, 0.0))
                             .build(),
-                        ),
+                        )
                         .with_children(&[{
                             camera = CameraBuilder::new(
                                 BaseBuilder::new()

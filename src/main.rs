@@ -19,7 +19,9 @@ mod door;
 mod light;
 mod config;
 mod save_load;
+mod level;
 
+use crate::{level::Level, player::Player};
 use fyrox::{
     engine::{
         Engine,
@@ -50,7 +52,11 @@ use fyrox::{
         UserInterface,
 	UiNode
     },
-    core::pool::{Handle, PoolIterator, PoolIteratorMut},
+    core::{
+        pool::{Handle, PoolIterator, PoolIteratorMut},
+        color::Color,
+        futures::executor::block_on,
+    },
     asset::{
         define_new_resource, 
         Resource, 
@@ -61,6 +67,7 @@ use fyrox::{
     event::{WindowEvent, DeviceId, DeviceEvent},
     utils::into_gui_texture,
     event_loop::ControlFlow,
+    scene::Scene,
 };
 use rg3d_sound::{
     source::{generic::GenericSourceBuilder, SoundSource, Status},
@@ -83,9 +90,9 @@ const GIT_VERSION: &str = git_version!();
 // Structs
 
 struct Game {
-    bgm: Handle<UiNode>,
-    voice: Handle<UiNode>,
-    sfx: Handle<UiNode>,
+    scene: Handle<Scene>,
+    level: Level,
+    player: Player,
 }
 
 // fn Newgame() {}
@@ -133,6 +140,52 @@ fn bgmloop() {
     }
     bgmloop();
 }
+
+//        let ctx = &mut engine.user_interface.build_ctx();
+//        let audioengine = SoundEngine::new();
+//        let soundcontenttest = SoundContext::new();
+//        audioengine.lock().unwrap().add_context(soundcontenttest.clone());
+//        let sound_buffer_test = SoundBufferResource::new_generic(rg3d_sound::futures::executor::block_on(DataSource::from_file("data/music/themetest.wav")).unwrap()).unwrap();
+//        let sourcetest = GenericSourceBuilder::new()
+//            .with_buffer(sound_buffer_test)
+//            .with_looping(true)
+//            .with_status(Status::Playing)
+//            .build_source()
+//            .unwrap();
+//        let _source_handle: CoreSoundHandle<SoundSource> = soundcontenttest.state().add_source(sourcetest);
+//        thread::sleep(Duration::from_secs(17));
+//        let bgm;
+//        let voice;
+//        let sfx;
+//        GridBuilder::new(
+//            WidgetBuilder::new()
+//                .with_children([
+//                    {
+//                        bgm = ButtonBuilder::new(WidgetBuilder::new().with_width(200.0).with_height(100.0).on_row(0)).with_text("bgm").build(ctx);
+//                        bgm
+//                    },
+//                    {
+//                        voice = ButtonBuilder::new(WidgetBuilder::new().with_width(200.0).with_height(100.0).on_row(1)).with_text("voice lines").build(ctx);
+//                        voice
+//                    },
+//                    {
+//                        sfx = ButtonBuilder::new(WidgetBuilder::new().with_width(200.0).with_height(100.0).on_row(2)).with_text("sound effects").build(ctx);
+//                        sfx
+//                    },
+//                ])
+//        )
+//        .add_row(GridDimension::auto())
+//        .add_row(GridDimension::auto())
+//        .add_row(GridDimension::auto())
+//        .add_row(GridDimension::auto())
+//        .add_column(GridDimension::auto())
+//        .build(ctx);
+//        Self {
+//            bgm,
+//            voice,
+//            sfx,
+//        }
+
 /// Uses the rg3d crates framework requirements. This section runs all the necesary functions and such.
 /// init is used for initializing of the game. In here we have resoure checks, preloading of the game and other stuff.
 /// on_tick is used for logic that happens every second. It has a fixed fps of 60 stored in the dt variable.
@@ -145,71 +198,17 @@ impl GameState for Game {
         where 
             Self: Sized 
     {
-        let ctx = &mut engine.user_interface.build_ctx();
-        let audioengine = SoundEngine::new();
-        let soundcontenttest = SoundContext::new();
-        audioengine.lock().unwrap().add_context(soundcontenttest.clone());
-        let sound_buffer_test = SoundBufferResource::new_generic(rg3d_sound::futures::executor::block_on(DataSource::from_file("data/music/themetest.wav")).unwrap()).unwrap();
-        let sourcetest = GenericSourceBuilder::new()
-            .with_buffer(sound_buffer_test)
-            .with_looping(true)
-            .with_status(Status::Playing)
-            .build_source()
-            .unwrap();
-        let _source_handle: CoreSoundHandle<SoundSource> = soundcontenttest.state().add_source(sourcetest);
-        thread::sleep(Duration::from_secs(17));
-
-        let bgm;
-        let voice;
-        let sfx;
-        GridBuilder::new(
-            WidgetBuilder::new()
-                .with_children([
-                    {
-                        bgm = ButtonBuilder::new(WidgetBuilder::new().with_width(200.0).with_height(100.0).on_row(0)).with_text("bgm").build(ctx);
-                        bgm
-                    },
-                    {
-                        voice = ButtonBuilder::new(WidgetBuilder::new().with_width(200.0).with_height(100.0).on_row(1)).with_text("voice lines").build(ctx);
-                        voice
-                    },
-                    {
-                        sfx = ButtonBuilder::new(WidgetBuilder::new().with_width(200.0).with_height(100.0).on_row(2)).with_text("sound effects").build(ctx);
-                        sfx
-                    },
-                ])
-        )
-        .add_row(GridDimension::auto())
-        .add_row(GridDimension::auto())
-        .add_row(GridDimension::auto())
-        .add_row(GridDimension::auto())
-        .add_column(GridDimension::auto())
-        .build(ctx);
-
+        let mut scene = Scene::new();
+        scene.ambient_lighting_color = Color::opaque(150, 150, 150);
+        let player = block_on(Player::new(engine.resource_manager.clone(), &mut scene));
         Self {
-            bgm,
-            voice,
-            sfx,
+            player,
+            level: block_on(Level::new(engine.resource_manager.clone(), &mut scene)),
+            scene: engine.scenes.add(scene),
         }
     }
 	fn on_tick(&mut self, engine: &mut Engine, dt: f32, control_flow: &mut ControlFlow) {}
-        fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {
-            if let Some(ButtonMessage::Click) = message.data() {
-                if message.destination == self.bgm {
-                    bgmloop();
-                }
-                if message.destination == self.voice {
-                    //
-                    //  Using this to call a loop voice music function
-                    //
-                }
-                if message.destination == self.sfx {
-                    //
-                    //  Using this to call a sound effects loop function
-                    //
-                }
-            }
-        }
+        fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
 	fn on_device_event(&mut self, engine: &mut Engine, device_id: DeviceId, event: DeviceEvent) {}
 	fn on_window_event(&mut self, engine: &mut Engine, event: WindowEvent) {}
 	fn on_exit(&mut self, engine: &mut Engine) {}
