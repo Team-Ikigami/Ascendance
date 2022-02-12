@@ -49,6 +49,8 @@ pub struct CameraController {
     pivot: Handle<Node>,
     hinge: Handle<Node>,
     camera: Handle<Node>,
+    yaw: f32,
+    pitch: f32,
 }
 
 impl CameraController {
@@ -88,6 +90,47 @@ impl CameraController {
             pivot,
             hinge,
             camera,
+            yaw: 0.0,
+            pitch: 0.0,
         }
+    }
+    pub fn handle_device_event(&mut self, device_event: &DeviceEvent) {
+        // https://howthingsfly.si.edu/flight-dynamics/roll-pitch-and-yaw very useful
+        if let DeviceEvent::MouseMotion { delta } = device_event {
+            const MOUSE_SENSITIVITY: f32 = 0.015;
+            // Yaw is the horizontal rotation
+            self.yaw -= (delta.0 as f32) * MOUSE_SENSITIVITY;
+            // pitch is the vertical forward/backward rotation. Want to limit it to straight up and
+            // straight down and not break the neck of the character as it looks up and backwards
+            // while rotating the same direction. 
+            self.pitch = (self.pitch + (delta.1 as f32) * MOUSE_SENSITIVITY)
+                // Limit vertical angle to -90; 90 degrees range?
+                .max(-90.0f32.to_radians())
+                .min(90.0f32.to_radians());
+        }
+    }
+    pub fn update(&mut self, graph: &mut Graph) {
+        // Apply rotation to the pivot (the base node of the body-hinge-camera triangle that I dont
+        // really understand. I think the pivot needs rotation to turn the character left and
+        // right?
+        graph[self.pivot]
+            .local_transform_mut()
+            .set_rotation(UnitQuaternion::from_axis_angle(
+                    &Vector3::y_axis(),
+                    self.yaw
+            ));
+        // apply rotation to the hinge. This is the X axis which is on the same plane as the y
+        // axis? I dont understand it so ill definitely inquire
+        // TODO
+        graph[self.hinge]
+            .local_transform_mut()
+            .set_rotation(UnitQuaternion::from_axis_angle(
+                    &Vector3::x_axis(),
+                    self.pitch
+            ));
+
+        // NOTE
+        // Based on what was written above, pitch seems to be the up-down vertical axis. It is
+        // however described as x_axis in the directly above snippet? that feels like a big error 
     }
 }

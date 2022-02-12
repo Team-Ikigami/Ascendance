@@ -52,4 +52,10 @@ impl Player {
             camera_controller: CameraController::new(&mut scene.graph, resource_manager).await,
         }
     }
+    pub fn handle_device_event(&mut self, device_event: &DeviceEvent) {
+        self.camera_controller.handle_device_event(device_event)
+    }
+    pub fn update(&mut self, scene: &mut Scene) {
+        self.camera_controller.update(&mut scene.graph);
+    }
 }

@@ -15,147 +15,222 @@ use rg3d::gui::{
     HorizontalAlignment,
     UserInterface,
 };
-// functions
-fn ThreeCoreBasicBrewingTable(ui: &mut UserInterface) -> Handle<UiNode> {
-    let ctx = &mut ui.build_ctx();
+struct ThreeCoreBasicBrewingTable;
+impl ThreeCoreBasicBrewingTable {
+    fn new(ui: &mut UserInterface) -> Handle<UiNode> {
+        let ctx = &mut ui.build_ctx();
+    }
+	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
 }
-fn ThreeCoreMediumBrewingTable(ui: &mut UserInterface) -> Handle<UiNode> {
-    let ctx = &mut ui.build_ctx();
+impl ThreeCoreMediumBrewingTable {
+    fn new(ui: &mut UserInterface) -> Handle<UiNode> {
+        let ctx = &mut ui.build_ctx();
+    }
+	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
 }
-fn ThreeCoreAdvancedBrewingTable(ui: &mut UserInterface) -> Handle<UiNode> {
-    let ctx = &mut ui.build_ctx();
+impl ThreeCoreAdvancedBrewingTable {
+    fn new(ui: &mut UserInterface) -> Handle<UiNode> {
+        let ctx = &mut ui.build_ctx();
+    }
+	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
 }
-fn ThreeCoreGodlyBrewingTable(ui: &mut UserInterface) -> Handle<UiNode> {
-    let ctx = &mut ui.build_ctx();
+impl ThreeCoreGodlyBrewingTable {
+    fn new(ui: &mut UserInterface) -> Handle<UiNode> {
+        let ctx = &mut ui.build_ctx();
+    }
+	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
 }
-fn FiveCoreBasicBrewingTable(ui: &mut UserInterface) -> Handle<UiNode> {
-    let ctx = &mut ui.build_ctx();
+impl FiveCoreBasicBrewingTable {
+    fn new(ui: &mut UserInterface) -> Handle<UiNode> {
+        let ctx = &mut ui.build_ctx();
+    }
+	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
 }
-fn FiveCoreMediumBrewingTable(ui: &mut UserInterface) -> Handle<UiNode> {
-    let ctx = &mut ui.build_ctx();
+impl FiveCoreMediumBrewingTable {
+    fn new(ui: &mut UserInterface) -> Handle<UiNode> {
+        let ctx = &mut ui.build_ctx();
+    }
+	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
 }
-fn FiveCoreAdvancedBrewingTable(ui: &mut UserInterface) -> Handle<UiNode> {
-    let ctx = &mut ui.build_ctx();
+impl FiveCoreAdvancedBrewingTable {
+    fn new(ui: &mut UserInterface) -> Handle<UiNode> {
+        let ctx = &mut ui.build_ctx();
+    }
+	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
 }
-fn FiveCoreGodlyBrewingTable(ui: &mut UserInterface) -> Handle<UiNode> {
-    let ctx = &mut ui.build_ctx();
+impl FiveCoreGodlyBrewingTable {
+    fn new(ui: &mut UserInterface) -> Handle<UiNode> {
+        let ctx = &mut ui.build_ctx();
+    }
+	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
 }
-fn TenCoreBasicBrewingTable(ui: &mut UserInterface) -> Handle<UiNode> {
-    let ctx = &mut ui.build_ctx();
+impl TenCoreBasicBrewingTable {
+    fn new(ui: &mut UserInterface) -> Handle<UiNode> {
+        let ctx = &mut ui.build_ctx();
+    }
+	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
 }
-fn TenCoreMediumBrewingTable(ui: &mut UserInterface) -> Handle<UiNode> {
-    let ctx = &mut ui.build_ctx();
+impl TenCoreMediumBrewingTable {
+    fn new(ui: &mut UserInterface) -> Handle<UiNode> {
+        let ctx = &mut ui.build_ctx();
+    }
+	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
 }
-fn TenCoreAdvancedBrewingTable(ui: &mut UserInterface) -> Handle<UiNode> {
-    let ctx = &mut ui.build_ctx();
+impl TenCoreAdvancedBrewingTable {
+    fn new(ui: &mut UserInterface) -> Handle<UiNode> {
+        let ctx = &mut ui.build_ctx();
+    }
+	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
 }
-fn TenCoreGodlyBrewingTable(ui: &mut UserInterface) -> Handle<UiNode> {
-    let ctx = &mut ui.build_ctx();
+impl TenCoreGodlyBrewingTable {
+    fn new(ui: &mut UserInterface) -> Handle<UiNode> {
+        let ctx = &mut ui.build_ctx();
+    }
+	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
 }
-fn MetalBasicAnvil(ui: &mut UserInterface) -> Handle<UiNode> {
-    let ctx = &mut ui.build_ctx();
+impl MetalBasicAnvil {
+    fn new(ui: &mut UserInterface) -> Handle<UiNode> {
+        let ctx = &mut ui.build_ctx();
+    }
+	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
 }
-fn MetalMediumAnvil(ui: &mut UserInterface) -> Handle<UiNode> {
-    let ctx = &mut ui.build_ctx();
+impl MetalMediumAnvil {
+    fn new(ui: &mut UserInterface) -> Handle<UiNode> {
+    	let ctx = &mut ui.build_ctx();
+	}
+	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
 }
-fn MetalAdvancedAnvil(ui: &mut UserInterface) -> Handle<UiNode> {
-    let ctx = &mut ui.build_ctx();
-    GridBuilder::new(WidgetBuilder::new().with_vertical_alignment(VerticalAlignment::Center).with_horizontal_alignment(HorizontalAlignment::Center))
-    .with_child(
-        HANDLE::None,
-    )
-    .with_background(
-        ImageBuilder::new(
-            WidgetBuilder::new()
-                .on_row(0)
-                .on_column(0)
-                .with_vertical_alignment(VerticalAlignment::Center)
-                .with_horizontal_alignment(HorizontalAlignment::Center),
-        )
-        .with_texture("assets/textures/icons/anvil.png")
-        .build(ctx),
-    )
-    .add_columns(2)
-    .add_rows(2)
-    .build(ctx);
+impl MetalAdvancedAnvil {
+	fn new(ui: &mut UserInterface, self: &mut Self) -> Handle<UiNode> {
+		let ctx = &mut ui.build_ctx();
+		GridBuilder::new(WidgetBuilder::new().with_vertical_alignment(VerticalAlignment::Center).with_horizontal_alignment(HorizontalAlignment::Center))
+		.with_child(
+			HANDLE::None,
+		)
+		.with_background(
+			ImageBuilder::new(
+				WidgetBuilder::new()
+					.on_row(0)
+					.on_column(0)
+					.with_vertical_alignment(VerticalAlignment::Center)
+					.with_horizontal_alignment(HorizontalAlignment::Center),
+			)
+			.with_texture("assets/textures/icons/anvil.png")
+			.build(ctx),
+		)
+		.add_columns(2)
+		.add_rows(2)
+		.build(ctx);
+	}
+	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
 }
-fn MetalGodlyAnvil(ui: &mut UserInterface) -> Handle<UiNode> {
-    let ctx = &mut ui.build_ctx();
+impl MetalGodlyAnvil {
+	fn new(ui: &mut UserInterface) -> Handle<UiNode> {
+    	let ctx = &mut ui.build_ctx();
+	}
+	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
 }
-fn RefinedBasicAnvil(ui: &mut UserInterface) -> Handle<UiNode> {
-    let ctx = &mut ui.build_ctx();
+impl RefinedBasicAnvil {
+	fn new(ui: &mut UserInterface) -> Handle<UiNode> {
+    	let ctx = &mut ui.build_ctx();
+	}
+	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
 }
-fn RefinedMediumAnvil(ui: &mut UserInterface) -> Handle<UiNode> {
-    let ctx = &mut ui.build_ctx();
+impl RefinedMediumAnvil {
+	fn new(ui: &mut UserInterface) -> Handle<UiNode> {
+    	let ctx = &mut ui.build_ctx();
+	}
+	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
 }
-fn RefinedAdvancedAnvil(ui: &mut UserInterface) -> Handle<UiNode> {
-    let ctx = &mut ui.build_ctx();
+impl RefinedAdvancedAnvil {
+	fn new(ui: &mut UserInterface) -> Handle<UiNode> {
+    	let ctx = &mut ui.build_ctx();
+	}
+	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
 }
-fn RefinedGodlyAnvil(ui: &mut UserInterface) -> Handle<UiNode> {
-    let ctx = &mut ui.build_ctx();
+impl RefinedGodlyAnvil {
+	fn new(ui: &mut UserInterface) -> Handle<UiNode> {
+    	let ctx = &mut ui.build_ctx();
+	}
+	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
 }
-fn NobleBasicAnvil(ui: &mut UserInterface) -> Handle<UiNode> {
-    let ctx = &mut ui.build_ctx();
+impl NobleBasicAnvil {
+	fn new(ui: &mut UserInterface) -> Handle<UiNode> {
+    	let ctx = &mut ui.build_ctx();
+	}
+	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
 }
-fn NobleMediumAnvil(ui: &mut UserInterface) {
-    let ctx = &mut ui.build_ctx();
+impl NobleMediumAnvil {
+	fn new(ui: &mut UserInterface) {
+	    let ctx = &mut ui.build_ctx();
+	}
+	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
 }
-fn NobleAdvancedAnvil(ui: &mut UserInterface) {
-    let ctx = &mut ui.build_ctx();
+impl NobleAdvancedAnvil {
+	fn new(ui: &mut UserInterface) {
+    	let ctx = &mut ui.build_ctx();
+	}
+	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
 }
-fn NobleGodlyAnvil(ui: &mut UserInterface) {
-    let ctx = &mut ui.build_ctx();
+impl NobleGodlyAnvil {
+	fn new(ui: &mut UserInterface) {
+    	let ctx = &mut ui.build_ctx();
+	}
+	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
 }
-pub fn OpeningUI(ui: &mut UserInterface) -> Handle<UiNode> {
-    let ctx = &mut ui.build_ctx();
-    GridBuilder::new(
-        WidgetBuilder::new()
-            .with_back(
-                ImageBuilder::new(
-                    WidgetBuilder::new()
-                        .on_row(1)
-                        .on_column(1),
-                )
-                .with_texture(into_gui_texture(resource_manager.request_texture("assets/misc/opening.gif")))
-                .build(ctx),
-            )
-            .with_child(
-                newgame = MenuBuilder::new(WidgetBuilder::new().with_vertical_alignment(VerticalAlignment::Center).with_horizontal_alignment(HorizontalAlignment::Center))
-                    .with_items({
-                        let newgame = MenuItemBuilder::new(WidgetBuilder::new()
-                                .on_row(1)
-                                .on_column(1)
-                                .with_vertical_alignment(VerticalAlignment::Center),
-                        )
-                        .with_content(text("New Game").shortcut("NewgameUI").icon("assets/textures/widgetbackgrounds/newgame.png"))
-                        .with_back("assets/textures/backgrounds/itemsrectanglebackgound.png")
-                        .build(ctx);
-                        newgame;
-                        let setting = MenuItemBuilder::new(
-                            WidgetBuilder::new()
-                                .on_row(0)
-                                .on_column(0)
-                                .with_vertical_alignment(VerticalAlignment::Center),
-                        )
-                        .with_content(text("Settings").shortcut("SettingsUI").icon("/assets/textures/icons/settings.png"))
-                        .with_back("assets/textures/backgrounds/itemsrectanglebackgound.png")
-                        .build(ctx);
-                        setting;
-                        let exit = MenuItemBuilder::new(
-                            WidgetBuilder::new()
-                                .on_row(0)
-                                .on_column(1)
-                                .with_vertical_alignment(VerticalAlignment::Center),
-                        )
-                        .with_content(text("Exit").shortcut("").icon("assets/textures/icons/exitdoor.png"))
-                        .with_back("assets/textures/backgrounds/itemsrectanglebackgound.png")
-                        .build(ctx);
-                        exit;
-                    })
-                    .build(ctx),
-            )
-    )
-    .add_row(Row::strict(200.0))
-    .add_column(Column::strict(600.0))
-    .build(ctx);
+impl OpeningUI {
+	fn new(ui: &mut UserInterface) -> Handle<UiNode> {
+		let ctx = &mut ui.build_ctx();
+		GridBuilder::new(
+			WidgetBuilder::new()
+				.with_back(
+					ImageBuilder::new(
+						WidgetBuilder::new()
+							.on_row(1)
+							.on_column(1),
+					)
+					.with_texture(into_gui_texture(resource_manager.request_texture("assets/misc/opening.gif")))
+					.build(ctx),
+				)
+				.with_child(
+					newgame = MenuBuilder::new(WidgetBuilder::new().with_vertical_alignment(VerticalAlignment::Center).with_horizontal_alignment(HorizontalAlignment::Center))
+						.with_items({
+							let newgame = MenuItemBuilder::new(WidgetBuilder::new()
+									.on_row(1)
+									.on_column(1)
+									.with_vertical_alignment(VerticalAlignment::Center),
+							)
+							.with_content(text("New Game").shortcut("NewgameUI").icon("assets/textures/widgetbackgrounds/newgame.png"))
+							.with_back("assets/textures/backgrounds/itemsrectanglebackgound.png")
+							.build(ctx);
+							newgame;
+							let setting = MenuItemBuilder::new(
+								WidgetBuilder::new()
+									.on_row(0)
+									.on_column(0)
+									.with_vertical_alignment(VerticalAlignment::Center),
+							)
+							.with_content(text("Settings").shortcut("SettingsUI").icon("/assets/textures/icons/settings.png"))
+							.with_back("assets/textures/backgrounds/itemsrectanglebackgound.png")
+							.build(ctx);
+							setting;
+							let exit = MenuItemBuilder::new(
+								WidgetBuilder::new()
+									.on_row(0)
+									.on_column(1)
+									.with_vertical_alignment(VerticalAlignment::Center),
+							)
+							.with_content(text("Exit").shortcut("").icon("assets/textures/icons/exitdoor.png"))
+							.with_back("assets/textures/backgrounds/itemsrectanglebackgound.png")
+							.build(ctx);
+							exit;
+						})
+						.build(ctx),
+				)
+		)
+		.add_row(Row::strict(200.0))
+		.add_column(Column::strict(600.0))
+		.build(ctx);
+	}
+	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
 }

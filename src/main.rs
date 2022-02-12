@@ -23,6 +23,7 @@ mod level;
 
 use crate::{level::Level, player::Player};
 use fyrox::{
+    window::Fullscreen,
     engine::{
         Engine,
         framework::prelude::*,
@@ -154,37 +155,7 @@ fn bgmloop() {
 //            .unwrap();
 //        let _source_handle: CoreSoundHandle<SoundSource> = soundcontenttest.state().add_source(sourcetest);
 //        thread::sleep(Duration::from_secs(17));
-//        let bgm;
-//        let voice;
-//        let sfx;
-//        GridBuilder::new(
-//            WidgetBuilder::new()
-//                .with_children([
-//                    {
-//                        bgm = ButtonBuilder::new(WidgetBuilder::new().with_width(200.0).with_height(100.0).on_row(0)).with_text("bgm").build(ctx);
-//                        bgm
-//                    },
-//                    {
-//                        voice = ButtonBuilder::new(WidgetBuilder::new().with_width(200.0).with_height(100.0).on_row(1)).with_text("voice lines").build(ctx);
-//                        voice
-//                    },
-//                    {
-//                        sfx = ButtonBuilder::new(WidgetBuilder::new().with_width(200.0).with_height(100.0).on_row(2)).with_text("sound effects").build(ctx);
-//                        sfx
-//                    },
-//                ])
-//        )
-//        .add_row(GridDimension::auto())
-//        .add_row(GridDimension::auto())
-//        .add_row(GridDimension::auto())
-//        .add_row(GridDimension::auto())
-//        .add_column(GridDimension::auto())
-//        .build(ctx);
-//        Self {
-//            bgm,
-//            voice,
-//            sfx,
-//        }
+
 
 /// Uses the rg3d crates framework requirements. This section runs all the necesary functions and such.
 /// init is used for initializing of the game. In here we have resoure checks, preloading of the game and other stuff.
@@ -201,15 +172,28 @@ impl GameState for Game {
         let mut scene = Scene::new();
         scene.ambient_lighting_color = Color::opaque(150, 150, 150);
         let player = block_on(Player::new(engine.resource_manager.clone(), &mut scene));
+        engine
+            .get_window()
+            .set_fullscreen(Some(Fullscreen::Borderless(None)));
         Self {
             player,
             level: block_on(Level::new(engine.resource_manager.clone(), &mut scene)),
             scene: engine.scenes.add(scene),
         }
     }
-	fn on_tick(&mut self, engine: &mut Engine, dt: f32, control_flow: &mut ControlFlow) {}
-        fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
-	fn on_device_event(&mut self, engine: &mut Engine, device_id: DeviceId, event: DeviceEvent) {}
+	fn on_tick(&mut self, engine: &mut Engine, dt: f32, control_flow: &mut ControlFlow) {
+            let scene = &mut engine.scenes[self.scene];
+            self.player.update(scene);
+    }
+    fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
+	fn on_device_event(
+            &mut self,
+            _engine: &mut Engine,
+            _device_id: DeviceId,
+            event: DeviceEvent
+        ) {
+            self.player.handle_device_event(&event);
+        }
 	fn on_window_event(&mut self, engine: &mut Engine, event: WindowEvent) {}
 	fn on_exit(&mut self, engine: &mut Engine) {}
 }
