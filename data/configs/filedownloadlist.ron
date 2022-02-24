@@ -1,0 +1,14 @@
+(
+    files: [
+        (
+            webaddr: "https://file.atg-rpg.com/zip/insect.zip",
+            fpath: "./tmpzip/",
+            fname: "insect.zip",
+        ),
+        (
+            webaddr: "https://file.atg-rpg.com/zip/trainingarea.zip",
+            fpath: "./tmpzip/",
+            fname: "trainingarea.zip",
+        ),
+    ].
+)
