@@ -182,16 +182,19 @@ impl GameState for Game {
             .into_rgba8();
         let mut pixels = Vec::new();
         img.pixels().for_each(|pixel| {
-            pixels.0.iter.for_each(|byte| {
+            pixel.0.iter().for_each(|byte| {
                 pixels.push(*byte);
             })
         });
-        engine
-            .get_window()
-            .set_window_icon(Some(Icon::from_rgba(pixels, img.width(), img.height()).unwrap()))
-            .set_fullscreen(Some(Fullscreen::Borderless(None)))
-            .set_cursor_visible(false)
-            .set_cursor_grab(true)
+        engine.get_window()
+            .set_fullscreen(Some(Fullscreen::Borderless(None)));
+        engine.get_window()
+            .set_window_icon(Some(Icon::from_rgba(pixels, img.width(), img.height()).unwrap()));
+        engine.get_window()
+            .set_cursor_visible(false);
+        engine.get_window()
+            .set_cursor_grab(true);
+        engine.get_window()
             .set_resizable(false);
         Self {
             player,
