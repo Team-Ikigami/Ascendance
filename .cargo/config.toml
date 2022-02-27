@@ -6,3 +6,7 @@ cl = "clean"
 
 [build]
 target-dir = "build"
+incremental = true
+
+[doc]
+browser = "BRAVE"
