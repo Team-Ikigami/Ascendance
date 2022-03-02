@@ -1,7 +1,10 @@
-workspace = [
+[workspace]
+members = [
 	"app",
 	"scripts/creatures/humanoids",
 	"scripts/world/objects/summoning-giant",
 	"scripts/attacks/meteor-shower",
-	"scripts/attacks/fallen-walls"
+	"scripts/attacks/fallen-walls",
+	"scripts/world/objects/doors",
+	"scripts/world/objects/organ-pipes"
 ]

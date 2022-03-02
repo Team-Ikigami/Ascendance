@@ -1,9 +1,0 @@
-# Rust
-build/
-Cargo.lock
-**/*.rs.bk
-**/*.log
-# extension generated folders
-/.history/
-*.*~
-*/**/.*.swap
