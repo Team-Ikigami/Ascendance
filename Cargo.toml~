@@ -1,0 +1,7 @@
+workspace = [
+	"app"
+	"scripts/creatures/humanoids"
+	"scripts/world/objects/summoning-giant"
+	"scripts/attacks/meteor-shower"
+	"scripts/attacks/fallen-walls"
+]
