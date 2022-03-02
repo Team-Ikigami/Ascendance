@@ -587,6 +587,7 @@ mod entitygen;
 mod loading_screen;
 mod inventory;
 mod weapon {
+	// attack types. Used by enemies and player.
 	#[derive(Debug, Copy, Clone)]
 	pub struct AttackTypes {
 		pub fire: bool,
@@ -601,10 +602,8 @@ mod weapon {
 		pub piercing: bool,
 		pub slashing: bool,
 	}
-};
-mod door {
-
 }
+mod door;
 mod light;
 mod config;
 mod save_load;
@@ -617,6 +616,7 @@ mod level {
 	pub struct Level {
 		root: Handle<Node>,
 	}
+	// creates a ne resources by requesting the level.rgs file and loading it to the scene.
 	impl Level {
 		pub async fn new(resource_manager: ResourceManager, scene: &mut Scene) -> Self {
 			let root = resource_manager
