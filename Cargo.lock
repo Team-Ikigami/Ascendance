@@ -597,6 +597,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "doors"
+version = "0.1.0"
+dependencies = [
+ "fyrox",
+]
+
+[[package]]
 name = "downcast-rs"
 version = "1.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -668,6 +675,13 @@ dependencies = [
  "quote",
  "syn",
  "synstructure",
+]
+
+[[package]]
+name = "fallen-walls"
+version = "0.1.0"
+dependencies = [
+ "fyrox",
 ]
 
 [[package]]
@@ -1200,6 +1214,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "humanoids"
+version = "0.1.0"
+dependencies = [
+ "fyrox",
+]
+
+[[package]]
 name = "ident_case"
 version = "1.0.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1508,6 +1529,13 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "5aa361d4faea93603064a027415f07bd8e1d5c88c9fbf68bf56a285428fd79ce"
 dependencies = [
  "autocfg",
+]
+
+[[package]]
+name = "meteor-shower"
+version = "0.1.0"
+dependencies = [
+ "fyrox",
 ]
 
 [[package]]
@@ -1938,6 +1966,13 @@ name = "once_cell"
 version = "1.9.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "da32515d9f6e6e489d7bc9d84c71b060db7247dc035bbe44eac88cf87486d8d5"
+
+[[package]]
+name = "organ-pipes"
+version = "0.1.0"
+dependencies = [
+ "fyrox",
+]
 
 [[package]]
 name = "osmesa-sys"
@@ -2808,6 +2843,13 @@ dependencies = [
  "quote",
  "rustversion",
  "syn",
+]
+
+[[package]]
+name = "summoning-giant"
+version = "0.1.0"
+dependencies = [
+ "fyrox",
 ]
 
 [[package]]
