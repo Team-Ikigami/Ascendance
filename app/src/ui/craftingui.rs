@@ -19,6 +19,31 @@ use rg3d::gui::{
 	Thickness,
 	VerticalAlignment
 };
+use ron::de::from_reader;
+use serde::Deserialize;
+use std::{
+	collections::HashMap,
+	fs::File,
+	path::PathBuf
+	str
+};
+use crate::{
+	items::{
+		Brewery1,
+		Requirements
+	}
+};
+
+/// TODO:
+/// 
+/// write an iterator that reads all the maps and creates icons for each item
+/// write the base format for what is goig to be in items/brewery_possibilites.ron
+/// learn how to do iterations
+
+struct RonMaps {
+	brewery1: HashMap<u8, HashMap<Brewery1, Vec<PathBuf, Requirements, Bool>>>,
+}
+
 struct ThreeCoreBasicBrewingTable {
 	icons: Vec<Handle<UiNode>>,
 	fuel_slot: Handle<UiNode>,
@@ -84,7 +109,6 @@ fn IconScrollbar(ctx: &mut BuildContext, data: ScrollBarData) -> Handle<UiNode> 
 	.show_value(data.show_value)
 	.with_value_precision(1)
 	.build(ctx);
-
 }
 
 impl ThreeCoreBasicBrewingTable {
@@ -129,10 +153,8 @@ impl ThreeCoreBasicBrewingTable {
 									.with_child({
 										// rusty-editor scrolling we use it
 										let scrolling = IconScrollbar();
-									})
-									.with_child(
-										Handle::NONE
-									)
+										scrolling
+									}) // iterator goes here
 								)
 								.add_rows(vec![
 									GridDimension::strict(50.0),
