@@ -6,10 +6,9 @@
 #![allow(unused_imports)]
 
 mod message;
-mod items;
 mod player;
 mod sound;
-// mod ui;
+mod ui;
 mod entitygen;
 mod loading_screen;
 mod inventory;

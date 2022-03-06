@@ -1,7 +1,8 @@
 (
-	brewery1: {
-		"StrengthOne": [
-			""
-		]
-	}
+	brewery1: [
+		(
+			name: "Strength One",
+			path: "data/textures/potions/strength_one.jpg",
+		),
+	]
 )

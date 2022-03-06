@@ -43,7 +43,11 @@
 				"data/sounds/footsteps/FootStep_shoe_wood_step4.wav"  // regular 2
 			],
 			Impact: [
-				""
+				"data/sounds/impact/Impact_sword_wood1.wav",
+				"data/sounds/impact/Impact_sword_wood2.wav",
+				"data/sounds/impact/Impact_thud_wood1.wav",
+				"data/sounds/impact/Impact_thud_wood2.wav",
+				"data/sounds/impact/Impact_crash_wood2.wav"
 			]
 		}
 	},

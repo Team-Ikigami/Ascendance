@@ -1,7 +1,7 @@
-use rg3d::engine::Engine;
-use rg3d::core::Handle;
-use rg3d::utils::into_gui_texture;
-use rg3d::gui::{
+use fyrox::engine::Engine;
+use fyrox::core::Handle;
+use fyrox::utils::into_gui_texture;
+use fyrox::gui::{
     widget::WidgetBuilder,
     grid::{
         GridBuilder,
@@ -20,28 +20,28 @@ use rg3d::gui::{
 	VerticalAlignment
 };
 use ron::de::from_reader;
+use ron::value::Value;
+use ron::value::Map;
 use serde::Deserialize;
 use std::{
 	collections::HashMap,
 	fs::File,
-	path::PathBuf
+	path::PathBuf,
 	str
 };
-use crate::{
-	items::{
-		Brewery1,
-		Requirements
-	}
-};
-
 /// TODO:
 /// 
 /// write an iterator that reads all the maps and creates icons for each item
 /// write the base format for what is goig to be in items/brewery_possibilites.ron
 /// learn how to do iterations
-
+#[derive(Deserialize, Debug)]
 struct RonMaps {
-	brewery1: HashMap<u8, HashMap<Brewery1, Vec<PathBuf, Requirements, Bool>>>,
+	brewery1: Vec<Nested>,
+}
+#[derive(Deserialize, Debug)]
+struct Nested {
+	name: String,
+	path: PathBuf,
 }
 
 struct ThreeCoreBasicBrewingTable {
@@ -154,7 +154,11 @@ impl ThreeCoreBasicBrewingTable {
 										// rusty-editor scrolling we use it
 										let scrolling = IconScrollbar();
 										scrolling
-									}) // iterator goes here
+									})
+									.with_child({
+										let icons = GridBuilder::new();
+										icons
+									})
 								)
 								.add_rows(vec![
 									GridDimension::strict(50.0),
@@ -176,16 +180,19 @@ impl ThreeCoreBasicBrewingTable {
 							WidgetBuilder::new()
 							.on_column(1)
 							.on_row(1)
-							.with_children(
-								Handle::NONE
-							)
+							.with_children(Handle::NONE)
 						)
 						.build(ctx),
 					)
 					.build(ctx),
 			)
-			.add_column(GridDimension::strict(570))
-			.add_column(GridDimension::strict(570))
+			.add_columns(vec![
+				GridDimension::strict(570),
+				GridDimension::strict(570)
+			])
+			.add_rows(vec![
+				GridDimension::stretch()
+			])
 			.with_opacity(25)
 			.build(ctx)
 		)
@@ -204,169 +211,191 @@ impl ThreeCoreBasicBrewingTable {
 		.build(ctx);
 
 		Self {
-			icon
-			slot_1,
-			slot_2,
-			slot_3,
-			fuel_slot,
+			icons,
+			scrolling
 		}
     }
-	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
-}
-impl ThreeCoreMediumBrewingTable {
-    fn new(ui: &mut UserInterface) -> Handle<UiNode> {
-        let ctx = &mut ui.build_ctx();
-    }
-	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
-}
-impl ThreeCoreAdvancedBrewingTable {
-    fn new(ui: &mut UserInterface) -> Handle<UiNode> {
-        let ctx = &mut ui.build_ctx();
-    }
-	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
-}
-impl ThreeCoreGodlyBrewingTable {
-    fn new(ui: &mut UserInterface) -> Handle<UiNode> {
-        let ctx = &mut ui.build_ctx();
-    }
-	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
-}
-impl FiveCoreBasicBrewingTable {
-    fn new(ui: &mut UserInterface) -> Handle<UiNode> {
-        let ctx = &mut ui.build_ctx();
-    }
-	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
-}
-impl FiveCoreMediumBrewingTable {
-    fn new(ui: &mut UserInterface) -> Handle<UiNode> {
-        let ctx = &mut ui.build_ctx();
-    }
-	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
-}
-impl FiveCoreAdvancedBrewingTable {
-    fn new(ui: &mut UserInterface) -> Handle<UiNode> {
-        let ctx = &mut ui.build_ctx();
-    }
-	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
-}
-impl FiveCoreGodlyBrewingTable {
-    fn new(ui: &mut UserInterface) -> Handle<UiNode> {
-        let ctx = &mut ui.build_ctx();
-    }
-	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
-}
-impl TenCoreBasicBrewingTable {
-    fn new(ui: &mut UserInterface) -> Handle<UiNode> {
-        let ctx = &mut ui.build_ctx();
-    }
-	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
-}
-impl TenCoreMediumBrewingTable {
-    fn new(ui: &mut UserInterface) -> Handle<UiNode> {
-        let ctx = &mut ui.build_ctx();
-    }
-	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
-}
-impl TenCoreAdvancedBrewingTable {
-    fn new(ui: &mut UserInterface) -> Handle<UiNode> {
-        let ctx = &mut ui.build_ctx();
-    }
-	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
-}
-impl TenCoreGodlyBrewingTable {
-    fn new(ui: &mut UserInterface) -> Handle<UiNode> {
-        let ctx = &mut ui.build_ctx();
-    }
-	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
-}
-impl MetalBasicAnvil {
-    fn new(ui: &mut UserInterface) -> Handle<UiNode> {
-        let ctx = &mut ui.build_ctx();
-    }
-	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
-}
-impl MetalMediumAnvil {
-    fn new(ui: &mut UserInterface) -> Handle<UiNode> {
-    	let ctx = &mut ui.build_ctx();
-	}
-	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
-}
-impl MetalAdvancedAnvil {
-	fn new(ui: &mut UserInterface, self: &mut Self) -> Handle<UiNode> {
-		let ctx = &mut ui.build_ctx();
-		GridBuilder::new(WidgetBuilder::new().with_vertical_alignment(VerticalAlignment::Center).with_horizontal_alignment(HorizontalAlignment::Center))
-		.with_child(
-			HANDLE::None,
-		)
-		.with_background(
-			ImageBuilder::new(
-				WidgetBuilder::new()
-					.on_row(0)
-					.on_column(0)
-					.with_vertical_alignment(VerticalAlignment::Center)
-					.with_horizontal_alignment(HorizontalAlignment::Center),
+	fn on_ui_message(
+		&mut self,
+		engine: &mut Engine,
+		message: UiMessage
+	) {}
+	fn generate_icons(
+		&mut self,
+		ui: &mut UserInterface,
+	)-> Vec<Handle<UiNode>> {
+		let path = File::open("data/configs/brewery_possibilities.ron").unwrap();
+		let mut items: RonMaps = from_reader(path).unwrap();
+		let mut new_row = u32::new();
+		new_row = 0;
+		let mut back = items.brewery1.map().iter();
+		let number = items.len();
+		for  in items.brewery1.iter() {
+			icons.add_row(GridDimension::strict(20));
+			icons.with_child(
+				ButtonBuilder::new(WidgetBuilder::new().on_row(new_row))
+				.with_back(decorator: Handle<UiNode>)
+				.with_text(text: &str)
 			)
-			.with_texture("assets/textures/icons/anvil.png")
-			.build(ctx),
-		)
-		.add_columns(2)
-		.add_rows(2)
-		.build(ctx);
+			new_row = new_row + 1;
+
+		}
 	}
-	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
 }
-impl MetalGodlyAnvil {
-	fn new(ui: &mut UserInterface) -> Handle<UiNode> {
-    	let ctx = &mut ui.build_ctx();
-	}
-	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
-}
-impl RefinedBasicAnvil {
-	fn new(ui: &mut UserInterface) -> Handle<UiNode> {
-    	let ctx = &mut ui.build_ctx();
-	}
-	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
-}
-impl RefinedMediumAnvil {
-	fn new(ui: &mut UserInterface) -> Handle<UiNode> {
-    	let ctx = &mut ui.build_ctx();
-	}
-	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
-}
-impl RefinedAdvancedAnvil {
-	fn new(ui: &mut UserInterface) -> Handle<UiNode> {
-    	let ctx = &mut ui.build_ctx();
-	}
-	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
-}
-impl RefinedGodlyAnvil {
-	fn new(ui: &mut UserInterface) -> Handle<UiNode> {
-    	let ctx = &mut ui.build_ctx();
-	}
-	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
-}
-impl NobleBasicAnvil {
-	fn new(ui: &mut UserInterface) -> Handle<UiNode> {
-    	let ctx = &mut ui.build_ctx();
-	}
-	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
-}
-impl NobleMediumAnvil {
-	fn new(ui: &mut UserInterface) {
-	    let ctx = &mut ui.build_ctx();
-	}
-	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
-}
-impl NobleAdvancedAnvil {
-	fn new(ui: &mut UserInterface) {
-    	let ctx = &mut ui.build_ctx();
-	}
-	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
-}
-impl NobleGodlyAnvil {
-	fn new(ui: &mut UserInterface) {
-    	let ctx = &mut ui.build_ctx();
-	}
-	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
-}
+// impl ThreeCoreMediumBrewingTable {
+//     fn new(ui: &mut UserInterface) -> Handle<UiNode> {
+//         let ctx = &mut ui.build_ctx();
+//     }
+// 	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
+// }
+// impl ThreeCoreAdvancedBrewingTable {
+//     fn new(ui: &mut UserInterface) -> Handle<UiNode> {
+//         let ctx = &mut ui.build_ctx();
+//     }
+// 	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
+// }
+// impl ThreeCoreGodlyBrewingTable {
+//     fn new(ui: &mut UserInterface) -> Handle<UiNode> {
+//         let ctx = &mut ui.build_ctx();
+//     }
+// 	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
+// }
+// impl FiveCoreBasicBrewingTable {
+//     fn new(ui: &mut UserInterface) -> Handle<UiNode> {
+//         let ctx = &mut ui.build_ctx();
+//     }
+// 	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
+// }
+// impl FiveCoreMediumBrewingTable {
+//     fn new(ui: &mut UserInterface) -> Handle<UiNode> {
+//         let ctx = &mut ui.build_ctx();
+//     }
+// 	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
+// }
+// impl FiveCoreAdvancedBrewingTable {
+//     fn new(ui: &mut UserInterface) -> Handle<UiNode> {
+//         let ctx = &mut ui.build_ctx();
+//     }
+// 	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
+// }
+// impl FiveCoreGodlyBrewingTable {
+//     fn new(ui: &mut UserInterface) -> Handle<UiNode> {
+//         let ctx = &mut ui.build_ctx();
+//     }
+// 	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
+// }
+// impl TenCoreBasicBrewingTable {
+//     fn new(ui: &mut UserInterface) -> Handle<UiNode> {
+//         let ctx = &mut ui.build_ctx();
+//     }
+// 	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
+// }
+// impl TenCoreMediumBrewingTable {
+//     fn new(ui: &mut UserInterface) -> Handle<UiNode> {
+//         let ctx = &mut ui.build_ctx();
+//     }
+// 	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
+// }
+// impl TenCoreAdvancedBrewingTable {
+//     fn new(ui: &mut UserInterface) -> Handle<UiNode> {
+//         let ctx = &mut ui.build_ctx();
+//     }
+// 	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
+// }
+// impl TenCoreGodlyBrewingTable {
+//     fn new(ui: &mut UserInterface) -> Handle<UiNode> {
+//         let ctx = &mut ui.build_ctx();
+//     }
+// 	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
+// }
+// impl MetalBasicAnvil {
+//     fn new(ui: &mut UserInterface) -> Handle<UiNode> {
+//         let ctx = &mut ui.build_ctx();
+//     }
+// 	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
+// }
+// impl MetalMediumAnvil {
+//     fn new(ui: &mut UserInterface) -> Handle<UiNode> {
+//     	let ctx = &mut ui.build_ctx();
+// 	}
+// 	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
+// }
+// impl MetalAdvancedAnvil {
+// 	fn new(ui: &mut UserInterface, self: &mut Self) -> Handle<UiNode> {
+// 		let ctx = &mut ui.build_ctx();
+// 		GridBuilder::new(WidgetBuilder::new().with_vertical_alignment(VerticalAlignment::Center).with_horizontal_alignment(HorizontalAlignment::Center))
+// 		.with_child(
+// 			HANDLE::None,
+// 		)
+// 		.with_background(
+// 			ImageBuilder::new(
+// 				WidgetBuilder::new()
+// 					.on_row(0)
+// 					.on_column(0)
+// 					.with_vertical_alignment(VerticalAlignment::Center)
+// 					.with_horizontal_alignment(HorizontalAlignment::Center),
+// 			)
+// 			.with_texture("assets/textures/icons/anvil.png")
+// 			.build(ctx),
+// 		)
+// 		.add_columns(2)
+// 		.add_rows(2)
+// 		.build(ctx);
+// 	}
+// 	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
+// }
+// impl MetalGodlyAnvil {
+// 	fn new(ui: &mut UserInterface) -> Handle<UiNode> {
+//     	let ctx = &mut ui.build_ctx();
+// 	}
+// 	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
+// }
+// impl RefinedBasicAnvil {
+// 	fn new(ui: &mut UserInterface) -> Handle<UiNode> {
+//     	let ctx = &mut ui.build_ctx();
+// 	}
+// 	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
+// }
+// impl RefinedMediumAnvil {
+// 	fn new(ui: &mut UserInterface) -> Handle<UiNode> {
+//     	let ctx = &mut ui.build_ctx();
+// 	}
+// 	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
+// }
+// impl RefinedAdvancedAnvil {
+// 	fn new(ui: &mut UserInterface) -> Handle<UiNode> {
+//     	let ctx = &mut ui.build_ctx();
+// 	}
+// 	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
+// }
+// impl RefinedGodlyAnvil {
+// 	fn new(ui: &mut UserInterface) -> Handle<UiNode> {
+//     	let ctx = &mut ui.build_ctx();
+// 	}
+// 	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
+// }
+// impl NobleBasicAnvil {
+// 	fn new(ui: &mut UserInterface) -> Handle<UiNode> {
+//     	let ctx = &mut ui.build_ctx();
+// 	}
+// 	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
+// }
+// impl NobleMediumAnvil {
+// 	fn new(ui: &mut UserInterface) {
+// 	    let ctx = &mut ui.build_ctx();
+// 	}
+// 	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
+// }
+// impl NobleAdvancedAnvil {
+// 	fn new(ui: &mut UserInterface) {
+//     	let ctx = &mut ui.build_ctx();
+// 	}
+// 	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
+// }
+// impl NobleGodlyAnvil {
+// 	fn new(ui: &mut UserInterface) {
+//     	let ctx = &mut ui.build_ctx();
+// 	}
+// 	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
+// }
 

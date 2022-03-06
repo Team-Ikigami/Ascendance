@@ -32,8 +32,8 @@ pub enum MaterialType {
 	Metal,
 	Stone,
 	Wood,
-	Chain,
-	Flesh,
+	// Chain,
+	// Flesh,
 }
 
 #[derive(Deserialize, Hash, Eq, PartialEq, Copy, Clone, Debug)]
@@ -84,11 +84,13 @@ pub struct SoundMap {
 
 impl SoundMap {
 	pub fn new(scene: &Scene, sound_base: &SoundBase) -> Self {
+		
 		let mut sound_map = HashMap::new();
 		
 		let mut stack = Vec::new();
-		
+		// performs for every node and body in the scene, filtering rigid bodies?
 		for (node, body) in scene.graph.pair_iter().filter(|(_, n)| n.is_rigid_body()) {
+			// perorms for every nodoe WITH a rigid body
 			for &collider in body.children() {
 				if scene.graph[collider].is_collider() {
 					let mut ranges = Vec::new();
