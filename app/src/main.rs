@@ -6,6 +6,7 @@
 #![allow(unused_imports)]
 
 mod message;
+mod items;
 mod player;
 mod sound;
 // mod ui;
