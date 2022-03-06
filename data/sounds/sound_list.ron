@@ -1,0 +1,54 @@
+(
+	material_to_sound: {
+		Grass: {
+			FootStep: [
+				"data/sounds/footsteps/FootStep_shoe_grass_step1.wav",
+				"data/sounds/footsteps/FootStep_shoe_grass_step2.wav",
+				"data/sounds/footsteps/FootStep_shoe_grass_step3.wav",
+				"data/sounds/footsteps/FootStep_shoe_grass_step4.wav"
+			],
+			Impact: [
+				"data/sounds/impacts/Impact_sword_grass1.wav",
+				"data/sounds/impacts/Impact_sword_grass2.wav",
+				"data/sounds/impacts/Impact_thud_grass1.wav"
+			]
+		},
+		Metal: {
+			FootStep: [
+				"data/sounds/footsteps/FootStep_metal_plate_step1.wav",
+				"data/sounds/footsteps/FootStep_metal_plate_step2.wav",
+				"data/sounds/footsteps/FootStep_metal_plate_step3.wav",
+				"data/sounds/footsteps/FootStep_metal_plate_step4.wav"				
+			],
+			Impact: [
+				"data/sounds/impacts/Impact_sword_metal1.wav", // clash
+				"data/sounds/impacts/Impact_sword_metal2.wav", // bang
+				"data/sounds/impacts/Impact_sword_metal3.wav", // grating souns
+				"data/sounds/impacts/Impact_thud_metal1.wav"
+			]
+		},
+		Stone: {
+			FootStep: [
+				"data/sounds/footsteps/FootStep_shoe_stone_step1.wav",
+				"data/sounds/footsteps/FootStep_shoe_stone_step2.wav",
+				"data/sounds/footsteps/FootStep_foot_stone_step1.wav",
+				"data/sounds/footsteps/FootStep_foot_stone_step1.wav"
+			]
+		},
+		Wood: {
+			FootStep: [
+				"data/sounds/footsteps/FootStep_shoe_wood_step1.wav", // regular
+				"data/sounds/footsteps/FootStep_shoe_wood_step2.wav", // creak
+				"data/sounds/footsteps/FootStep_shoe_wood_step3.wav", // regular & creak
+				"data/sounds/footsteps/FootStep_shoe_wood_step4.wav"  // regular 2
+			],
+			Impact: [
+				""
+			]
+		}
+	},
+	texture_to_material: {
+		"data/models/organ/organ_pipes.jpg": Metal,
+		"data/models/cabinet/cabinet_door.jpg": Wood,
+	}
+)

@@ -1,0 +1,8 @@
+{
+	"command": "cargo build",
+	"args": [
+		"--workspace",
+		"--release"
+	],
+	"isBackground": true,
+}
