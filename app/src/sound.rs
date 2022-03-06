@@ -1,128 +1,131 @@
 use super::message::Message;
-	use fyrox::core::sstorage::ImmutableString;
-	use fyrox::material::PropertyValue;
-	use fyrox::scene::graph::physics::FeatureId;
-	use fyrox::{
-		core::{algebra::Vector3, pool::Handle, visitor::prelude::*},
-		engine::resource_manager::ResourceManager,
-		rand::{self, seq::SliceRandom},
-		scene::{node::Node, Scene},
-		sound::{
-			context::SoundContext,
-			effects::{BaseEffect, Effect, EffectInput},
-			source::{generic::GenericSourceBuilder, spatial::SpatialSourceBuilder, Status},
-		},
-		utils::log::{Log, MessageKind},
-	};
-	use serde::Deserialize;
-	use std::{collections::HashMap, fs::File, ops::Range, path::Path, path::PathBuf, time::Duration};
+use fyrox::core::sstorage::ImmutableString;
+use fyrox::material::PropertyValue;
+use fyrox::scene::graph::physics::FeatureId;
+use fyrox::{
+	core::{algebra::Vector3, pool::Handle, visitor::prelude::*},
+	engine::resource_manager::ResourceManager,
+	rand::{self, seq::SliceRandom},
+	scene::{node::Node, Scene},
+	sound::{
+		context::SoundContext,
+		effects::{BaseEffect, Effect, EffectInput},
+		source::{generic::GenericSourceBuilder, spatial::SpatialSourceBuilder, Status},
+	},
+	utils::log::{Log, MessageKind},
+};
+use serde::Deserialize;
+use std::{collections::HashMap, fs::File, ops::Range, path::Path, path::PathBuf, time::Duration};
 
-	#[derive(Debug)]
-	pub struct TriangleRange {
-		range: Range<u32>,
-		material: MaterialType,
+//
+#[derive(Debug)]
+pub struct TriangleRange {
+	range: Range<u32>,
+	material: MaterialType,
+}
+
+// presumably used to affect how the sound rebounds
+// i copied this and have forgotten how it works
+#[derive(Deserialize, Hash, Eq, PartialEq, Copy, Clone, Debug)]
+pub enum MaterialType {
+	Grass,
+	Metal,
+	Stone,
+	Wood,
+	Chain,
+	Flesh,
+}
+
+#[derive(Deserialize, Hash, Eq, PartialEq, Copy, Clone, Debug)]
+pub enum SoundKind {
+	Impact,
+	FootStep,
+}
+
+#[derive(Deserialize, Debug, Default)]
+pub struct SoundBase {
+	material_to_sound: HashMap<MaterialType, HashMap<SoundKind, Vec<PathBuf>>>,
+	texture_to_material: HashMap<PathBuf, MaterialType>,
+}
+
+impl SoundBase {
+	pub fn load() -> Self {
+		let file = File::open("data/sounds/sound_list.ron").unwrap();
+		let mut base: Self = ron::de::from_reader(file).unwrap();
+		// Canonicalize paths to remove \ and / differences and remove prefixes like ./ etc.
+		base.texture_to_material = base
+		.texture_to_material
+		.iter()
+		.filter_map(|(path, material_type)| match path.canonicalize() {
+			Ok(canonicalized) =>  Some((canonicalized, material_type.clone())),
+			Err(e) => {
+				Log::writeln(
+					MessageKind::Error,
+					format!(
+						"[Sound Manager]: Failed to \
+						canonicalize path {}! Reason: {}",
+						path.display(),
+						e
+					),
+				);
+				
+				None
+			}
+		})
+		.collect::<HashMap<_, _>>();
+		base
 	}
+}
 
-	#[derive(Deserialize, Hash, Eq, PartialEq, Copy, Clone, Debug)]
-	pub enum MaterialType {
-		Grass,
-		Metal,
-		Stone,
-		Wood,
-		Chain,
-		Flesh,
-	}
+#[derive(Default)]
+pub struct SoundMap {
+	sound_map: HashMap<Handle<Node>, Vec<TriangleRange>>,
+}
 
-	#[derive(Deserialize, Hash, Eq, PartialEq, Copy, Clone, Debug)]
-	pub enum SoundKind {
-		Impact,
-		FootStep,
-	}
-
-	#[derive(Deserialize, Debug, Default)]
-	pub struct SoundBase {
-		material_to_sound: HashMap<MaterialType, HashMap<SoundKind, Vec<PathBuf>>>,
-		texture_to_material: HashMap<PathBuf, MaterialType>,
-	}
-
-	impl SoundBase {
-		pub fn load() -> Self {
-			let file = File::open("data/sounds/audio_list.ron").unwrap();
-			let mut base: Self = ron::de::from_reader(file).unwrap();
-			// Canonicalize paths to remove \ and / differences and remove prefixes like ./ etc.
-			base.texture_to_material = base
-				.texture_to_material
-				.iter()
-				.filter_map(|(path, material_type)| match path.canonicalize() {
-					Ok(canonicalized) =>  Some((canonicalized, material_type.clone())),
-					Err(e) => {
-						Log::writeln(
-							MessageKind::Error,
-							format!(
-								"[Sound Manager]: Failed to \
-												canonicalize path {}! Reason: {}",
-								path.display(),
-								e
-							),
-						);
-
-						None
-					}
-				})
-				.collect::<HashMap<_, _>>();
-			base
-		}
-	}
-
-	#[derive(Default)]
-	pub struct SoundMap {
-		sound_map: HashMap<Handle<Node>, Vec<TriangleRange>>,
-	}
-
-	impl SoundMap {
-		pub fn new(scene: &Scene, sound_base: &SoundBase) -> Self {
-			let mut sound_map = HashMap::new();
-
-			let mut stack = Vec::new();
-
-			for (node, body) in scene.graph.pair_iter().filter(|(_, n)| n.is_rigid_body()) {
-				for &collider in body.children() {
-					if scene.graph[collider].is_collider() {
-						let mut ranges = Vec::new();
-
-						stack.clear();
-						stack.push(node);
-
-						let mut triangle_offset = 0u32;
-						while let Some(handle) = stack.pop() {
-							let descendant = &scene.graph[handle];
-
-							if let Node::Mesh(descendant_mesh) = descendant {
-								for surface in descendant_mesh.surfaces() {
-									let data = surface.data();
-									let data = data.lock();
-
-									if let Some(diffuse_texture) = surface
-										.material()
-										.lock()
-										.property_ref(&ImmutableString::new("diffuseTexture"))
+impl SoundMap {
+	pub fn new(scene: &Scene, sound_base: &SoundBase) -> Self {
+		let mut sound_map = HashMap::new();
+		
+		let mut stack = Vec::new();
+		
+		for (node, body) in scene.graph.pair_iter().filter(|(_, n)| n.is_rigid_body()) {
+			for &collider in body.children() {
+				if scene.graph[collider].is_collider() {
+					let mut ranges = Vec::new();
+					
+					stack.clear();
+					stack.push(node);
+					
+					let mut triangle_offset = 0u32;
+					while let Some(handle) = stack.pop() {
+						let descendant = &scene.graph[handle];
+						
+						if let Node::Mesh(descendant_mesh) = descendant {
+							for surface in descendant_mesh.surfaces() {
+								let data = surface.data();
+								let data = data.lock();
+								
+								if let Some(diffuse_texture) = surface
+								.material()
+								.lock()
+								.property_ref(&ImmutableString::new("diffuseTexture"))
+								{
+									if let PropertyValue::Sampler {
+										value: Some(diffuse_texture),
+										..
+									} = diffuse_texture
 									{
-										if let PropertyValue::Sampler {
-											value: Some(diffuse_texture),
-											..
-										} = diffuse_texture
-										{
-											let state = diffuse_texture.state();
-											match state.path().canonicalize() {
-												Ok(path) => {
-													if let Some(&material) =
-														sound_base.texture_to_material.get(&*path)
-													{
-														ranges.push(TriangleRange {
-															range: triangle_offset
-																..(triangle_offset
-																	+ data.geometry_buffer.len()
-																		as u32),
+										let state = diffuse_texture.state();
+										match state.path().canonicalize() {
+											Ok(path) => {
+												if let Some(&material) =
+												sound_base.texture_to_material.get(&*path)
+												{
+													ranges.push(TriangleRange {
+														range: triangle_offset
+														..(triangle_offset
+															+ data.geometry_buffer.len()
+															as u32),
 															material,
 														});
 													} else {
@@ -143,35 +146,35 @@ use super::message::Message;
 														MessageKind::Error,
 														format!(
 															"[Sound Manager]: Failed to \
-														canonicalize path {}! Reason: {}",
-														state.path().display(),
-														e
+															canonicalize path {}! Reason: {}",
+															state.path().display(),
+															e
 														),
 													);
 												}
 											}
 										}
 									}
-
+									
 									triangle_offset += data.geometry_buffer.len() as u32;
 								}
 							}
-
+							
 							stack.extend_from_slice(descendant.children());
 						}
-
+						
 						sound_map.insert(collider, ranges);
 					}
 				}
 			}
 			Self { sound_map }
 		}
-
+		
 		pub fn ranges_of(&self, collider: Handle<Node>) -> Option<&[TriangleRange]> {
 			self.sound_map.get(&collider).map(|r| r.as_slice())
 		}
 	}
-
+	
 	#[derive(Default, Visit)]
 	pub struct SoundManager {
 		context: SoundContext,
@@ -181,7 +184,7 @@ use super::message::Message;
 		#[visit(skip)]
 		sound_map: SoundMap,
 	}
-
+	
 	impl SoundManager {
 		pub fn new(context: SoundContext, scene: &Scene) -> Self {
 			let mut base_effect = BaseEffect::default();
@@ -191,11 +194,11 @@ use super::message::Message;
 			reverb.set_wet(0.5);
 			reverb.set_decay_time(Duration::from_secs_f32(3.0));
 			let reverb = context
-				.state()
-				.add_effect(fyrox::sound::effects::Effect::Reverb(reverb));
-
+			.state()
+			.add_effect(fyrox::sound::effects::Effect::Reverb(reverb));
+			
 			let sound_base = SoundBase::load();
-
+			
 			Self {
 				context,
 				reverb,
@@ -203,7 +206,7 @@ use super::message::Message;
 				sound_base,
 			}
 		}
-
+		
 		async fn play_sound(
 			&self,
 			path: &Path,
@@ -219,12 +222,12 @@ use super::message::Message;
 			if let Ok(buffer) = resource_manager.request_sound_buffer(path, false).await {
 				let stabbed_sound = SpatialSourceBuilder::new(
 					GenericSourceBuilder::new()
-						.with_buffer(buffer.into())
-						.with_status(Status::Playing)
-						.with_play_once(true)
-						.with_gain(gain)
-						.build()
-						.unwrap(),
+					.with_buffer(buffer.into())
+					.with_status(Status::Playing)
+					.with_play_once(true)
+					.with_gain(gain)
+					.build()
+					.unwrap(),
 				)
 				.with_position(position)
 				.with_radius(radius)
@@ -234,8 +237,8 @@ use super::message::Message;
 				let mut state = self.context.state();
 				let source = state.add_source(stabbed_sound);
 				state
-					.effect_mut(self.reverb)
-					.add_input(EffectInput::direct(source));
+				.effect_mut(self.reverb)
+				.add_input(EffectInput::direct(source));
 			} else {
 				Log::writeln(
 					MessageKind::Error,
@@ -243,7 +246,7 @@ use super::message::Message;
 				);
 			}
 		}
-
+		
 		pub async fn handle_message(&mut self, resource_manager: ResourceManager, message: &Message) {
 			match message {
 				Message::PlaySound {
@@ -273,30 +276,30 @@ use super::message::Message;
 					radius,
 				} => {
 					let material = self
-						.sound_map
-						.ranges_of(collider)
-						.map(|ranges| {
-							match feature {
-								FeatureId::Face(idx) => {
-									// FeatureId::Face(idx) is
-									let mut material = None;
-									for range in ranges {
-										if range.range.contains(&idx) {
-											material = Some(range.material);
-											break;
-										}
+					.sound_map
+					.ranges_of(collider)
+					.map(|ranges| {
+						match feature {
+							FeatureId::Face(idx) => {
+								// FeatureId::Face(idx) is
+								let mut material = None;
+								for range in ranges {
+									if range.range.contains(&idx) {
+										material = Some(range.material);
+										break;
 									}
-									material
 								}
-								_ => {
-									// Some things have odd colliders, they dont provide useful info
-									// about impact locationm we have to use first available material.
-									ranges.first().map(|first_range| first_range.material)
-								}
+								material
 							}
-						})
-						.flatten();
-
+							_ => {
+								// Some things have odd colliders, they dont provide useful info
+								// about impact locationm we have to use first available material.
+								ranges.first().map(|first_range| first_range.material)
+							}
+						}
+					})
+					.flatten();
+					
 					if let Some(material) = material {
 						if let Some(map) = self.sound_base.material_to_sound.get(&material) {
 							if let Some(sound_list) = map.get(&sound_kind) {
@@ -316,7 +319,7 @@ use super::message::Message;
 									MessageKind::Warning,
 									format!(
 										"Unable to play environment sound there \
-									is no respective mapping for {:?} sound kind!",
+										is no respective mapping for {:?} sound kind!",
 										sound_kind
 									),
 								);
@@ -335,7 +338,7 @@ use super::message::Message;
 						Log::writeln(
 							MessageKind::Warning,
 							"Unable to play environment sound: unable to fetch material type!"
-								.to_owned(),
+							.to_owned(),
 						);
 					}
 				}
