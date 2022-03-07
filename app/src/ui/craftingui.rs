@@ -36,13 +36,9 @@ use std::{
 /// learn how to do iterations
 #[derive(Deserialize, Debug)]
 struct RonMaps {
-	brewery1: Vec<Nested>,
+	brewery1: Vec<Tuple<String, PathBuf>>,
 }
-#[derive(Deserialize, Debug)]
-struct Nested {
-	name: String,
-	path: PathBuf,
-}
+
 
 struct ThreeCoreBasicBrewingTable {
 	icons: Vec<Handle<UiNode>>,
@@ -225,12 +221,12 @@ impl ThreeCoreBasicBrewingTable {
 		ui: &mut UserInterface,
 	)-> Vec<Handle<UiNode>> {
 		let path = File::open("data/configs/brewery_possibilities.ron").unwrap();
-		let mut items: RonMaps = from_reader(path).unwrap();
+		let mut read: RonMaps = from_reader(path).unwrap();
 		let mut new_row = u32::new();
 		new_row = 0;
-		let mut back = items.brewery1.map().iter();
+		let mut back = items.brewery1.0.iter();
 		let number = items.len();
-		for  in items.brewery1.iter() {
+		for String in items.brewery1.0.iter() {
 			icons.add_row(GridDimension::strict(20));
 			icons.with_child(
 				ButtonBuilder::new(WidgetBuilder::new().on_row(new_row))
