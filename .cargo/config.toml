@@ -1,5 +1,5 @@
 [alias]
-b = "run --release"
+b = "build --release"
 updep = "upgrade"
 uplock = "update"
 cl = "clean"

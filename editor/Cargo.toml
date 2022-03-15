@@ -1,0 +1,17 @@
+[package]
+name = "editor"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+ascendance_lib = { path = "../ascendance" }
+fallen_walls = { path = "../scripts/attacks/fallen-walls" }
+meteor_shower = { path = "../scripts/attacks/meteor-shower" }
+humanoids = { path = "../scripts/creatures/humanoids"}
+doors = { path = "../scripts/world/objects/doors"}
+organ_pipes = { path = "../scripts/world/objects/organ-pipes"}
+summoning_giant = { path = "../scripts/world/objects/summoning-giant"}
+fyrox = "*"
+fyroxed = "*"
