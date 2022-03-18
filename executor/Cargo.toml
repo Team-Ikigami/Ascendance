@@ -8,7 +8,8 @@ fyrox = "0.24"
 ascendance_lib = { path = "../ascendance" }
 fallen_walls = { path = "../scripts/attacks/fallen-walls" }
 meteor_shower = { path = "../scripts/attacks/meteor-shower" }
-humanoids = { path = "../scripts/creatures/humanoids"}
+humanoids = { path = "../scripts/creatures/human_bot"}
 doors = { path = "../scripts/world/objects/doors"}
 organ_pipes = { path = "../scripts/world/objects/organ-pipes"}
 summoning_giant = { path = "../scripts/world/objects/summoning-giant"}
+undead_bot = { path = "../scripts/creatures/undead_bot" }

@@ -7,28 +7,105 @@
     //! 5 = poison damage
     //! 6 = freeze damage
     //! 7 = electric damage
-    map: {
+   spells: {
         IceSpike: (
+			name: "Ice Spike",
             animation: "data/animations/magic/ice_spike.fbx",
-            penetration: = 0,
-            damage: = 10,
-            effect: = 6,
-            range: = 25,
-            speed: = 10,
-            cooldown: = 1,
-            mana: = 10,
-            castTime: = 0.5,
+            penetration: true,
+            power: 200,
+            effect: 6,
+            range: 25,
+            speed: 10,
+            cooldown: 1,
+            mana: 10,
+            castTime: 0.5,
         ),
         Fireball: (
             animation: "data/animations/magic/fireball.fbx",
-            penetration: = 0,
-            damage: = 10,
-            effect: = 4,
-            range: = 25,
-            speed: = 10,
-            cooldown: = 1,
-            mana: = 10,
-            castTime: = 0.5,
+            penetration: false,
+            power: 200,
+            effect: 4,
+            range: 25,
+            speed: 10,
+            cooldown: 1,
+            mana: 10,
+            castTime: 0.5,
         ),
-    }
+    },
+	incantations: {
+		// Field of flames
+		Fof: (
+			animation: "data/animations/magic/fof.fbx",
+			penetration: false,
+			power: 500,
+			effect: 4,
+			range: 25,
+			speed: 10,
+			cooldown: 1,
+			mana: 10,
+			castTime: 0.5,
+		),
+		// Land of frost
+		Lof: (
+			animation: "data/animations/magic/lof.fbx",
+			penetration: false,
+			power: 500,
+			effect: 6,
+			range: 25,
+			speed: 10,
+			cooldown: 1,
+			mana: 10,
+			castTime: 0.5,
+		),
+		// poison the land around the player, hurt the player as well
+		LoPoison: (
+			animation: "data/animations/magic/lof.fbx",
+			penetration: false,
+			power: 500,
+			effect: 5,
+			range: 25,
+			speed: 10,
+			cooldown: 1,
+			mana: 40,
+			castTime: 0.5,
+		),
+	},
+	Miracles: (
+		// Heal the character
+		Heal: (
+			animation: "data/animations/magic/heal.fbx",
+			penetration: false,
+			power: 100,
+			effect: 0,
+			range: 25,
+			speed: 10,
+			cooldown: 1,
+			mana: 10,
+			castTime: 0.5,
+		),
+		// Heal enemies and hurt player
+		BadHeal: (
+			animation: "data/animations/magic/badheal.fbx",
+			penetration: false,
+			power: 100,
+			effect: 1,
+			range: 25,
+			speed: 10,
+			cooldown: 1,
+			mana: 10,
+			castTime: 0.5,
+		),
+		// Damage enemies and heal player. "Absorb Evil"
+		AbsorbEvil: (
+			animation: "data/animations/magic/absorbevil.fbx",
+			penetration: false,
+			power: 100,
+			effect: 3,
+			range: 25,
+			speed: 10,
+			cooldown: 1,
+			mana: 10,
+			castTime: 0.5,
+		),
+	)
 )

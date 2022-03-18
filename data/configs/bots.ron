@@ -95,5 +95,132 @@
                 "data/sounds/cheesebread_attack.ogg",
             ],
         ),
+		undead_warrior: (
+			model: "data/model/undead_warrior/undead_warrior.fbx",
+			attack_animation: [
+				(
+					path: "animations/undead_warrior/attack.fbx",
+					stick_timestamp: 0.9,
+					timestamp: 1.1,
+					damage: Point(70.0),
+					speed: 1.1
+				),
+			],
+			idle_animation: "animations/undead_warrior/idle.fbx",
+			walk_animation: "animations/undead_warrior/walk.fbx",
+			aim_animation: "animations/undead_warrior/aim.fbx",
+			dying_animation: "animations/undead_warrior/dying.fbx",
+			bite_name: "UndeadWarrior:Head",
+			left_leg_name: "UndeadWarrior:LeftUpLeg",
+			right_leg_name: "UndeadWarrior:RightUpLeg",
+			head_name: "UndeadWarrior:Head",
+			hips: "UndeadWarrior:Hips",
+			spine: "UndeadWarrior:Spine", // Empty because cannot use weapons.
+			walk_speed: 0.7,
+			scale: 1.0,
+			weapon_scale: 130.0,
+			health: 600.0,
+			v_aim_angle_hack: 0.0,
+			can_use_weapons: true,
+			close_combat_distance: 0.9,
+			pain_sounds: [
+				"data/sounds/undead_warrior_pain_1.wav",
+				"data/sounds/undead_warrior_pain_2.wav"
+			],
+			scream_sounds: [
+				"data/sounds/undead_warrior_scream_1.wav"
+			],
+			idle_sounds: [
+				"data/sounds/undead_warrior_idle_1.wav",
+			],
+			attack_sounds: [
+				"data/sounds/undead_warrior_attack.ogg",
+			],
+		),
+		undead_archer: (
+			model: "data/model/undead_archer/undead_archer.fbx",
+			attack_animation: [
+				(
+					path: "animations/undead_archer/attack.fbx",
+					stick_timestamp: 0.9,
+					timestamp: 1.1,
+					damage: Point(70.0),
+					speed: 1.1
+				),
+			],
+			idle_animation: "animations/undead_archer/idle.fbx",
+			walk_animation: "animations/undead_archer/walk.fbx",
+			aim_animation: "animations/undead_archer/aim.fbx",
+			dying_animation: "animations/undead_archer/dying.fbx",
+			bite_name: "UndeadArcher:Head",
+			left_leg_name: "UndeadArcher:LeftUpLeg",
+			right_leg_name: "UndeadArcher:RightUpLeg",
+			head_name: "UndeadArcher:Head",
+			hips: "UndeadArcher:Hips",
+			spine: "UndeadArcher:Spine", // Empty because cannot use weapons.
+			walk_speed: 0.7,
+			scale: 1.0,
+			weapon_scale: 130.0,
+			health: 600.0,
+			v_aim_angle_hack: 0.0,
+			can_use_weapons: true,
+			close_combat_distance: 0.9,
+			pain_sounds: [
+				"data/sounds/undead_archer_pain_1.wav",
+				"data/sounds/undead_archer_pain_2.wav"
+			],
+			scream_sounds: [
+				"data/sounds/undead_archer_scream_1.wav"
+			],
+			idle_sounds: [
+				"data/sounds/undead_archer_idle_1.wav",
+			],
+			attack_sounds: [
+				"data/sounds/undead_archer_attack.ogg",
+			],
+		),
+		hollow_warrior: (
+			model: "data/model/hollow_warrior/hollow_warrior.fbx",
+			attack_animation: [
+				(
+					path: "animations/hollow_warrior/attack.fbx",
+					stick_timestamp: 0.9,
+					timestamp: 1.1,
+					damage: Point(70.0),
+					speed: 1.1
+				),
+			],
+			idle_animation: "animations/hollow_warrior/idle.fbx",
+			walk_animation: "animations/hollow_warrior/walk.fbx",
+			aim_animation: "animations/hollow_warrior/aim.fbx",
+			dying_animation: "animations/hollow_warrior/dying.fbx",
+			bite_name: "HollowWarrior:Head",
+			left_leg_name: "HollowWarrior:LeftUpLeg",
+			right_leg_name: "HollowWarrior:RightUpLeg",
+			head_name: "HollowWarrior:Head",
+			hips: "HollowWarrior:Hips",
+			spine: "HollowWarrior:Spine", // Empty because cannot use weapons.
+			walk_speed: 0.7,
+			scale: 1.0,
+			weapon_scale: 130.0,
+			health: 1500.0,
+			v_aim_angle_hack: 0.0,
+			can_use_weapons: true,
+			close_combat_distance: 0.9,
+			pain_sounds: [
+				"data/sounds/hollow_warrior_pain_1.wav",
+				"data/sounds/hollow_warrior_pain_2.wav"
+			],
+			scream_sounds: [
+				"data/sounds/hollow_warrior_scream_1.wav"
+			],
+			idle_sounds: [
+				"data/sounds/hollow_warrior_idle_1.wav",
+			],
+			attack_sounds: [
+				"data/sounds/hollow_warrior_attack.ogg",
+			],
+		),
+		
     }
 )

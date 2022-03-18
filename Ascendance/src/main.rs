@@ -18,6 +18,7 @@ mod light;
 mod config;
 mod save_load;
 mod level;
+mod bot;
 use crate::{level::Level, player::Player};
 use fyrox::{
     window::{Icon, Fullscreen},
