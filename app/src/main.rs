@@ -9,7 +9,6 @@ mod message;
 mod player;
 mod sound;
 // mod ui;
-mod world;
 mod entitygen;
 mod loading_screen;
 mod inventory;
