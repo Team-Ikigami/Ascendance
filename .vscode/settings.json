@@ -1,3 +1,7 @@
 {
 	"editor.tabSize": 4,
+	"editor.unicodeHighlight.invisibleCharacters": true,
+	"rust.jobs": 2,
+	"rust.full_docs": true,
+	"editor.suggest.showModules": true
 }

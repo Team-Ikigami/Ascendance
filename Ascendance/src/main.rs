@@ -5,84 +5,61 @@
 #![allow(dead_code)]
 #![allow(unused_imports)]
 
+mod bot;
+mod config;
+mod door;
+mod entitygen;
+mod inventory;
+mod level;
+mod light;
+mod loading_screen;
 mod message;
 mod player;
+mod save_load;
 mod sound;
 mod ui;
-mod entitygen;
-mod loading_screen;
-mod inventory;
 mod weapon;
-mod door;
-mod light;
-mod config;
-mod save_load;
-mod level;
-mod bot;
 use crate::{level::Level, player::Player};
 use fyrox::{
-    window::{Icon, Fullscreen},
-    engine::{
-        Engine,
-        framework::prelude::*,
-        resource_manager::ResourceManager
+    asset::{define_new_resource, Resource, ResourceData, ResourceLoadError, ResourceState},
+    core::{
+        color::Color,
+        futures::executor::block_on,
+        pool::{Handle, PoolIterator, PoolIteratorMut},
     },
+    engine::{framework::prelude::*, resource_manager::ResourceManager, Engine},
+    event::{DeviceEvent, DeviceId, WindowEvent},
+    event_loop::ControlFlow,
     gui::{
         button::{ButtonBuilder, ButtonMessage},
-        widget::{WidgetBuilder, WidgetMessage},
-        grid::{GridBuilder, GridDimension},
         check_box::CheckBoxBuilder,
+        grid::{GridBuilder, GridDimension},
         image::ImageBuilder,
+        menu::{MenuBuilder, MenuItemBuilder, MenuItemContent},
+        menu::{MenuItemMessage, MenuMessage},
+        message::{MessageData, MessageDirection, MouseButton, UiMessage},
         scroll_bar::ScrollBarBuilder,
         text::TextBuilder,
         text_box::{TextBoxBuilder, TextBoxMessage},
-	menu::{MenuMessage, MenuItemMessage},
-        message::{
-            UiMessage,
-            MessageDirection,
-            MouseButton,
-            MessageData,
-        },
-        menu::{MenuBuilder, MenuItemBuilder, MenuItemContent},
-        DEFAULT_FONT,
-        DragContext,
-        MouseState,
-        Thickness,
-        UserInterface,
-	UiNode
+        widget::{WidgetBuilder, WidgetMessage},
+        DragContext, MouseState, Thickness, UiNode, UserInterface, DEFAULT_FONT,
     },
-    core::{
-        pool::{Handle, PoolIterator, PoolIteratorMut},
-        color::Color,
-        futures::executor::block_on,
-    },
-    asset::{
-        define_new_resource, 
-        Resource, 
-        ResourceLoadError, 
-        ResourceData, 
-        ResourceState
-    },
-    event::{WindowEvent, DeviceId, DeviceEvent},
-    utils::into_gui_texture,
-    event_loop::ControlFlow,
     scene::Scene,
+    utils::into_gui_texture,
+    window::{Fullscreen, Icon},
 };
-use rg3d_sound::{
-    source::{generic::GenericSourceBuilder, SoundSource, Status},
-    engine::SoundEngine,
-    context::SoundContext,
-    buffer::{DataSource, SoundBufferResource},
-    pool::Handle as CoreSoundHandle,
-};
-use std::{
-    thread,
-    time::Duration
-};
-use serde::{Serialize, Deserialize};
+use image::io::Reader as ImageReader;
 use rand::prelude::*;
 use rand::Rng;
-use image::io::Reader as ImageReader;
+use rg3d_sound::{
+    buffer::{DataSource, SoundBufferResource},
+    context::SoundContext,
+    engine::SoundEngine,
+    pool::Handle as CoreSoundHandle,
+    source::{generic::GenericSourceBuilder, SoundSource, Status},
+};
+use serde::{Deserialize, Serialize};
+use std::{thread, time::Duration};
 
 use git_version::git_version;
 const GIT_VERSION: &str = git_version!();
@@ -119,17 +96,21 @@ fn bgmloop() {
     let mut randbgmint = rand::thread_rng().gen_range(1..6);
     match randbgmint {
         1 => {
-            let sound_buffer = SoundBufferResource::new_generic(rg3d_sound::futures::executor::block_on(DataSource::from_file("data/music/themetest.wav"))
-                .unwrap())
-                .unwrap();
-            
+            let sound_buffer = SoundBufferResource::new_generic(
+                rg3d_sound::futures::executor::block_on(DataSource::from_file(
+                    "data/music/themetest.wav",
+                ))
+                .unwrap(),
+            )
+            .unwrap();
+
             let source = GenericSourceBuilder::new()
                 .with_buffer(sound_buffer)
                 .with_status(Status::Playing)
                 .build_source()
                 .unwrap();
             let _source_handle: CoreSoundHandle<SoundSource> = context.state().add_source(source);
-            
+
             thread::sleep(Duration::from_secs(17));
         }
         2 => bgmloop(),
@@ -155,7 +136,6 @@ fn bgmloop() {
 //        let _source_handle: CoreSoundHandle<SoundSource> = soundcontenttest.state().add_source(sourcetest);
 //        thread::sleep(Duration::from_secs(17));
 
-
 /// Uses the rg3d crates framework requirements. This section runs all the necesary functions and such.
 /// init is used for initializing of the game. In here we have resoure checks, preloading of the game and other stuff.
 /// on_tick is used for logic that happens every second. It has a fixed fps of 60 stored in the dt variable.
@@ -164,9 +144,9 @@ fn bgmloop() {
 /// on_window_event handles the window events such as resizing.
 /// on_resource_load handles the resource loading.
 impl GameState for Game {
-    fn init(engine: &mut Engine) -> Self 
-        where 
-            Self: Sized 
+    fn init(engine: &mut Engine) -> Self
+    where
+        Self: Sized,
     {
         let mut scene = Scene::new();
         scene.ambient_lighting_color = Color::opaque(150, 150, 150);
@@ -184,43 +164,34 @@ impl GameState for Game {
                 pixels.push(*byte);
             })
         });
-        engine.get_window()
+        engine
+            .get_window()
             .set_fullscreen(Some(Fullscreen::Borderless(None)));
-        engine.get_window()
-            .set_window_icon(Some(Icon::from_rgba(pixels, img.width(), img.height()).unwrap()));
-        engine.get_window()
-            .set_cursor_visible(false);
-        engine.get_window()
-            .set_cursor_grab(true);
-        engine.get_window()
-            .set_resizable(false);
+        engine.get_window().set_window_icon(Some(
+            Icon::from_rgba(pixels, img.width(), img.height()).unwrap(),
+        ));
+        engine.get_window().set_cursor_visible(false);
+        engine.get_window().set_cursor_grab(true);
+        engine.get_window().set_resizable(false);
         Self {
             player,
             level: block_on(Level::new(engine.resource_manager.clone(), &mut scene)),
             scene: engine.scenes.add(scene),
         }
     }
-	fn on_tick(&mut self, engine: &mut Engine, dt: f32, control_flow: &mut ControlFlow) {
-            let scene = &mut engine.scenes[self.scene];
-            self.player.update(scene);
+    fn on_tick(&mut self, engine: &mut Engine, dt: f32, control_flow: &mut ControlFlow) {
+        let scene = &mut engine.scenes[self.scene];
+        self.player.update(scene);
     }
     fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
-	fn on_device_event(
-            &mut self,
-            _engine: &mut Engine,
-            _device_id: DeviceId,
-            event: DeviceEvent
-        ) {
-            self.player.handle_device_event(&event);
-        }
-	fn on_window_event(&mut self, engine: &mut Engine, event: WindowEvent) {}
-	fn on_exit(&mut self, engine: &mut Engine) {}
+    fn on_device_event(&mut self, _engine: &mut Engine, _device_id: DeviceId, event: DeviceEvent) {
+        self.player.handle_device_event(&event);
+    }
+    fn on_window_event(&mut self, engine: &mut Engine, event: WindowEvent) {}
+    fn on_exit(&mut self, engine: &mut Engine) {}
 }
 
 /// Uses the rg3d crate to create a window and run the game loop.
 fn main() {
-    Framework::<Game>::new()
-        .unwrap()
-        .title("Simple")
-        .run();
+    Framework::<Game>::new().unwrap().title("Simple").run();
 }

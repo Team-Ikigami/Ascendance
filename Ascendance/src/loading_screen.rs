@@ -6,11 +6,7 @@ use fyrox::{
         progress_bar::{ProgressBarBuilder, ProgressBarMessage},
         text::TextBuilder,
         widget::WidgetBuilder,
-        BuildContext,
-        HorizontalAlignment,
-        UiNode,
-        UserInterface,
-        VerticalAlignment,
+        BuildContext, HorizontalAlignment, UiNode, UserInterface, VerticalAlignment,
     },
 };
 
@@ -33,7 +29,7 @@ impl LoadingScreen {
                             .on_row(1)
                             .on_column(1)
                             .with_child({
-                                progress_bar = 
+                                progress_bar =
                                     ProgressBarBuilder::new(WidgetBuilder::new().on_row(1))
                                         .build(ctx);
                                 progress_bar
@@ -63,9 +59,9 @@ impl LoadingScreen {
     }
     pub fn set_progress(&self, ui: &UserInterface, progress: f32) {
         ui.send_message(ProgressBarMessage::progress(
-                self.progress_bar,
-                MessageDirection::ToWidget,
-                progress,
+            self.progress_bar,
+            MessageDirection::ToWidget,
+            progress,
         ));
     }
 }

@@ -1,50 +1,35 @@
-use fyrox::engine::Engine;
 use fyrox::core::Handle;
-use fyrox::utils::into_gui_texture;
+use fyrox::engine::Engine;
 use fyrox::gui::{
-    widget::WidgetBuilder,
-    grid::{
-        GridBuilder,
-        Row,
-        Column,
-		GridDimension,
-    },
+    grid::{Column, GridBuilder, GridDimension, Row},
     image::ImageBuilder,
-    menu::{MenuItemBuilder, MenuBuilder},
+    menu::{MenuBuilder, MenuItemBuilder},
     node::UiNode,
-    VerticalAlignment,
-    HorizontalAlignment,
-    UserInterface,
-	scrollbar::{ScrollBarBuilder},
-	Thickness,
-	VerticalAlignment
+    scrollbar::ScrollBarBuilder,
+    widget::WidgetBuilder,
+    HorizontalAlignment, Thickness, UserInterface, VerticalAlignment, VerticalAlignment,
 };
+use fyrox::utils::into_gui_texture;
 use ron::de::from_reader;
-use ron::value::Value;
 use ron::value::Map;
+use ron::value::Value;
 use serde::Deserialize;
-use std::{
-	collections::HashMap,
-	fs::File,
-	path::PathBuf,
-	str
-};
+use std::{collections::HashMap, fs::File, path::PathBuf, str};
 /// TODO:
-/// 
+///
 /// write an iterator that reads all the maps and creates icons for each item
 /// write the base format for what is goig to be in items/brewery_possibilites.ron
 /// learn how to do iterations
 #[derive(Deserialize, Debug)]
 struct RonMaps {
-	brewery1: Vec<Tuple<String, PathBuf>>,
+    brewery1: Vec<Tuple<String, PathBuf>>,
 }
 
-
 struct ThreeCoreBasicBrewingTable {
-	icons: Vec<Handle<UiNode>>,
-	fuel_slot: Handle<UiNode>,
-	base: Handle<UiNode>,
-	scrolling: Handle<UiNode>,
+    icons: Vec<Handle<UiNode>>,
+    fuel_slot: Handle<UiNode>,
+    base: Handle<UiNode>,
+    scrolling: Handle<UiNode>,
 }
 struct ThreeCoreMediumBrewingTable;
 struct ThreeCoreAdvancedBrewingTable;
@@ -76,167 +61,154 @@ struct NobleAdvancedAnvil;
 struct NobleGodlyAnvil;
 
 pub struct ScrollBarData {
-	pub min: f32,
-	pub max: f32,
-	pub value: f32,
-	pub step: f32,
-	pub row: usize,
-	pub column: usize,
-	pub margin: Thickness,
-	pub show_value: bool,
-	pub orientation: Orientation,
+    pub min: f32,
+    pub max: f32,
+    pub value: f32,
+    pub step: f32,
+    pub row: usize,
+    pub column: usize,
+    pub margin: Thickness,
+    pub show_value: bool,
+    pub orientation: Orientation,
 }
 
 fn IconScrollbar(ctx: &mut BuildContext, data: ScrollBarData) -> Handle<UiNode> {
-	let mut wb = WidgetBuilder::new();
-	match data.orientation {
-		Orientation::Vertical => wb = wb.with_width(30.0),
-		Orientation::Horizontal => wb = wb.with_height(30.0),
-	}
-	ScrollBarBuilder::new(
-		wb.on_row(data.row)
-			.on_column(data.column)
-			.with_margin(data.margin),
-	)
-	.with_min(data.min)
-	.with_max(data.max)
-	.with_value(data.value)
-	.with_step(data.step)
-	.show_value(data.show_value)
-	.with_value_precision(1)
-	.build(ctx);
+    let mut wb = WidgetBuilder::new();
+    match data.orientation {
+        Orientation::Vertical => wb = wb.with_width(30.0),
+        Orientation::Horizontal => wb = wb.with_height(30.0),
+    }
+    ScrollBarBuilder::new(
+        wb.on_row(data.row)
+            .on_column(data.column)
+            .with_margin(data.margin),
+    )
+    .with_min(data.min)
+    .with_max(data.max)
+    .with_value(data.value)
+    .with_step(data.step)
+    .show_value(data.show_value)
+    .with_value_precision(1)
+    .build(ctx);
 }
 
 impl ThreeCoreBasicBrewingTable {
     fn new(ui: &mut UserInterface) -> Handle<UiNode> {
         let ctx = &mut ui.build_ctx();
 
-		let icons;
-		let fuel_slot;
-		let scrolling;
-		
-		GridBuilder::new(
-			WidgetBuilder::new()
-			.with_width(1200)
-			.with_height(900)
-			.with_children(
-				GridBuilder::new(
-					WidgetBuilder::new()
-					.on_column(1)
-					.on_height(1)
-					.with_width(840.0)
-					.with_height(1140.0)
-					.with_children(
-						GridBuilder:new(
-							WidgetBuilder::new()
-							.on_column(0)
-							.on_row(0)
-							.with_children(
-								GridBuilder::new(
-									WidgetBuilder::new()
-									.on_row(0)
-								)
-								.add_columns(vec![
-									GridDimension::strict(50.0),
-									GridDimension::strict(150.0),
-									GridDimension::strict(50.0)
-								])
-								.build(ctx),
-								/// item scrolling.
-								GridBuilder::new(
-									WidgetBuilder::new()
-									.on_row(2)
-									.with_child({
-										// rusty-editor scrolling we use it
-										let scrolling = IconScrollbar();
-										scrolling
-									})
-									.with_child({
-										let icons = GridBuilder::new();
-										icons
-									})
-								)
-								.add_rows(vec![
-									GridDimension::strict(50.0),
-									GridDimension::strict(300.0),
-									GridDimension::strict(50.0)
-								])
-								.add_columns(vec![
-									GridDimension::stretch(),
-									GridDimension::strict(30.0)
-								])
-								.build(ctx),
-							)
-						)
-						.add_row(GridDimension::strict(250))
-						.add_row(GridDimension::strict(90))
-						.add_row(GridDimension::strict(800))
-						.build(ctx),
-						GridBuilder::new(
-							WidgetBuilder::new()
-							.on_column(1)
-							.on_row(1)
-							.with_children(Handle::NONE)
-						)
-						.build(ctx),
-					)
-					.build(ctx),
-			)
-			.add_columns(vec![
-				GridDimension::strict(570),
-				GridDimension::strict(570)
-			])
-			.add_rows(vec![
-				GridDimension::stretch()
-			])
-			.with_opacity(25)
-			.build(ctx)
-		)
-		)
-		.add_columns(vec![
-			GridDimension::strict(30),
-			GridDimension::strict(1140),
-			GridDimension::strict(30)
-		])
-		.add_rows(vec![
-			GridDimension::strict(30),
-			GridDimension::strict(840),
-			GridDimension::strict(30)
-		])
-		.with_opacity(100)
-		.build(ctx);
+        let icons;
+        let fuel_slot;
+        let scrolling;
 
-		Self {
-			icons,
-			scrolling
-		}
+        GridBuilder::new(
+            WidgetBuilder::new()
+                .with_width(1200)
+                .with_height(900)
+                .with_children(
+                    GridBuilder::new(
+                        WidgetBuilder::new()
+                            .on_column(1)
+                            .on_height(1)
+                            .with_width(840.0)
+                            .with_height(1140.0)
+                            .with_children(
+                                GridBuilder::new(
+                                    WidgetBuilder::new().on_column(0).on_row(0).with_children(
+                                        GridBuilder::new(
+                                            WidgetBuilder::new()
+                                                .on_row(0)
+                                                .with_children(Handle::NONE),
+                                        )
+                                        .add_columns(vec![
+                                            GridDimension::strict(50.0),
+                                            GridDimension::strict(150.0),
+                                            GridDimension::strict(50.0),
+                                        ])
+                                        .build(ctx),
+                                        /// item scrolling.
+                                        GridBuilder::new(
+                                            WidgetBuilder::new().on_row(2).with_children(
+                                                {
+                                                    // rusty-editor scrolling we use it
+                                                    let scrolling = IconScrollbar();
+                                                    scrolling
+                                                },
+                                                {
+                                                    let icons = GridBuilder::new();
+                                                    icons
+                                                },
+                                            ),
+                                        )
+                                        .add_rows(vec![
+                                            GridDimension::strict(50.0),
+                                            GridDimension::strict(300.0),
+                                            GridDimension::strict(50.0),
+                                        ])
+                                        .add_columns(vec![
+                                            GridDimension::stretch(),
+                                            GridDimension::strict(30.0),
+                                        ])
+                                        .build(ctx),
+                                    ),
+                                )
+                                .add_rows(vec![
+                                    GridDimension::strict(250.0),
+                                    GridDimension::strict(90.0),
+                                    GridDimension::strict(800.0),
+                                ])
+                                .build(ctx),
+                                GridBuilder::new(
+                                    WidgetBuilder::new()
+                                        .on_column(1)
+                                        .on_row(1)
+                                        .with_children(Handle::NONE),
+                                )
+                                .build(ctx),
+                            )
+                            .build(ctx),
+                    )
+                    .add_columns(vec![
+                        GridDimension::strict(570.0),
+                        GridDimension::strict(570.0),
+                    ])
+                    .add_rows(vec![GridDimension::stretch()])
+                    .with_opacity(25)
+                    .build(ctx),
+                ),
+        )
+        .add_columns(vec![
+            GridDimension::strict(30.0),
+            GridDimension::strict(1140.0),
+            GridDimension::strict(30.0),
+        ])
+        .add_rows(vec![
+            GridDimension::strict(30.0),
+            GridDimension::strict(840.0),
+            GridDimension::strict(30.0),
+        ])
+        .with_opacity(100.0)
+        .build(ctx);
+
+        Self { icons, scrolling }
     }
-	fn on_ui_message(
-		&mut self,
-		engine: &mut Engine,
-		message: UiMessage
-	) {}
-	fn generate_icons(
-		&mut self,
-		ui: &mut UserInterface,
-	)-> Vec<Handle<UiNode>> {
-		let path = File::open("data/configs/brewery_possibilities.ron").unwrap();
-		let mut read: RonMaps = from_reader(path).unwrap();
-		let mut new_row = u32::new();
-		new_row = 0;
-		let mut back = items.brewery1.0.iter();
-		let number = items.len();
-		for String in items.brewery1.0.iter() {
-			icons.add_row(GridDimension::strict(20));
-			icons.with_child(
-				ButtonBuilder::new(WidgetBuilder::new().on_row(new_row))
-				.with_back(decorator: Handle<UiNode>)
-				.with_text(text: &str)
-			)
-			new_row = new_row + 1;
-
-		}
-	}
+    fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
+    fn generate_icons(&mut self, ui: &mut UserInterface) -> Vec<Handle<UiNode>> {
+        let path = File::open("data/configs/brewery_possibilities.ron").unwrap();
+        let mut read: RonMaps = from_reader(path).unwrap();
+        let mut new_row = u32::new();
+        new_row = 0;
+        let mut back = items.brewery1.0.iter();
+        let number = items.len();
+        for String in items.brewery1.0.iter() {
+            icons.add_row(GridDimension::strict(20));
+            icons.with_child(
+                ButtonBuilder::new(WidgetBuilder::new().on_row(new_row))
+                    .with_back(decorator: Handle<UiNode>)
+                    .with_text(text: &str),
+            );
+            new_row = new_row + 1;
+        }
+    }
 }
 // impl ThreeCoreMediumBrewingTable {
 //     fn new(ui: &mut UserInterface) -> Handle<UiNode> {
@@ -394,4 +366,3 @@ impl ThreeCoreBasicBrewingTable {
 // 	}
 // 	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
 // }
-
