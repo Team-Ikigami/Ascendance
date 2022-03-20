@@ -1,19 +1,19 @@
-use fyrox::{
-	core::{
-		algebra::{UnitQuaternion, Vector3},
-		inspect::{Inspect, PropertyInfo},
-		pool::Handle,
-		uuid::Uuid,
-		visitor::prelude::*,	
-	},
-	event::{ElementState, Event},
-	plugin::{Plugin, PluginContext},
-	scene::{
-		node::{Node, TypeUuidProvider},
-		rigidbody::RigidBody,
-	},
-	script::{ScriptContext, ScriptTrait}
-};
+use fyrox::*;//{
+//	core::{
+//		algebra::{UnitQuaternion, Vector3},
+//		inspect::{Inspect, PropertyInfo},
+//		pool::Handle,
+//		uuid::Uuid,
+//		visitor::prelude::*,	
+//	},
+//	event::{ElementState, Event},
+//	plugin::{Plugin, PluginContext},
+//	scene::{
+//		node::{Node, TypeUuidProvider},
+//		rigidbody::RigidBody,
+//	},
+//	script::{ScriptContext, ScriptTrait}
+//};
 use std::str::FromStr;
 
 #[derive(Visit, Default, Inspect)]
