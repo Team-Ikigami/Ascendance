@@ -6,7 +6,7 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-ascendance_lib = { path = "../ascendance" }
+ascendance_lib = { path = "../Ascendance" }
 fallen_walls = { path = "../scripts/attacks/fallen-walls" }
 meteor_shower = { path = "../scripts/attacks/meteor-shower" }
 humanoids = { path = "../scripts/creatures/human_bot"}

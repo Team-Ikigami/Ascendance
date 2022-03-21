@@ -5,7 +5,7 @@ edition = "2021"
 
 [dependencies]
 fyrox = "0.24"
-ascendance_lib = { path = "../ascendance" }
+ascendance_lib = { path = "../Ascendance" }
 fallen_walls = { path = "../scripts/attacks/fallen-walls" }
 meteor_shower = { path = "../scripts/attacks/meteor-shower" }
 humanoids = { path = "../scripts/creatures/human_bot"}
