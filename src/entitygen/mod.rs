@@ -27,7 +27,7 @@ pub mod friendly_skeleton;
 pub mod friendly_zombie;
 pub mod basic_necromancer;
 pub mod medium_necromancer;
-pub mod hard_necromancer;
+// pub mod hard_necromancer;
 pub mod necromancer_king;
 pub mod elf;
 pub mod human;

@@ -4,16 +4,16 @@ impl MageBuilder{
 	fn new() {
 
 	}
-	fn AiType(&mut self) {
+	fn ai_type(&mut self) {
 
 	}
-	fn Armour(&mut self) {
+	fn armour(&mut self) {
 
 	}
-	fn Weapon(&mut self) {
+	fn weapon(&mut self) {
 
 	}
-	fn Abilities(
+	fn stats(
 		&mut self,
 		health: &mut f32,
 		magic: &mut f32,

@@ -15,10 +15,61 @@ use rg3d::gui::{
     HorizontalAlignment,
     UserInterface,
 };
-struct ThreeCoreBasicBrewingTable;
+struct ThreeCoreBasicBrewingTable {
+	icon: Handle<UiNode>,
+	slot_1: Handle<UiNode>,
+	slot_2: Handle<UiNode>,
+	slot_3: Handle<UiNode>,
+	fuel_slot: Handle<UiNode>,
+	base: Handle<UiNode>,
+}
+struct ThreeCoreMediumBrewingTable;
+struct ThreeCoreAdvancedBrewingTable;
+struct ThreeCoreGodlyBrewingTable;
+
+struct FiveCoreBasicBrewingTable;
+struct FiveCoreMediumBrewingTable;
+struct FiveCoreAdvancedBrewingTable;
+struct FiveCoreGodlyBrewingTable;
+
+struct TenCoreBasicBrewingTable;
+struct TenCoreMediumBrewingTable;
+struct TenCoreAdvancedBrewingTable;
+struct TenCoreGodlyBrewingTable;
+
+struct MetalBasicAnvil;
+struct MetalMediumAnvil;
+struct MetalAdvancedAnvil;
+struct MetalGodlyAnvil;
+
+struct RefinedBasicAnvil;
+struct RefinedMediumAnvil;
+struct RefinedAdvancedAnvil;
+struct RefinedGodlyAnvil;
+
+struct NobleBasicAnvil;
+struct NobleMediumAnvil;
+struct NobleAdvancedAnvil;
+struct NobleGodlyAnvil
+
 impl ThreeCoreBasicBrewingTable {
     fn new(ui: &mut UserInterface) -> Handle<UiNode> {
         let ctx = &mut ui.build_ctx();
+
+		let icon;
+		let slot_1;
+		let slot_2;
+		let slot_3;
+		let fuel_slot;
+		let base = GridBuilder::new(WidgetBuilder::new());
+
+		Self {
+			icon
+			slot_1,
+			slot_2,
+			slot_3,
+			fuel_slot,
+		}
     }
 	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
 }
@@ -178,59 +229,4 @@ impl NobleGodlyAnvil {
 	}
 	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
 }
-impl OpeningUI {
-	fn new(ui: &mut UserInterface) -> Handle<UiNode> {
-		let ctx = &mut ui.build_ctx();
-		GridBuilder::new(
-			WidgetBuilder::new()
-				.with_back(
-					ImageBuilder::new(
-						WidgetBuilder::new()
-							.on_row(1)
-							.on_column(1),
-					)
-					.with_texture(into_gui_texture(resource_manager.request_texture("assets/misc/opening.gif")))
-					.build(ctx),
-				)
-				.with_child(
-					newgame = MenuBuilder::new(WidgetBuilder::new().with_vertical_alignment(VerticalAlignment::Center).with_horizontal_alignment(HorizontalAlignment::Center))
-						.with_items({
-							let newgame = MenuItemBuilder::new(WidgetBuilder::new()
-									.on_row(1)
-									.on_column(1)
-									.with_vertical_alignment(VerticalAlignment::Center),
-							)
-							.with_content(text("New Game").shortcut("NewgameUI").icon("assets/textures/widgetbackgrounds/newgame.png"))
-							.with_back("assets/textures/backgrounds/itemsrectanglebackgound.png")
-							.build(ctx);
-							newgame;
-							let setting = MenuItemBuilder::new(
-								WidgetBuilder::new()
-									.on_row(0)
-									.on_column(0)
-									.with_vertical_alignment(VerticalAlignment::Center),
-							)
-							.with_content(text("Settings").shortcut("SettingsUI").icon("/assets/textures/icons/settings.png"))
-							.with_back("assets/textures/backgrounds/itemsrectanglebackgound.png")
-							.build(ctx);
-							setting;
-							let exit = MenuItemBuilder::new(
-								WidgetBuilder::new()
-									.on_row(0)
-									.on_column(1)
-									.with_vertical_alignment(VerticalAlignment::Center),
-							)
-							.with_content(text("Exit").shortcut("").icon("assets/textures/icons/exitdoor.png"))
-							.with_back("assets/textures/backgrounds/itemsrectanglebackgound.png")
-							.build(ctx);
-							exit;
-						})
-						.build(ctx),
-				)
-		)
-		.add_row(Row::strict(200.0))
-		.add_column(Column::strict(600.0))
-		.build(ctx);
-	}
-	fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
-}
+

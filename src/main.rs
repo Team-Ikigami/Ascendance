@@ -174,7 +174,10 @@ impl GameState for Game {
         let player = block_on(Player::new(engine.resource_manager.clone(), &mut scene));
         engine
             .get_window()
-            .set_fullscreen(Some(Fullscreen::Borderless(None)));
+            .set_fullscreen(Some(Fullscreen::Borderless(None)))
+            .set_cursor_visible(false)
+            .set_cursor_grab(true)
+            .set_resizable(false);
         Self {
             player,
             level: block_on(Level::new(engine.resource_manager.clone(), &mut scene)),
