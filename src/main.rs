@@ -23,7 +23,7 @@ mod level;
 
 use crate::{level::Level, player::Player};
 use fyrox::{
-    window::Fullscreen,
+    window::{Icon, Fullscreen},
     engine::{
         Engine,
         framework::prelude::*,
@@ -84,6 +84,7 @@ use std::{
 use serde::{Serialize, Deserialize};
 use rand::prelude::*;
 use rand::Rng;
+use image::io::Reader as ImageReader;
 
 use git_version::git_version;
 const GIT_VERSION: &str = git_version!();
@@ -172,8 +173,22 @@ impl GameState for Game {
         let mut scene = Scene::new();
         scene.ambient_lighting_color = Color::opaque(150, 150, 150);
         let player = block_on(Player::new(engine.resource_manager.clone(), &mut scene));
+        let img = ImageReader::open("data/textures/icons/window_icon.png")
+            .unwrap()
+            .with_guessed_format()
+            .unwrap()
+            .decode()
+            .unwrap()
+            .into_rgba8();
+        let mut pixels = Vec::new();
+        img.pixels().for_each(|pixel| {
+            pixels.0.iter.for_each(|byte| {
+                pixels.push(*byte);
+            })
+        });
         engine
             .get_window()
+            .set_window_icon(Some(Icon::from_rgba(pixels, img.width(), img.height()).unwrap()))
             .set_fullscreen(Some(Fullscreen::Borderless(None)))
             .set_cursor_visible(false)
             .set_cursor_grab(true)
