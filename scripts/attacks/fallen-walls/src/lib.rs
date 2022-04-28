@@ -1,28 +1,30 @@
-use fyrox::*; //{
-              //	core::{
-              //		algebra::{UnitQuaternion, Vector3},
-              //		inspect::{Inspect, PropertyInfo},
-              //		pool::Handle,
-              //		uuid::Uuid,
-              //		visitor::prelude::*,
-              //	},
-              //	event::{ElementState, Event},
-              //	plugin::{Plugin, PluginContext},
-              //	scene::{
-              //		node::{Node, TypeUuidProvider},
-              //		rigidbody::RigidBody,
-              //	},
-              //	script::{ScriptContext, ScriptTrait}
-              //};
-use fyrox::asset::core::pool::Handle;
-use fyrox::core::pool::Handle;
+use fyrox::{
+    core::{
+        algebra::{UnitQuaternion, Vector3},
+        inspect::{Inspect, PropertyInfo},
+        pool::Handle,
+        uuid::Uuid,
+        visitor::prelude::*,
+    },
+    event::{ElementState, Event},
+    plugin::{Plugin, PluginContext},
+    scene::{
+        node::{Node, TypeUuidProvider},
+        rigidbody::RigidBody,
+    },
+    script::{ScriptContext, ScriptTrait}
+};
 use fyrox::engine::{resource_manager::ResourceManager, Engine};
 use fyrox::scene::rigidbody::RigidBodyBuilder;
 use fyrox::scene::{
-    collider::ColliderBuilder, particle_system::ParticleSystemBuilder, rigidbody::RigidBodyBuilder,
+    collider::ColliderBuilder,
+	particle_system::ParticleSystemBuilder,
     Scene,
 };
 use std::str::FromStr;
+use fyrox::scene::base::BaseBuilder;
+use fyrox::scene::transform::TransformBuilder;
+use fyrox::scene::collider::ColliderShape;
 
 #[derive(Visit, Default, Inspect)]
 struct GamePlugin {
@@ -30,7 +32,7 @@ struct GamePlugin {
 }
 
 impl GamePlugin {
-    fn new(scene: &mut Scene, position: Vector3<f32>, resource_manager: ResourceManager) -> Self {
+    async fn new(scene: &mut Scene, position: Vector3<f32>, resource_manager: ResourceManager) -> Self {
         let rock_1 = resource_manager
             .request_model("data/models/rock_1.fbx")
             .await

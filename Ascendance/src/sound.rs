@@ -26,7 +26,13 @@ pub struct TriangleRange {
 
 // presumably used to affect how the sound rebounds
 // i copied this and have forgotten how it works
-#[derive(Deserialize, Hash, Eq, PartialEq, Copy, Clone, Debug)]
+#[derive(Deserialize)]
+#[derive(Hash)]
+#[derive(Eq)]
+#[derive(PartialEq)]
+#[derive(Copy)]
+#[derive(Clone)]
+#[derive(Debug)]
 pub enum MaterialType {
     Grass,
     Metal,
@@ -36,13 +42,21 @@ pub enum MaterialType {
     // Flesh,
 }
 
-#[derive(Deserialize, Hash, Eq, PartialEq, Copy, Clone, Debug)]
+#[derive(Deserialize)]
+#[derive(Hash)]
+#[derive(Eq)]
+#[derive(PartialEq)]
+#[derive(Copy)]
+#[derive(Clone)]
+#[derive(Debug)]
 pub enum SoundKind {
     Impact,
     FootStep,
 }
 
-#[derive(Deserialize, Debug, Default)]
+#[derive(Deserialize)]
+#[derive(Debug)]
+#[derive(Default)]
 pub struct SoundBase {
     material_to_sound: HashMap<MaterialType, HashMap<SoundKind, Vec<PathBuf>>>,
     texture_to_material: HashMap<PathBuf, MaterialType>,
@@ -176,7 +190,8 @@ impl SoundMap {
     }
 }
 
-#[derive(Default, Visit)]
+#[derive(Default)]
+#[derive(Visit)]
 pub struct SoundManager {
     context: SoundContext,
     reverb: Handle<Effect>,

@@ -7,3 +7,5 @@ Cargo.lock
 /.history/
 *.*~
 */**/.*.swap
+# no look
+game-plan/*.*

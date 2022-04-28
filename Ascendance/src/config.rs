@@ -3,14 +3,11 @@ use fyrox::renderer::QualitySettings;
 use ron::ser::PrettyConfig;
 use serde::{Deserialize, Serialize};
 use std::fs::File;
-#[derive(Deserialize, Serialize, Clone)]
-pub struct SoundConfig {
-    pub master_volume: f32,
-    pub music_volume: f32,
-    pub use_hrtf: bool,
-}
 
-#[derive(Deserialize, Serialize, Clone)]
+
+#[derive(Clone)]
+#[derive(Serialize)]
+#[derive(Deserialize)]
 pub struct SoundConfig {
     pub master_volume: f32,
     pub music_volume: f32,
@@ -26,7 +23,10 @@ impl Default for SoundConfig {
         }
     }
 }
-#[derive(Deserialize, Serialize, Default, Clone)]
+#[derive(Deserialize)]
+#[derive(Serialize)]
+#[derive(Default)]
+#[derive(Clone)]
 pub struct Config {
     pub graphics_settings: QualitySettings,
     pub controls: ControlScheme,

@@ -264,30 +264,6 @@
             consumable: false,
             preview: "data/ui/swords/steelsword.png"
         ),
-        GoldSword: (
-            model: "data/models/swords/goldsword.fbx",
-            scale: 1.0,
-            name: "Gold Sword",
-            description: "A gold sword. Can be used to kill people.",
-            consumable: false,
-            preview: "data/ui/swords/goldsword.png"
-        ),
-        GoldShovel: (
-            model: "data/models/tools/shovel/goldshovel.fbx",
-            scale: 0.1,
-            name: "Gold shovel",
-            description: "A gold shovel..",
-            consumable: false,
-            preview: "data/ui/tools/shovel.png"
-        ),
-        GoldAxe: (
-            model: "data/models/tools/axe/goldaxe.fbx",
-            scale: 0.1,
-            name: "Gold axe",
-            description: "A gold axe..",
-            consumable: false,
-            preview: "data/ui/tools/axe.png"
-        ),
         MithrilSword: (
             model: "data/models/swords/mithrilsword.fbx",
             scale: 1.0,

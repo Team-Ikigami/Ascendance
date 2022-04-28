@@ -1,13 +1,15 @@
-use fyrox::core::Handle;
+use fyrox::core::pool::Handle;
 use fyrox::engine::Engine;
 use fyrox::gui::{
     grid::{Column, GridBuilder, GridDimension, Row},
     image::ImageBuilder,
     menu::{MenuBuilder, MenuItemBuilder},
-    node::UiNode,
-    scrollbar::ScrollBarBuilder,
+    UiNode,
+    scroll_bar::ScrollBarBuilder,
     widget::WidgetBuilder,
-    HorizontalAlignment, Thickness, UserInterface, VerticalAlignment, VerticalAlignment,
+	button::ButtonBuilder,
+    HorizontalAlignment, Thickness, UserInterface, VerticalAlignment,
+	Orientation,
 };
 use fyrox::utils::into_gui_texture;
 use ron::de::from_reader;
@@ -22,7 +24,7 @@ use std::{collections::HashMap, fs::File, path::PathBuf, str};
 /// learn how to do iterations
 #[derive(Deserialize, Debug)]
 struct RonMaps {
-    brewery1: Vec<Tuple<String, PathBuf>>,
+    brewery1: Vec<HashMap<String, PathBuf>>,
 }
 
 struct ThreeCoreBasicBrewingTable {
@@ -72,7 +74,8 @@ pub struct ScrollBarData {
     pub orientation: Orientation,
 }
 
-fn IconScrollbar(ctx: &mut BuildContext, data: ScrollBarData) -> Handle<UiNode> {
+fn IconScrollbar(ui: &mut UserInterface, data: ScrollBarData) -> fyrox::core::pool::Handle<fyrox::gui::UiNode> {
+	let mut ctx = ui.build_ctx();
     let mut wb = WidgetBuilder::new();
     match data.orientation {
         Orientation::Vertical => wb = wb.with_width(30.0),
@@ -102,22 +105,22 @@ impl ThreeCoreBasicBrewingTable {
 
         GridBuilder::new(
             WidgetBuilder::new()
-                .with_width(1200)
-                .with_height(900)
-                .with_children(
+                .with_width(1200.0)
+                .with_height(900.0)
+                .with_child(
                     GridBuilder::new(
                         WidgetBuilder::new()
-                            .on_column(1)
-                            .on_height(1)
+                            .on_column(0)
+                            .on_row(0)
                             .with_width(840.0)
                             .with_height(1140.0)
-                            .with_children(
+                            .with_children([
                                 GridBuilder::new(
-                                    WidgetBuilder::new().on_column(0).on_row(0).with_children(
+                                    WidgetBuilder::new().on_column(0).on_row(0).with_children([
                                         GridBuilder::new(
                                             WidgetBuilder::new()
                                                 .on_row(0)
-                                                .with_children(Handle::NONE),
+                                                .with_child(Handle::NONE),
                                         )
                                         .add_columns(vec![
                                             GridDimension::strict(50.0),
@@ -127,17 +130,27 @@ impl ThreeCoreBasicBrewingTable {
                                         .build(ctx),
                                         /// item scrolling.
                                         GridBuilder::new(
-                                            WidgetBuilder::new().on_row(2).with_children(
+                                            WidgetBuilder::new().on_row(2).with_children([
                                                 {
                                                     // rusty-editor scrolling we use it
-                                                    let scrolling = IconScrollbar();
+                                                    let scrolling = IconScrollbar(ctx, ScrollBarData {
+														min: 0.0,
+														max: 0.0,
+														value: 0.0,
+														step: 1.0,
+														row: 2,
+														column: 0,
+														margin: Thickness::uniform(0.0),
+														show_value: true,
+														orientation: Orientation::Vertical,
+													});
                                                     scrolling
                                                 },
                                                 {
-                                                    let icons = GridBuilder::new();
+                                                    let icons = GridBuilder::new(WidgetBuilder::new());
                                                     icons
                                                 },
-                                            ),
+											]),
                                         )
                                         .add_rows(vec![
                                             GridDimension::strict(50.0),
@@ -149,30 +162,26 @@ impl ThreeCoreBasicBrewingTable {
                                             GridDimension::strict(30.0),
                                         ])
                                         .build(ctx),
-                                    ),
-                                )
-                                .add_rows(vec![
+									]),
+                                ).add_rows(vec![
                                     GridDimension::strict(250.0),
                                     GridDimension::strict(90.0),
                                     GridDimension::strict(800.0),
-                                ])
-                                .build(ctx),
+                                ]).build(ctx),
                                 GridBuilder::new(
                                     WidgetBuilder::new()
                                         .on_column(1)
                                         .on_row(1)
-                                        .with_children(Handle::NONE),
-                                )
-                                .build(ctx),
-                            )
-                            .build(ctx),
+                                        .with_child(Handle::NONE),
+                                ).build(ctx),
+							]).build(ctx),
                     )
                     .add_columns(vec![
                         GridDimension::strict(570.0),
                         GridDimension::strict(570.0),
                     ])
                     .add_rows(vec![GridDimension::stretch()])
-                    .with_opacity(25)
+                    // .with_opacity(25)
                     .build(ctx),
                 ),
         )
@@ -192,23 +201,23 @@ impl ThreeCoreBasicBrewingTable {
         Self { icons, scrolling }
     }
     fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
-    fn generate_icons(&mut self, ui: &mut UserInterface) -> Vec<Handle<UiNode>> {
-        let path = File::open("data/configs/brewery_possibilities.ron").unwrap();
-        let mut read: RonMaps = from_reader(path).unwrap();
-        let mut new_row = u32::new();
-        new_row = 0;
-        let mut back = items.brewery1.0.iter();
-        let number = items.len();
-        for String in items.brewery1.0.iter() {
-            icons.add_row(GridDimension::strict(20));
-            icons.with_child(
-                ButtonBuilder::new(WidgetBuilder::new().on_row(new_row))
-                    .with_back(decorator: Handle<UiNode>)
-                    .with_text(text: &str),
-            );
-            new_row = new_row + 1;
-        }
-    }
+//    fn generate_icons(&mut self, ui: &mut UserInterface) -> Vec<Handle<UiNode>> {
+//        let path = File::open("data/configs/brewery_possibilities.ron").unwrap();
+//        let mut read: RonMaps = from_reader(path).unwrap();
+//        let mut new_row = u32::new();
+//        new_row = 0;
+//        let mut back = items.brewery1.0.iter();
+//        let number = items.len();
+//        for String in items.brewery1.0.iter() {
+//            icons.add_row(GridDimension::strict(20));
+//            icons.with_child(
+//                ButtonBuilder::new(WidgetBuilder::new().on_row(new_row))
+//                    // .with_back(decorator: Handle<UiNode>)
+//                    .with_text("{}", String),
+//            );
+//            new_row = new_row + 1;
+//        }
+//    }
 }
 // impl ThreeCoreMediumBrewingTable {
 //     fn new(ui: &mut UserInterface) -> Handle<UiNode> {

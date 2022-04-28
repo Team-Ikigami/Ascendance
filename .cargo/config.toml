@@ -1,12 +1,20 @@
 [alias]
-b = "build --release"
+ch = "check"
+chr = "check --release"
+b = "build"
+br = "build --release"
+r = "run"
+rr = "run --release"
+cl = "clean"
+t = "test"
 updep = "upgrade"
 uplock = "update"
-cl = "clean"
+e = "build --examples"
+er = "build --examples --release"
 
 [build]
 target-dir = "build"
 incremental = true
 
 [doc]
-browser = "BRAVE"
+browser = "brave"

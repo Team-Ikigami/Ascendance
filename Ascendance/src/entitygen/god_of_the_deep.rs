@@ -1,4 +1,4 @@
-use crate::weapon::AttackTypes;
+use crate::items::weapon::AttackTypes;
 use fyrox::engine::Engine;
 use rand::thread_rng;
 use rand::Rng;
@@ -6,7 +6,7 @@ struct GodOfTheDeep {
     name: String,
     description: String,
     level: u32,
-    hit_points: u32,
+    hit_points: i64,
     speed: u32,
     strength: u32,
     proficiencies: AttackTypes,
@@ -21,8 +21,8 @@ impl GodOfTheDeep {
         Self: Sized,
     {
         let mut rng = rand::thread_rng();
-        let mut health = rng.gen_range(500..20000);
-        let mut magic = rng.gen_range(1500..2000);
+        let mut health: i64 = rng.gen_range(500..20000);
+        let mut magic: i64 = rng.gen_range(1500..2000);
         let resists = AttackTypes {
             fire: true,
             water: true,
