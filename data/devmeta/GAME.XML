@@ -1,0 +1,42 @@
+<location>
+	<start>
+		<summary>
+			An area filled with weak creatures that are either friendly or neutral to you.
+
+			Its a town starting to show decay, its residents getting old and the houses breaking down.
+		</summary>
+		<paths>
+			<one>See location.one; The path takes you past the first boss;</one>
+		</paths>
+	</start>
+	<one>
+</location>
+<npe>
+	<enemies>
+		<regular>
+		</regular>
+		<boss>
+		</boss>
+	</enemies>
+	<neutral>
+		<regular>
+			<person>
+				<human-blacksmith-one>
+					<gender>Male</gender>
+					<hits-to-get-mad>4</hits-to-get-mad>
+					<description>A rugged man who has lifted the hammer and molded metal his whole life, he knows not of the harshness of the world, only the harshness of the flame he weilds has affected him in this life</description>
+				</human-blacksmith-one>
+			</person>
+		</regular>
+		<boss>
+		</boss>
+	</neutral>
+	<friendly>
+	</friendly>
+</npe>
+<music>
+	<sfx>
+	</sfx>
+	<bgm>
+	</bgm>
+</music>

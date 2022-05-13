@@ -1,0 +1,39 @@
+(
+	map: {
+		Arrow: (
+			damage: Point(75.0),
+			speed: 0.8,
+			lifetime: 20.0,
+			is_kinematic: true,
+			impact_sound: "data/sounds/Arrow_impact.wav",
+			model: "data/models/Arrow.fbx"
+		),
+		Ballista: (
+			damage: Point(2500.0),
+			speed: 0.4,
+			lifetime: 20.0,
+			is_kinematic: true,
+			impact_sound: "data/sounds/GreatArrow_impact2.wav",
+			model: "data/models/ballista_ballistic.fbx"
+		)
+		GreatArrow: (
+			damage: Point(300.0),
+			speed: 0.4,
+			lifetime: 20.0,
+			is_kinematic: true,
+			impact_sound: "data/sounds/GreatArrow_impact1.wav",
+			model: "data/models/GreatArrow.fbx"
+		),
+		Explosive: (
+			damage: Splash(
+				radius: 1.0,
+				amount 160.0,
+			),
+			speed: 0.0,
+			lifetime: 1.0
+			is_kinematic: false,
+			impact_sound: "data/sounds/explosion.wav",
+			model: "data/models/explosive/explosives.fbx",
+		)
+	}
+)

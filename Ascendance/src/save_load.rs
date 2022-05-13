@@ -10,6 +10,11 @@ pub struct SaveState {
     bad_exit: bool,
     save_kind: SaveKind
 }
+impl Default for SaveKind {
+	fn default(&self) -> Self {
+		
+	}
+}
 impl Default for SaveState {
     fn default(&self) -> Self {
         Self {
@@ -27,10 +32,10 @@ impl SaveState {
     }
     pub fn set_save_kind(&self) -> Self {
         match self.save_kind {
-            SaveKind::complete => println!("Game Saved"),
-            SaveKind::character => println!("Character saved"),
-            SaveKind::inventory => println!("Inventory Updated"),
-            SaveKind::world => println!("World state saved"),
+            SaveKind::Complete => println!("Game Saved"),
+            SaveKind::Character => println!("Character saved"),
+            SaveKind::Inventory => println!("Inventory Updated"),
+            SaveKind::World => println!("World state saved"),
             _ => println!("nothing should happen and this should never occur"),
         }
     }

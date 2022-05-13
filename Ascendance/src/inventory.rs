@@ -50,7 +50,7 @@ impl Inventory {
 }
 
 impl SaveInventory {
-	pub fn CreateInventory(&self) -> Self where: Sized {
+	pub fn CreateInventory(&self) -> Self {
 		let mut inv = Inv::<ItemEnum>::new(32);
 		Self {
 			inventory_path: Default::default(),
