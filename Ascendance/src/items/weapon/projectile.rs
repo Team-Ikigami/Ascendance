@@ -183,16 +183,24 @@ impl Projectile {
         owner: Shooter,
         initial_velocity: Vector3<f32>,
     ) -> Self {
-		// Defines variable as whatever information returned from calling the get_definition function with the current function variable "Kind" This is used later
+		// Gets the information from the get_definition function using the kind variable that is necesary to call this function.
         let definition = Self::get_definition(kind);
 
+		// adds the model of whatever the definition variable called the get_definitions with.
         let resource = resource_manager
             .request_model(definition.model.clone())
             .await
             .unwrap();
+		// creates a new node with the model that was added to memory.
         let model = resource.instantiate_geometry(scene);
+		// TODO: Read about this function
         let body = scene.graph.find_by_name(model, "Projectile");
+		// Create a reference to the scene graphs "body" variable that was created a line ago.
         let body_ref = &mut scene.graph[body];
+		// Using the reference just created, it makes a mutable local transformation (linear movement of the model) and sets the position somewhere, i would
+		// assume to be the final position of the projectile. It then checks if the body variable is a rigid body, if it is, it moves the body to the position
+		// with "lin_vel" which, with a bit of context clues can be assumed to be linear velocity which is always set to be the inital velocity. Useful for
+		// projectiles because calculating the linear velocity and how it changes is annoying and unwanted for me and the computer
         body_ref.local_transform_mut().set_position(position);
         if let Some(body) = body_ref.cast_mut::<RigidBody>() {
             body.set_lin_vel(initial_velocity);
@@ -214,13 +222,17 @@ impl Projectile {
         }
     }
 
+	// This function checks the lifetime variable of this struct to see if it is below or equal to absolute 0. Useful.
     pub fn is_dead(&self) -> bool {
         self.lifetime <= 0.0
     }
 
-    pub fn kill(&mut self) {
-        self.lifetime = 0.0;
-    }
+	// This function outright kills the projectile by setting the structs lifetime variable to be absolute 0. Useful for when you dont want the game to become
+	// unplayably laggy. Reading a bit further showed me that it is useful to have this when an arrow hits its target ofc. Didnt think about that at all
+	// before.
+	pub fn kill(&mut self) {
+		self.lifetime = 0.0;
+	}
 
     pub fn update(
         &mut self,
@@ -232,8 +244,12 @@ impl Projectile {
     ) {
         // Fetch current position of projectile.
         let (position, collider) = if self.body.is_some() {
+			// creates reference to body of the projectile in the scene graph
             let body_ref = &scene.graph[self.body];
+			// creates a variable of the position of the body of the projectile
             let position = body_ref.global_position();
+			// creates a variable of the collider of the body of the projectile. The process is that for each of the children of the body_ref referenced nodes
+			// it iterates a filter over the lower level nodes of the scene graph to see if it is a collider. Meaning it checks to see if the projectile has a collider node. It then checks the next node to see if it is a collider. It then does an unwrap or a default function. I think unwrap is a function that returns the value of the node if it is a collider and default continues to the next child node of the projectile..
             let collider = body_ref
                 .children()
                 .iter()
@@ -242,10 +258,15 @@ impl Projectile {
                 .next()
                 .unwrap_or_default();
             (position, collider)
-        } else {
+        }
+		// if the body of the projectile doesnt exist  then it iterates through the scene graph for the global position of the self.model variable, it also
+		// makes the handle fo the node a NONE constant.
+		else {
             (scene.graph[self.model].global_position(), Handle::NONE)
         };
 
+		// no fucking idea what a ray hit even is but this creates a variable to see the last position, current position, the owner node of the projectile(?)
+		// node, the weapon and the actors, the physics of the scene and the collider. I THINK THIS IS FOR BOUNCY SHIT.
         let ray_hit = ray_hit(
             self.last_position,
             position,
@@ -256,31 +277,44 @@ impl Projectile {
             collider,
         );
 
+		// Creates several variables if the weapon::hit exists.  It uses the ray_hit set of variables. It uses the hit.position to set the variable of the 
+		// ray_hit  position. It then uses the hit.normal vairable to se the ray_hit.normal variable. It then creates a blood effect variable if the actor 
+		// that gets hit is_some() TODO: FIND OUT ABOUT THAT
+		//
+		// At the end of the two parts of the if statement there is a ( ) that calls a couple variables. They are called in order to correspond to the (effect_position, effect_normal, effect_kind). They are NOT RANDOM OR ODD.
         let (effect_position, effect_normal, effect_kind) = if let Some(hit) = ray_hit {
             let position = hit.position;
             let normal = hit.normal;
             let blood_effect = hit.actor.is_some();
 
+			// It inserts another of the hit struct to the projectile.hits variable.
             self.hits.insert(hit);
+			// The projectile is killed :'(
             self.kill();
 
+			// Makes the just created position variable and normal variable. It checks if the blood_effect variable is real. If it is, it creates a blood
+			// splatter effect. If not it does nothing and uses the BigImpact part of the EffectKind enum.
             (
                 position,
                 normal,
                 if blood_effect {
                     EffectKind::BloodSpray
                 } else {
-                    EffectKind::BulletImpact
+                    EffectKind::BigImpact
                 },
             )
-        } else {
+        }
+		// if  the previous big If statement is false, then it uses the get_position in this impl and calls it with a mutable scene.graph. It then uses the y 
+		// variable of the 3d plane. It sets the last part of the variable to be the non bloodspray impact
+		else {
             (
                 self.get_position(&scene.graph),
                 Vector3::y(),
-                EffectKind::BulletImpact,
+                EffectKind::Impact,
             )
         };
 
+		// CONTINUE HERE
         // Movement of kinematic projectiles are controlled explicitly.
         if self.definition.is_kinematic {
             let total_velocity = self.dir.scale(self.definition.speed);
