@@ -1,4 +1,5 @@
 use super::message::Message;
+
 use fyrox::core::sstorage::ImmutableString;
 use fyrox::material::PropertyValue;
 use fyrox::scene::graph::physics::FeatureId;
@@ -6,18 +7,21 @@ use fyrox::{
     core::{algebra::Vector3, pool::Handle, visitor::prelude::*},
     engine::resource_manager::ResourceManager,
     rand::{self, seq::SliceRandom},
-    scene::{node::Node, Scene},
-    sound::{
-        context::SoundContext,
-        effects::{BaseEffect, Effect, EffectInput},
-        source::{generic::GenericSourceBuilder, spatial::SpatialSourceBuilder, Status},
-    },
+    scene::{
+		node::Node,
+		Scene,
+	},
     utils::log::{Log, MessageKind},
 };
 use serde::Deserialize;
 use std::{collections::HashMap, fs::File, ops::Range, path::Path, path::PathBuf, time::Duration};
+use fyrox_sound::{
+    context::SoundContext,
+    effects::{BaseEffect, Effect, EffectInput},
+    source::{generic::GenericSourceBuilder, spatial::SpatialSourceBuilder, Status},
+};
 
-//
+// Used to determine how the sound is played based on the material (a deserialized set of information) and range, an unsigned 32 bit number for distance.
 #[derive(Debug)]
 pub struct TriangleRange {
     range: Range<u32>,
@@ -64,6 +68,7 @@ pub struct SoundBase {
 
 impl SoundBase {
     pub fn load() -> Self {
+		// Deserialize list of sounds.
         let file = File::open("data/sounds/sound_list.ron").unwrap();
         let mut base: Self = ron::de::from_reader(file).unwrap();
         // Canonicalize paths to remove \ and / differences and remove prefixes like ./ etc.
@@ -205,13 +210,13 @@ impl SoundManager {
     pub fn new(context: SoundContext, scene: &Scene) -> Self {
         let mut base_effect = BaseEffect::default();
         base_effect.set_gain(0.7);
-        let mut reverb = fyrox::sound::effects::reverb::Reverb::new(base_effect);
+        let mut reverb = fyrox_sound::effects::reverb::Reverb::new(base_effect);
         reverb.set_dry(0.5);
         reverb.set_wet(0.5);
         reverb.set_decay_time(Duration::from_secs_f32(3.0));
         let reverb = context
             .state()
-            .add_effect(fyrox::sound::effects::Effect::Reverb(reverb));
+            .add_effect(fyrox_sound::effects::Effect::Reverb(reverb));
 
         let sound_base = SoundBase::load();
 

@@ -5,8 +5,8 @@ use crate::{
     },
     bot::{
         behaviour::{
-	    	BehaviorContext,
-	    	BotBehavior
+	    	BehaviourContext,
+	    	BotBehaviour
 		},
     	lower_body::{
 		    LowerBodyMachine, 

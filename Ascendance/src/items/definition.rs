@@ -1,6 +1,7 @@
 use crate::items::weapon::definition::WeaponKind;
 use fyrox::core::visitor::Visitor;
 use fyrox::core::visitor::prelude::Visit;
+use fyrox::core::visitor::VisitResult;
 use crate::items::apparel::definition::ApparelKind;
 #[derive(Debug)]
 #[derive(Clone)]

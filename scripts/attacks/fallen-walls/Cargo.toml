@@ -3,4 +3,4 @@ name = "fallen_walls"
 version = "0.1.0"
 edition = "2021"
 [dependencies]
-fyrox = "0.24.0"
+fyrox = "0.25.0"

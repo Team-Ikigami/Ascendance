@@ -14,5 +14,5 @@ doors = { path = "../scripts/world/objects/doors"}
 organ_pipes = { path = "../scripts/world/objects/organ-pipes"}
 summoning_giant = { path = "../scripts/world/objects/summoning-giant"}
 undead_bot = { path = "../scripts/creatures/undead_bot" }
-fyrox = "*"
-fyroxed = "*"
+fyrox = "0.25"
+fyroxed_base = "*"

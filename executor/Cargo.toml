@@ -4,7 +4,7 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
-fyrox = "0.24"
+fyrox = "0.25"
 ascendance_lib = { path = "../Ascendance" }
 fallen_walls = { path = "../scripts/attacks/fallen-walls" }
 meteor_shower = { path = "../scripts/attacks/meteor-shower" }

@@ -69,3 +69,11 @@ impl WeaponKind {
 		}
 	}
 }
+
+#[derive(Copy, Clone, PartialEq, Eq, Debug, Deserialize, Hash)]
+#[repr(u32)]
+pub enum ShotEffect {
+    Smoke = 0,
+    Beam = 1,
+    Rail = 2,
+}

@@ -72,7 +72,7 @@ impl Default for Damage {
 }
 impl Damage {
     #[must_use]
-    pub fn scale(&self, k: 32) -> Self {
+    pub fn scale(&self, k: f32) -> Self {
         // Using * on a self makes it a pointer. Id love to know what K is and why it has the
         // function ".abs()
         match *self {

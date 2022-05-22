@@ -1,20 +1,20 @@
 [workspace]
 members = [
 	# Binaries to execute
-	# "executor",
-	# "editor",
+	"executor",
+	"editor",
 	
 	# Binary to run the main game
 	"Ascendance",
 	
 	# Binary scripts to add to the executor
 	"scripts/creatures/undead_bot",
-	# "scripts/creatures/human_bot",
-	# "scripts/world/objects/summoning-giant",
-	# "scripts/attacks/meteor-shower",
-	# "scripts/attacks/fallen-walls",
-	# "scripts/world/objects/doors",
-	# "scripts/world/objects/organ-pipes",
+	"scripts/creatures/human_bot",
+	"scripts/world/objects/summoning-giant",
+	"scripts/attacks/meteor-shower",
+	"scripts/attacks/fallen-walls",
+	"scripts/world/objects/doors",
+	"scripts/world/objects/organ-pipes",
 ]
 
 [profile.release]

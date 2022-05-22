@@ -1,6 +1,11 @@
 use crate::{
-    actor::ActorContainer, inventory::Inventory, item::ItemKind, message::Message, Actor,
-    DoorUiContainer, MessageSender,
+    actor::ActorContainer,
+	inventory::Inventory,
+	items::definitions::ItemKind,
+	message::Message,
+	Actor,
+    DoorUiContainer,
+	MessageSender,
 };
 use fyrox::scene::light::BaseLight;
 use fyrox::scene::mesh::Mesh;

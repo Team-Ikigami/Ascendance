@@ -1,12 +1,3 @@
-// TODO: Write docs for bot/mod.rs
-// TODO: Write docs for bot/lower_body.rs
-// TODO: Write docs for bot/upper_body.rs
-// TODO: Write docs for bot/behaviour/mod.rs
-// TODO: Write docs for items/mod.rs
-// TODO: Write docs for items/weapon.rs
-
-#[docs(include="../README.md")]
-
 #![allow(unused_variables)]
 #![allow(unused_mut)]
 #![allow(unreachable_patterns)]
@@ -14,12 +5,22 @@
 #![allow(unused_imports)]
 #![allow(clippy::too_many_arguments)]
 
-mod utils;
+#[doc = include("../README.md")]
+
+// TODO: Write docs for bot/lower_body.rs
+// TODO: Write docs for bot/mod.rs
+// TODO: Write docs for bot/upper_body.rs
+// TODO: Write docs for bot/behaviour/mod.rs
+// TODO: Write docs for items/mod.rs
+// TODO: Write docs for items/weapon.rs
+
+mod actor;
 mod bot;
 mod config;
 mod door;
 mod entitygen;
 mod inventory;
+mod items;
 mod level;
 mod light;
 mod loading_screen;
@@ -28,7 +29,7 @@ mod player;
 mod save_load;
 mod sound;
 mod ui;
-mod items;
+mod utils;
 use items::weapon::*;
 use items::definition::ItemKind;
 use crate::{

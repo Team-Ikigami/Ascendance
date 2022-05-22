@@ -128,7 +128,7 @@ impl ThreeCoreBasicBrewingTable {
                                             GridDimension::strict(50.0),
                                         ])
                                         .build(ctx),
-                                        /// item scrolling.
+                                        // item scrolling.
                                         GridBuilder::new(
                                             WidgetBuilder::new().on_row(2).with_children([
                                                 {
