@@ -1,7 +1,7 @@
 [workspace]
 members = [
 	# Binary to run the main game
-	"Ascendance",
+	# "Ascendance",
 	
 	# Binary scripts to add to the executor
 	# "scripts/creatures/undead_bot",
@@ -11,6 +11,7 @@ members = [
 	# "scripts/attacks/fallen-walls",
 	# "scripts/world/objects/doors",
 	# "scripts/world/objects/organ-pipes",
+
 ]
 
 [profile.release]

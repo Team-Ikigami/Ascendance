@@ -9,3 +9,4 @@ Cargo.lock
 */**/.*.swap
 # no look
 game-plan/*.*
+fyrox-tuts/**/*.*
