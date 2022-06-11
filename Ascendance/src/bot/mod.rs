@@ -1,33 +1,15 @@
 use crate::{
-    actor::{
-        Actor,
-        TargetDescriptor
-    },
+    actor::{Actor, TargetDescriptor},
     bot::{
-        behaviour::{
-	    	BehaviourContext,
-	    	BotBehaviour
-		},
-    	lower_body::{
-		    LowerBodyMachine, 
-	    	LowerBodyMachineInput
-		},
-        upper_body::{
-		    UpperBodyMachine, 
-	    	UpperBodyMachineInput
-		},
+		behaviour::{BehaviourContext, BotBehaviour},
+    	lower_body::{LowerBodyMachine, LowerBodyMachineInput},
+        upper_body::{UpperBodyMachine, UpperBodyMachineInput},
     },
-    character::{
-		find_hit_boxes,
-		Character
-    },
+    character::{find_hit_boxes, Character},
     door::DoorContainer,
-    inventory::{
-		Inventory,
-		ItemEntry
-    },
+    inventory::{Inventory, ItemEntry},
     items::{
-		ItemKind,
+		definition::ItemKind,
 		weapon::{
 		    bash::Damage,
 		    projectile::Damage, 
@@ -45,29 +27,15 @@ use fyrox::scene::graph::physics::CoefficientCombineRule;
 use fyrox::scene::pivot::PivotBuilder;
 use fyrox::scene::rigidbody::RigidBody;
 use fyrox::{
-    animation::machine::{
-        Machine,
-        PoseNode
-    },
+    animation::machine::{Machine, PoseNode},
     core::{
-        algebra::{
-            Point3,
-            UnitQuaternion,
-            Vector3
-        },
+        algebra::{Point3, UnitQuaternion, Vector3},
         arrayvec::ArrayVec,
         color::Color,
         math::SmoothAngle,
         pool::Handle,
-        rand::{
-            seq::IteratorRandom,
-            Rng
-        },
-        visitor::prelude::{
-            Visit,
-            VisitResult,
-            Visitor
-        },
+        rand::{seq::IteratorRandom, Rng},
+        visitor::prelude::{Visit, VisitResult, Visitor},
     },
     engine::resource_manager::ResourceManager,
     lazy_static::lazy_static,
@@ -75,55 +43,30 @@ use fyrox::{
     scene::{
         self,
         base::BaseBuilder,
-        collider::{
-            ColliderBuilder,
-            ColliderShape,
-            InteractionGroups
-        },
+        collider::{ColliderBuilder, ColliderShape, InteractionGroups},
         debug::SceneDrawingContext,
         graph::{
-            physics::{
-                Intersection,
-                RayCastOptions
-            },
+            physics::{Intersection, RayCastOptions},
             Graph,
         },
         node::Node,
-        rigidbody::{
-            RigidBodyBuilder,
-            RigidBodyType
-        },
+        rigidbody::{RigidBodyBuilder, RigidBodyType},
         transform::TransformBuilder,
         Scene,
     },
     utils::{
-        log::{
-            Log,
-            MessageKind
-        },
-        navmesh::{
-            NavmeshAgent,
-            NavmeshAgentBuilder
-        },
+        log::{Log, MessageKind},
+        navmesh::{NavmeshAgent, NavmeshAgentBuilder},
     },
 };
 use serde::Deserialize;
 use std::{
     collections::HashMap,
-    fmt::{
-        Debug,
-        Formatter
-    },
+    fmt::{Debug, Formatter},
     fs::File,
     hash::Hash,
-    ops::{
-        Deref,
-        DerefMut
-    },
-    sync::{
-        Arc,
-        Mutex
-    },
+    ops::{Deref, DerefMut},
+    sync::{Arc, Mutex},
 };
 
 mod behaviour;

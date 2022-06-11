@@ -5,7 +5,8 @@
 #![allow(unused_imports)]
 #![allow(clippy::too_many_arguments)]
 
-#[doc = include("../README.md")]
+#![doc = include_str!("../README.md")]
+#![doc(html_no_source)]
 
 // TODO: Write docs for bot/lower_body.rs
 // TODO: Write docs for bot/mod.rs
@@ -14,24 +15,24 @@
 // TODO: Write docs for items/mod.rs
 // TODO: Write docs for items/weapon.rs
 
-mod actor;
-mod bot;
-mod config;
-mod door;
-mod entitygen;
-mod inventory;
-mod items;
+// mod actor;
+// mod bot;
+// mod config;
+// mod door;
+// mod entitygen;
+// mod inventory;
+// mod items;
 mod level;
-mod light;
-mod loading_screen;
-mod message;
+// mod light;
+// mod loading_screen;
+// mod message;
 mod player;
-mod save_load;
-mod sound;
+// mod save_load;
+// mod sound;
 mod ui;
-mod utils;
-use items::weapon::*;
-use items::definition::ItemKind;
+// mod utils;
+// use crate::items::weapon::*;
+// use crate::items::definition::ItemKind;
 use crate::{
     level::Level,
     player::Player
@@ -106,7 +107,6 @@ use fyrox::{
         Thickness,
         UiNode,
         UserInterface,
-        DEFAULT_FONT,
     },
     scene::Scene,
     utils::into_gui_texture,
@@ -116,23 +116,19 @@ use fyrox::{
     },
 };
 use image::io::Reader as ImageReader;
-use rand::prelude::*;
-use rand::Rng;
-use rand::thread_rng;
-use fyrox::sound::{
-    buffer::{
-        DataSource,
-        SoundBufferResource
-    },
-    context::SoundContext,
-    engine::SoundEngine,
-    pool::Handle as CoreSoundHandle,
-    source::{
-        generic::GenericSourceBuilder,
-        SoundSource,
-        Status
-    },
-};
+use fyrox::core::rand::prelude::*;
+use fyrox::core::rand::Rng;
+use fyrox::core::rand::thread_rng;
+
+// use fyrox::scene::sound::{
+//     DataSource,
+//     SoundBufferResource,
+//     context::SoundContext,
+//     SoundEngine,
+//     pool::Handle as CoreSoundHandle,
+//     Sound,
+//     Status,
+// };
 use serde::{
     Deserialize,
     Serialize
@@ -141,6 +137,7 @@ use std::{
     thread,
     time::Duration
 };
+use crate::ui::craftingui::BrewingTable;
 
 use git_version::git_version;
 const GIT_VERSION: &str = git_version!();
@@ -151,6 +148,7 @@ struct Game {
     scene: Handle<Scene>,
     level: Level,
     player: Player,
+	brewtable_ui: BrewingTable,
 }
 
 // fn Newgame() {}
@@ -170,38 +168,40 @@ struct Game {
 // fn AverageBanditWarlock(builder: &mut ResourceManager) {}
 // fn AverageBanditBarbarian(builder: &mut ResourceManager) {}
 // fn AverageBanditChief(builder: &mut ResourceManager) {}
-fn bgmloop() {
-    let engine = SoundEngine::new();
-    let context = SoundContext::new();
-    engine.lock().unwrap().add_context(context.clone());
-    let mut randbgmint: u8 = rand::thread_rng().gen_range(1..6);
-    match randbgmint {
-        1 => {
-            let sound_buffer = SoundBufferResource::new_generic(
-                fyrox::sound::futures::executor::block_on(DataSource::from_file(
-                    "data/music/themetest.wav",
-                ))
-                .unwrap(),
-            )
-            .unwrap();
 
-            let source = GenericSourceBuilder::new()
-                .with_buffer(sound_buffer)
-                .with_status(Status::Playing)
-                .build_source()
-                .unwrap();
-            let _source_handle: CoreSoundHandle<SoundSource> = context.state().add_source(source);
-
-            thread::sleep(Duration::from_secs(17));
-        }
-        2 => bgmloop(),
-        3 => bgmloop(),
-        4 => bgmloop(),
-        5 => bgmloop(),
-        _ => bgmloop(),
-    }
-    bgmloop();
-}
+// fn bgmloop() {
+//     let engine = SoundEngine::new();
+//     let context = SoundContext::new();
+//     engine.lock().unwrap().add_context(context.clone());
+//     let mut randbgmint: u8 = rand::thread_rng().gen_range(1..6);
+//     match randbgmint {
+//         1 => {
+//             let sound_buffer = SoundBufferResource::new_generic(
+//                 fyrox::scene::sound::futures::executor::block_on(DataSource::from_file(
+//                     "data/music/themetest.wav",
+//                 ))
+//                 .unwrap(),
+//             )
+//             .unwrap();
+// 
+//             let source = SoundBuilder::new()
+// 				.with_spatial_blend_factor(0.0)
+// 				.with_buffer(sound_buffer)
+//                 .with_status(Status::Playing)
+//                 .build_source()
+//                 .unwrap();
+//             let _source_handle: CoreSoundHandle<SoundSource> = context.state().add_source(source);
+// 
+//             thread::sleep(Duration::from_secs(17));
+//         }
+//         2 => bgmloop(),
+//         3 => bgmloop(),
+//         4 => bgmloop(),
+//         5 => bgmloop(),
+//         _ => bgmloop(),
+//     }
+//     bgmloop();
+// }
 
 //        let ctx = &mut engine.user_interface.build_ctx();
 //        let audioengine = SoundEngine::new();
@@ -252,19 +252,26 @@ impl GameState for Game {
             Icon::from_rgba(pixels, img.width(), img.height()).unwrap(),
         ));
         engine.get_window().set_cursor_visible(false);
-        engine.get_window().set_cursor_grab(true);
+		engine.get_window().set_cursor_grab(true).expect("Damn bro, no cursors?");
         engine.get_window().set_resizable(false);
+		
+		let brewtable_ui = BrewingTable::new();
+		
         Self {
             player,
             level: block_on(Level::new(engine.resource_manager.clone(), &mut scene)),
             scene: engine.scenes.add(scene),
+			brewtable_ui,
         }
     }
     fn on_tick(&mut self, engine: &mut Engine, dt: f32, control_flow: &mut ControlFlow) {
         let scene = &mut engine.scenes[self.scene];
         self.player.update(scene);
     }
-    fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {}
+    fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {
+		self.brewtable_ui.handle_ui_message(&message);
+
+	}
     fn on_device_event(&mut self, _engine: &mut Engine, _device_id: DeviceId, event: DeviceEvent) {
         self.player.handle_device_event(&event);
     }
@@ -290,21 +297,28 @@ struct Cli {
 	start_game: String,
 }
 
-/// Uses the rg3d crate to create a window and run the game loop.
-fn main() {
-	let args = Cli::parse();
+async fn start_game() {
+    let args = Cli::parse();
 	 // println!("{:?}", x);
 	let start_game = args.start_game;
-	if start_game == "True".to_string() || "False".to_string(){
-		if start_game == Some("True".to_string()) {
-			println!("Starting game");
-			Framework::<Game>::new().unwrap().title("FUCKING FINALLY").run();
-			println!("Do you have anything you want to do other than start the game?");
-		} else if start_game == "False".to_string() {
-			println!("Not starting game, what do you want to do?");
+
+}
+
+/// Uses the rg3d crate to create a window and run the game loop.
+ fn main() {
+	let args = Cli::parse();
+	let start_game = args.start_game;
+	std::thread::spawn(move || {
+		loop {
+			if start_game == "True".to_string() {
+				println!("nigger what the fuck, the game already runs. What the hell you want me to do?!")
+			} else if start_game == "False".to_string() {
+				println!("Not starting game, what do you want to do?");
+			}
+			else {
+				println!("INVALID ARGUMENTS");
+			}
 		}
-	}
-	else {
-		println!("INVALID ARGUMENTS");
-	}
+	});
+	Framework::<Game>::new().unwrap().title("FUCKING FINALLY").run();
 }

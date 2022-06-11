@@ -1,3 +1,4 @@
+use fyrox::scene::pivot::PivotBuilder;
 use fyrox::{
     core::{
         algebra::{UnitQuaternion, Vector3},
@@ -52,9 +53,9 @@ impl CameraController {
     pub async fn new(graph: &mut Graph, resource_manager: ResourceManager) -> Self {
         let camera;
         let hinge;
-        let pivot = BaseBuilder::new()
+        let pivot = PivotBuilder::new(BaseBuilder::new()
             .with_children(&[{
-                hinge = BaseBuilder::new()
+                hinge = PivotBuilder::new(BaseBuilder::new()
                     .with_local_transform(
                         TransformBuilder::new()
                             // move the hinge of the pivot & camera up to the characters head/body
@@ -70,14 +71,14 @@ impl CameraController {
                                     .build(),
                             ),
                         )
+                        .with_z_far(48.0)
                         .with_skybox(create_skybox(resource_manager).await)
                         .build(graph);
-
                         camera
-                    }])
+                    }]))
                     .build(graph);
                 hinge
-            }])
+            }]))
             .build(graph);
 
         Self {

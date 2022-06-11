@@ -15,7 +15,7 @@ use fyrox::{
 };
 use serde::Deserialize;
 use std::{collections::HashMap, fs::File, ops::Range, path::Path, path::PathBuf, time::Duration};
-use fyrox_sound::{
+use fyrox::scene::sound::{
     context::SoundContext,
     effects::{BaseEffect, Effect, EffectInput},
     source::{generic::GenericSourceBuilder, spatial::SpatialSourceBuilder, Status},
