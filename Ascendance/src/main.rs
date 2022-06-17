@@ -311,7 +311,7 @@ async fn start_game() {
 	std::thread::spawn(move || {
 		loop {
 			if start_game == "True".to_string() {
-				println!("nigger what the fuck, the game already runs. What the hell you want me to do?!")
+				println!("what the fuck, the game already runs. What the hell you want me to do?!")
 			} else if start_game == "False".to_string() {
 				println!("Not starting game, what do you want to do?");
 			}
