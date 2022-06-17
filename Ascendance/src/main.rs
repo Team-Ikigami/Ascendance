@@ -49,43 +49,18 @@ use fyrox::{
     core::{
         color::Color,
         futures::executor::block_on,
-        pool::{
-            Handle,
-            PoolIterator,
-            PoolIteratorMut
-        },
+        pool::{Handle, PoolIterator, PoolIteratorMut},
     },
-    engine::{
-        framework::prelude::*,
-        resource_manager::ResourceManager,
-        Engine
-    },
-    event::{
-        DeviceEvent,
-        DeviceId,
-        WindowEvent
-    },
+    engine::{framework::prelude::*, resource_manager::ResourceManager, Engine},
+    event::{DeviceEvent, DeviceId, WindowEvent},
     event_loop::ControlFlow,
     gui::{
-        button::{
-            ButtonBuilder,
-            ButtonMessage
-        },
+        button::{ButtonBuilder, ButtonMessage},
         check_box::CheckBoxBuilder,
-        grid::{
-            GridBuilder,
-            GridDimension
-        },
+        grid::{GridBuilder, GridDimension},
         image::ImageBuilder,
-        menu::{
-            MenuBuilder,
-            MenuItemBuilder,
-            MenuItemContent
-        },
-        menu::{
-            MenuItemMessage,
-            MenuMessage
-        },
+        menu::{MenuBuilder, MenuItemBuilder, MenuItemContent},
+        menu::{MenuItemMessage, MenuMessage},
         message::{
             MessageData,
             MessageDirection,
@@ -94,14 +69,8 @@ use fyrox::{
         },
         scroll_bar::ScrollBarBuilder,
         text::TextBuilder,
-        text_box::{
-            TextBoxBuilder,
-            TextBoxMessage
-        },
-        widget::{
-            WidgetBuilder,
-            WidgetMessage
-        },
+        text_box::{TextBoxBuilder, TextBoxMessage},
+        widget::{WidgetBuilder, WidgetMessage},
         DragContext,
         MouseState,
         Thickness,
@@ -110,10 +79,7 @@ use fyrox::{
     },
     scene::Scene,
     utils::into_gui_texture,
-    window::{
-        Fullscreen,
-        Icon
-    },
+    window::{Fullscreen, Icon},
 };
 use image::io::Reader as ImageReader;
 use fyrox::core::rand::prelude::*;
@@ -281,6 +247,20 @@ impl GameState for Game {
 		}
 	}
     fn on_exit(&mut self, engine: &mut Engine) {}
+}
+
+#[derive(Parser)]
+#[derive(Debug)]
+struct Cli {
+       #[clap(short='a', long="add-to-inventory")]
+       add_to_inventory: Option<Vec<String>>,
+       // add_to_inventory: std::string::ToString<ItemKind>,
+       #[clap(short, long)]
+       set_user_health: Option<Vec<u32>>,
+       #[clap(short, long)]
+       set_bot_health: u32,
+       #[clap(short='n', long="start-game")]
+       start_game: String,
 }
 
 /// Uses the rg3d crate to create a window and run the game loop.
