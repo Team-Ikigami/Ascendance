@@ -77,7 +77,11 @@ use fyrox::{
         UiNode,
         UserInterface,
     },
-    scene::Scene,
+    scene::{
+		base::BaseBuilder,
+		sound::{SoundBuilder, Status},
+		Scene
+	},
     utils::into_gui_texture,
     window::{Fullscreen, Icon},
 };
@@ -135,39 +139,60 @@ struct Game {
 // fn AverageBanditBarbarian(builder: &mut ResourceManager) {}
 // fn AverageBanditChief(builder: &mut ResourceManager) {}
 
-// fn bgmloop() {
-//     let engine = SoundEngine::new();
-//     let context = SoundContext::new();
-//     engine.lock().unwrap().add_context(context.clone());
-//     let mut randbgmint: u8 = rand::thread_rng().gen_range(1..6);
-//     match randbgmint {
-//         1 => {
-//             let sound_buffer = SoundBufferResource::new_generic(
-//                 fyrox::scene::sound::futures::executor::block_on(DataSource::from_file(
-//                     "data/music/themetest.wav",
-//                 ))
-//                 .unwrap(),
-//             )
-//             .unwrap();
-// 
-//             let source = SoundBuilder::new()
-// 				.with_spatial_blend_factor(0.0)
-// 				.with_buffer(sound_buffer)
-//                 .with_status(Status::Playing)
-//                 .build_source()
-//                 .unwrap();
-//             let _source_handle: CoreSoundHandle<SoundSource> = context.state().add_source(source);
-// 
-//             thread::sleep(Duration::from_secs(17));
-//         }
-//         2 => bgmloop(),
-//         3 => bgmloop(),
-//         4 => bgmloop(),
-//         5 => bgmloop(),
-//         _ => bgmloop(),
-//     }
-//     bgmloop();
-// }
+async fn bgmloop(engine: Engine, scene: &mut Scene) {
+   loop {
+	let mut randbgmint: u8 = rand::thread_rng().gen_range(1..6);
+		match randbgmint {
+    	    1 => {
+    	        let sound = engine
+					.resource_manager
+    	            .request_sound_buffer("data/music/themetest.wav");
+    	        // thread::sleep(Duration::from_secs(17));
+				let sound_handle = SoundBuilder::new(BaseBuilder::new())
+					.with_buffer(Some(sound))
+					.with_status(Status::Playing)
+					.with_play_once(true)
+					.build(&mut scene.graph);
+    	    }
+    	    2 => {
+				let sound = engine
+					.resource_manager
+    	            .request_sound_buffer("data/music/church/holy-cathedral-wav.wavx");
+    	        // thread::sleep(Duration::from_secs(17));
+				let sound_handle = SoundBuilder::new(BaseBuilder::new())
+					.with_buffer(Some(sound))
+					.with_status(Status::Playing)
+					.with_play_once(true)
+					.build(&mut scene.graph);
+			}
+    	    3 => {
+				let sound = engine
+					.resource_manager
+    	            .request_sound_buffer("data/music/holycathedral128.mp3");
+    	        // thread::sleep(Duration::from_secs(17));
+				let sound_handle = SoundBuilder::new(BaseBuilder::new())
+					.with_buffer(Some(sound))
+					.with_status(Status::Playing)
+					.with_play_once(true)
+					.build(&mut scene.graph);
+			}
+    	    4 => {
+				let sound = engine
+					.resource_manager
+					.request_sound_buffer("data/music/holycathedral320.mp3");
+				// thread::sleep(Duration::from_secs(17));
+				let sound_handle = SoundBuilder::new(BaseBuilder::new())
+					.with_buffer(Some(sound))
+					.with_status(Status::Playing)
+					.with_play_once(true)
+					.build(&mut scene.graph);
+			}
+    	    5 => println!("OWO ADD MUSIC FOR BGM HERE DADDY-O"),
+    	    _ => println!("Damn i guess i dont know random number generators well src/main.rs L144"),
+    	}
+
+   }
+}
 
 //        let ctx = &mut engine.user_interface.build_ctx();
 //        let audioengine = SoundEngine::new();
