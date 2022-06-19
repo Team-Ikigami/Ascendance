@@ -55,6 +55,7 @@ use fyrox::{
     event::{DeviceEvent, DeviceId, WindowEvent},
     event_loop::ControlFlow,
     gui::{
+        core::algebra::{Vector2},
         button::{ButtonBuilder, ButtonMessage},
         check_box::CheckBoxBuilder,
         grid::{GridBuilder, GridDimension},
@@ -107,7 +108,7 @@ use std::{
     thread,
     time::Duration
 };
-use crate::ui::craftingui::BrewingTable;
+use crate::ui::crafting::smelt::BrewingTable;
 
 use git_version::git_version;
 const GIT_VERSION: &str = git_version!();
@@ -115,10 +116,11 @@ const GIT_VERSION: &str = git_version!();
 // Structs
 
 struct Game {
-    scene: Handle<Scene>,
-    level: Level,
-    player: Player,
-	brewtable_ui: BrewingTable,
+    bgm_button: Handle<UiNode>,
+    // scene: Handle<Scene>,
+    // level: Level,
+    // player: Player,
+    // brewtable_ui: BrewingTable,
 }
 
 // fn Newgame() {}
@@ -139,7 +141,7 @@ struct Game {
 // fn AverageBanditBarbarian(builder: &mut ResourceManager) {}
 // fn AverageBanditChief(builder: &mut ResourceManager) {}
 
-async fn bgmloop(engine: Engine, scene: &mut Scene) {
+fn bgmloop(engine: &mut Engine, scene: &mut Scene) {
    loop {
 	let mut randbgmint: u8 = rand::thread_rng().gen_range(1..6);
 		match randbgmint {
@@ -220,28 +222,56 @@ impl GameState for Game {
     where
         Self: Sized,
     {
-        let mut scene = Scene::new();
-        scene.ambient_lighting_color = Color::opaque(150, 150, 150);
-        let player = block_on(Player::new(engine.resource_manager.clone(), &mut scene));
-        let img = ImageReader::open("data/textures/icons/window_icon.png")
-            .unwrap()
-            .with_guessed_format()
-            .unwrap()
-            .decode()
-            .unwrap()
-            .into_rgba8();
-        let mut pixels = Vec::new();
-        img.pixels().for_each(|pixel| {
-            pixel.0.iter().for_each(|byte| {
-                pixels.push(*byte);
-            })
-        });
+        // let mut scene = Scene::new();
+        // scene.ambient_lighting_color = Color::opaque(150, 150, 150);
+        // let player = block_on(Player::new(engine.resource_manager.clone(), &mut scene));
+
+        let ui = &mut UserInterface::new(Vector2::<f32>::new(800.0, 800.0));
+        let ctx = &mut ui.build_ctx();
+
+        let bgmbutton;
+        GridBuilder::new(
+            WidgetBuilder::new()
+                .with_width(800.0)
+                .with_height(800.0)
+                .with_child({
+                    bgmbutton = ButtonBuilder::new(
+                        WidgetBuilder::new()
+                            .on_row(0)
+                            .on_column(0)
+                            .with_width(800.0)
+                            .with_height(800.0)
+                            )
+                        .with_text("Play BGM")
+                        .build(ctx);
+                    bgmbutton
+                }
+                )
+            )
+            .add_row(GridDimension::strict(800.0))
+            .add_column(GridDimension::strict(800.0))
+            .build(ctx);
+
+
+        // let img = ImageReader::open("data/textures/icons/window_icon.png")
+        //     .unwrap()
+        //     .with_guessed_format()
+        //     .unwrap()
+        //     .decode()
+        //     .unwrap()
+        //     .into_rgba8();
+        // let mut pixels = Vec::new();
+        // img.pixels().for_each(|pixel| {
+        //     pixel.0.iter().for_each(|byte| {
+        //         pixels.push(*byte);
+        //     })
+        // });
         engine
             .get_window()
             .set_fullscreen(Some(Fullscreen::Borderless(None)));
-        engine.get_window().set_window_icon(Some(
-            Icon::from_rgba(pixels, img.width(), img.height()).unwrap(),
-        ));
+        // engine.get_window().set_window_icon(Some(
+        //     Icon::from_rgba(pixels, img.width(), img.height()).unwrap(),
+        // ));
         engine.get_window().set_cursor_visible(false);
 		engine.get_window().set_cursor_grab(true).expect("Damn bro, no cursors?");
         engine.get_window().set_resizable(false);
@@ -249,22 +279,29 @@ impl GameState for Game {
 		let brewtable_ui = BrewingTable::new();
 		
         Self {
-            player,
-            level: block_on(Level::new(engine.resource_manager.clone(), &mut scene)),
-            scene: engine.scenes.add(scene),
-			brewtable_ui,
+            // player,
+            // level: block_on(Level::new(engine.resource_manager.clone(), &mut scene)),
+            // scene: engine.scenes.add(scene),
+	    // brewtable_ui,
+            bgm_button: bgmbutton,
         }
     }
     fn on_tick(&mut self, engine: &mut Engine, dt: f32, control_flow: &mut ControlFlow) {
-        let scene = &mut engine.scenes[self.scene];
-        self.player.update(scene);
+        // let scene = &mut engine.scenes[self.scene];
+        // self.player.update(scene);
     }
     fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {
-		self.brewtable_ui.handle_ui_message(&message);
+		// self.brewtable_ui.handle_ui_message(&message);
+                if let Some(ButtonMessage::Click) = message.data() {
+                    if message.destination == self.bgm_button {
+                        let mut scene = Scene::new();
+                        bgmloop(engine, &mut scene);
+                    }
+                }
 
 	}
     fn on_device_event(&mut self, _engine: &mut Engine, _device_id: DeviceId, event: DeviceEvent) {
-        self.player.handle_device_event(&event);
+        // self.player.handle_device_event(&event);
     }
     fn on_window_event(&mut self, engine: &mut Engine, event: WindowEvent) {
 		match event {
@@ -290,19 +327,17 @@ struct Cli {
 
 /// Uses the rg3d crate to create a window and run the game loop.
  fn main() {
-	let args = Cli::parse();
-	let start_game = args.start_game;
-	std::thread::spawn(move || {
-		loop {
-			if start_game == "True".to_string() {
-				println!("what the fuck, the game already runs. What the hell you want me to do?!")
-			} else if start_game == "False".to_string() {
-				println!("Not starting game, what do you want to do?");
-			}
-			else {
-				println!("INVALID ARGUMENTS");
-			}
-		}
-	});
+	// let args = Cli::parse();
+	// let start_game = args.start_game;
+	// std::thread::spawn(move || {
+	//     if start_game == "True".to_string() {
+        //         println!("what the fuck, the game already runs. What the hell you want me to do?!")
+	//     } else if start_game == "False".to_string() {
+	//         println!("Not starting game, what do you want to do?");
+        //     }
+        //     else {
+        //         println!("INVALID ARGUMENTS");
+	//     }
+	// });
 	Framework::<Game>::new().unwrap().title("FUCKING FINALLY").run();
 }

@@ -1,4 +1,4 @@
-// pub mod gameui;
-pub mod craftingui;
-// pub mod playerui;
+// pub mod game;
+pub mod crafting;
+// pub mod player;
 // pub mod serverui;

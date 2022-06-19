@@ -69,3 +69,30 @@ This is the repository for the ASCENDANCE game. A souls-like RPG focused on play
 	- [src/ui/start_menu_ui.rs](src/ui/start_menu_ui.rs)
 - [src/utils/mod.rs](src/utils/mod.rs)
 	- [src/utils/model_map.rs](src/utils/model_map.rs)
+	    
+
+
+## Level Tree explanitory view
+
+All different perk names are different perks, all same perk names are interconnected ones. 
+
+Example being base.str_1.end_1 connects to base.int_1.nrgitm_1
+
+
+- Base
+	- str_1
+		- end_1
+			- nrgitm_1
+		- hpitm_1
+		    - end_2
+	- dex_1
+		- end_2
+			- hpitm_1
+		- hpitm_2
+	- int_1
+		- end_3,
+		- nrgitm_1
+			- end_1
+	- fth_1
+		- end_4,
+		- nrgitm_2
