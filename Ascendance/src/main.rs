@@ -81,7 +81,7 @@ use fyrox::{
     scene::{
 		base::BaseBuilder,
 		sound::{SoundBuilder, Status},
-		Scene
+		Scene,
 	},
     utils::into_gui_texture,
     window::{Fullscreen, Icon},
@@ -121,6 +121,7 @@ struct Game {
     // level: Level,
     // player: Player,
     // brewtable_ui: BrewingTable,
+    scene_handle: Handle<Scene>,
 }
 
 // fn Newgame() {}
@@ -141,75 +142,6 @@ struct Game {
 // fn AverageBanditBarbarian(builder: &mut ResourceManager) {}
 // fn AverageBanditChief(builder: &mut ResourceManager) {}
 
-fn bgmloop(engine: &mut Engine, scene: &mut Scene) {
-   loop {
-	let mut randbgmint: u8 = rand::thread_rng().gen_range(1..6);
-		match randbgmint {
-    	    1 => {
-    	        let sound = engine
-					.resource_manager
-    	            .request_sound_buffer("data/music/themetest.wav");
-    	        // thread::sleep(Duration::from_secs(17));
-				let sound_handle = SoundBuilder::new(BaseBuilder::new())
-					.with_buffer(Some(sound))
-					.with_status(Status::Playing)
-					.with_play_once(true)
-					.build(&mut scene.graph);
-    	    }
-    	    2 => {
-				let sound = engine
-					.resource_manager
-    	            .request_sound_buffer("data/music/church/holy-cathedral-wav.wavx");
-    	        // thread::sleep(Duration::from_secs(17));
-				let sound_handle = SoundBuilder::new(BaseBuilder::new())
-					.with_buffer(Some(sound))
-					.with_status(Status::Playing)
-					.with_play_once(true)
-					.build(&mut scene.graph);
-			}
-    	    3 => {
-				let sound = engine
-					.resource_manager
-    	            .request_sound_buffer("data/music/holycathedral128.mp3");
-    	        // thread::sleep(Duration::from_secs(17));
-				let sound_handle = SoundBuilder::new(BaseBuilder::new())
-					.with_buffer(Some(sound))
-					.with_status(Status::Playing)
-					.with_play_once(true)
-					.build(&mut scene.graph);
-			}
-    	    4 => {
-				let sound = engine
-					.resource_manager
-					.request_sound_buffer("data/music/holycathedral320.mp3");
-				// thread::sleep(Duration::from_secs(17));
-				let sound_handle = SoundBuilder::new(BaseBuilder::new())
-					.with_buffer(Some(sound))
-					.with_status(Status::Playing)
-					.with_play_once(true)
-					.build(&mut scene.graph);
-			}
-    	    5 => println!("OWO ADD MUSIC FOR BGM HERE DADDY-O"),
-    	    _ => println!("Damn i guess i dont know random number generators well src/main.rs L144"),
-    	}
-
-   }
-}
-
-//        let ctx = &mut engine.user_interface.build_ctx();
-//        let audioengine = SoundEngine::new();
-//        let soundcontenttest = SoundContext::new();
-//        audioengine.lock().unwrap().add_context(soundcontenttest.clone());
-//        let sound_buffer_test = SoundBufferResource::new_generic(rg3d_sound::futures::executor::block_on(DataSource::from_file("data/music/themetest.wav")).unwrap()).unwrap();
-//        let sourcetest = GenericSourceBuilder::new()
-//            .with_buffer(sound_buffer_test)
-//            .with_looping(true)
-//            .with_status(Status::Playing)
-//            .build_source()
-//            .unwrap();
-//        let _source_handle: CoreSoundHandle<SoundSource> = soundcontenttest.state().add_source(sourcetest);
-//        thread::sleep(Duration::from_secs(17));
-
 /// Uses the rg3d crates framework requirements. This section runs all the necesary functions and such.
 /// init is used for initializing of the game. In here we have resoure checks, preloading of the game and other stuff.
 /// on_tick is used for logic that happens every second. It has a fixed fps of 60 stored in the dt variable.
@@ -225,33 +157,10 @@ impl GameState for Game {
         // let mut scene = Scene::new();
         // scene.ambient_lighting_color = Color::opaque(150, 150, 150);
         // let player = block_on(Player::new(engine.resource_manager.clone(), &mut scene));
+        let scene = &mut Scene::new();
+        let scene_handle = engine.scenes.add(scene);
 
-        let ui = &mut UserInterface::new(Vector2::<f32>::new(800.0, 800.0));
-        let ctx = &mut ui.build_ctx();
-
-        let bgmbutton;
-        GridBuilder::new(
-            WidgetBuilder::new()
-                .with_width(800.0)
-                .with_height(800.0)
-                .with_child({
-                    bgmbutton = ButtonBuilder::new(
-                        WidgetBuilder::new()
-                            .on_row(0)
-                            .on_column(0)
-                            .with_width(800.0)
-                            .with_height(800.0)
-                            )
-                        .with_text("Play BGM")
-                        .build(ctx);
-                    bgmbutton
-                }
-                )
-            )
-            .add_row(GridDimension::strict(800.0))
-            .add_column(GridDimension::strict(800.0))
-            .build(ctx);
-
+        let bgm_button = button_builder_you_faggot_compiler(&mut engine.user_interface);
 
         // let img = ImageReader::open("data/textures/icons/window_icon.png")
         //     .unwrap()
@@ -266,24 +175,24 @@ impl GameState for Game {
         //         pixels.push(*byte);
         //     })
         // });
-        engine
-            .get_window()
-            .set_fullscreen(Some(Fullscreen::Borderless(None)));
+        // engine
+        //     .get_window()
+        //     .set_fullscreen(Some(Fullscreen::Borderless(None)));
         // engine.get_window().set_window_icon(Some(
         //     Icon::from_rgba(pixels, img.width(), img.height()).unwrap(),
         // ));
-        engine.get_window().set_cursor_visible(false);
-		engine.get_window().set_cursor_grab(true).expect("Damn bro, no cursors?");
-        engine.get_window().set_resizable(false);
-		
-		let brewtable_ui = BrewingTable::new();
+        // engine.get_window().set_cursor_visible(false);
+	//	engine.get_window().set_cursor_grab(true).expect("Damn bro, no cursors?");
+        // engine.get_window().set_resizable(false);	
+	// let brewtable_ui = BrewingTable::new();
 		
         Self {
             // player,
             // level: block_on(Level::new(engine.resource_manager.clone(), &mut scene)),
             // scene: engine.scenes.add(scene),
 	    // brewtable_ui,
-            bgm_button: bgmbutton,
+            bgm_button,
+            scene_handle,
         }
     }
     fn on_tick(&mut self, engine: &mut Engine, dt: f32, control_flow: &mut ControlFlow) {
@@ -291,13 +200,69 @@ impl GameState for Game {
         // self.player.update(scene);
     }
     fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {
-		// self.brewtable_ui.handle_ui_message(&message);
-                if let Some(ButtonMessage::Click) = message.data() {
-                    if message.destination == self.bgm_button {
-                        let mut scene = Scene::new();
-                        bgmloop(engine, &mut scene);
-                    }
-                }
+	// self.brewtable_ui.handle_ui_message(&message);
+        if let Some(ButtonMessage::Click) = message.data() {
+            if message.destination == self.bgm_button {
+				let sound = engine
+					.resource_manager
+    			    .request_sound_buffer("data/music/church/holy-cathedral-wav.wav");
+				let sound_handle = SoundBuilder::new(BaseBuilder::new())
+					.with_buffer(Some(sound))
+					.with_status(Status::Playing)
+					.with_looping(true)
+					.build(&mut scene_handle.graph);
+				// let mut randbgmint: u8 = rand::thread_rng().gen_range(1..6);
+				// match randbgmint {
+    			//     1 => {
+    			//         let sound = engine
+				// 		    .resource_manager
+    			//             .request_sound_buffer("data/music/themetest.wav");
+				// 		let sound_handle = SoundBuilder::new(BaseBuilder::new())
+				// 			.with_buffer(Some(sound))
+				// 			.with_status(Status::Playing)
+				// 			.with_play_once(true)
+				// 			.build(&mut scene.graph);
+    			//         let sound_node = scene.graph[sound_handle].as_sound();
+    			//     }
+    			//     2 => {
+				// 		let sound = engine
+				// 			.resource_manager
+    			//             .request_sound_buffer("data/music/church/holy-cathedral-wav.wav");
+				// 		let sound_handle = SoundBuilder::new(BaseBuilder::new())
+				// 			.with_buffer(Some(sound))
+				// 			.with_status(Status::Playing)
+				// 			.with_play_once(true)
+				// 			.build(&mut scene.graph);
+    			//         let sound_node = scene.graph[sound_handle].as_sound();
+				// 	}
+    			//     3 => {
+				// 		let sound = engine
+				// 			.resource_manager
+    			//             .request_sound_buffer("data/music/church/holycathedral128.mp3");
+				// 		let sound_handle = SoundBuilder::new(BaseBuilder::new())
+				// 			.with_buffer(Some(sound))
+				// 			.with_status(Status::Playing)
+				// 			.with_play_once(true)
+				// 			.build(&mut scene.graph);
+    			//         let sound_node = scene.graph[sound_handle].as_sound();
+                //                 sound_node 
+				// 	}
+    			//     4 => {
+				// 		let sound = engine
+				// 			.resource_manager
+				// 			.request_sound_buffer("data/music/church/holycathedral320.mp3");
+				// 		let sound_handle = SoundBuilder::new(BaseBuilder::new())
+				// 			.with_buffer(Some(sound))
+				// 			.with_status(Status::Playing)
+				// 			.with_play_once(true)
+				// 			.build(&mut scene.graph);
+    			//         let sound_node = scene.graph[sound_handle].as_sound();
+                //                 sound_node
+				// 	}
+    			//     _ => println!("Damn i guess i dont know random number generators well src/main.rs L144"),
+    			// }
+            }
+        }
 
 	}
     fn on_device_event(&mut self, _engine: &mut Engine, _device_id: DeviceId, event: DeviceEvent) {
@@ -323,6 +288,18 @@ struct Cli {
        set_bot_health: u32,
        #[clap(short='n', long="start-game")]
        start_game: String,
+}
+
+fn button_builder_you_faggot_compiler(ui: &mut UserInterface) -> Handle<UiNode> {
+    ButtonBuilder::new(
+        WidgetBuilder::new()
+            .on_row(0)
+            .on_column(0)
+            .with_width(800.0)
+            .with_height(800.0)
+    )
+    .with_text("Play BGM")
+    .build(&mut ui.build_ctx())
 }
 
 /// Uses the rg3d crate to create a window and run the game loop.
