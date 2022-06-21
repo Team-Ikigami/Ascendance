@@ -1,0 +1,44 @@
+// Format goes:
+// - nodeId: String
+// - nodeType: String (perk, class)
+// - Bonuses: Array
+//   - type: String (statUp, itembonus)
+//   - stat: String
+//   - value: interger
+// - connectedTo: Array<String>
+// - connectedFrom: Array<String>
+// - cost: Integer
+
+
+(
+    array: [
+        basic: (
+            nodeId: "basic",
+            modeType: "class"
+            bonuses: [
+                (
+                    type: "base",
+                    stat: "none",
+                    value: 0,
+                ),
+            ],
+            connectedTo: ("str_1", "int_1", "fth_1", "dex_1", ),
+            connectedFrom: [ "none" ],
+            cost: 0,
+        ),
+        str_1: (
+            nodeId: "str_1",
+            nodeType: "perk",
+            bonuses: [
+                (
+                    type: "statUp",
+                    stat: "strength",
+                    value: 1,
+                ),
+            ],
+            connectedTo: ("end_1", "hpitm_1"),
+            connectedFrom: "basic",
+            cost: 1,
+        ),
+    ],
+)

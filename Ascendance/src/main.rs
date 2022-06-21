@@ -157,7 +157,7 @@ impl GameState for Game {
         // let mut scene = Scene::new();
         // scene.ambient_lighting_color = Color::opaque(150, 150, 150);
         // let player = block_on(Player::new(engine.resource_manager.clone(), &mut scene));
-        let scene = &mut Scene::new();
+        let scene = Scene::new();
         let scene_handle = engine.scenes.add(scene);
 
         let bgm_button = button_builder_you_faggot_compiler(&mut engine.user_interface);
@@ -210,7 +210,7 @@ impl GameState for Game {
 					.with_buffer(Some(sound))
 					.with_status(Status::Playing)
 					.with_looping(true)
-					.build(&mut scene_handle.graph);
+					.build(&mut self.scene_handle.graph);
 				// let mut randbgmint: u8 = rand::thread_rng().gen_range(1..6);
 				// match randbgmint {
     			//     1 => {
