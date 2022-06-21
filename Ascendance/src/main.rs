@@ -117,11 +117,10 @@ const GIT_VERSION: &str = git_version!();
 
 struct Game {
     bgm_button: Handle<UiNode>,
-    // scene: Handle<Scene>,
+    scene: Handle<Scene>,
     // level: Level,
     // player: Player,
     // brewtable_ui: BrewingTable,
-    scene_handle: Handle<Scene>,
 }
 
 // fn Newgame() {}
@@ -157,8 +156,8 @@ impl GameState for Game {
         // let mut scene = Scene::new();
         // scene.ambient_lighting_color = Color::opaque(150, 150, 150);
         // let player = block_on(Player::new(engine.resource_manager.clone(), &mut scene));
-        let scene = Scene::new();
-        let scene_handle = engine.scenes.add(scene);
+        let mut scene_init = Scene::new();
+        let scene = engine.scenes.add(scene_init);
 
         let bgm_button = button_builder_you_faggot_compiler(&mut engine.user_interface);
 
@@ -192,7 +191,7 @@ impl GameState for Game {
             // scene: engine.scenes.add(scene),
 	    // brewtable_ui,
             bgm_button,
-            scene_handle,
+            scene,
         }
     }
     fn on_tick(&mut self, engine: &mut Engine, dt: f32, control_flow: &mut ControlFlow) {
@@ -200,67 +199,22 @@ impl GameState for Game {
         // self.player.update(scene);
     }
     fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {
+        let scene = &mut engine.scenes[self.scene];
 	// self.brewtable_ui.handle_ui_message(&message);
         if let Some(ButtonMessage::Click) = message.data() {
             if message.destination == self.bgm_button {
-				let sound = engine
-					.resource_manager
-    			    .request_sound_buffer("data/music/church/holy-cathedral-wav.wav");
-				let sound_handle = SoundBuilder::new(BaseBuilder::new())
-					.with_buffer(Some(sound))
-					.with_status(Status::Playing)
-					.with_looping(true)
-					.build(&mut self.scene_handle.graph);
-				// let mut randbgmint: u8 = rand::thread_rng().gen_range(1..6);
-				// match randbgmint {
-    			//     1 => {
-    			//         let sound = engine
-				// 		    .resource_manager
-    			//             .request_sound_buffer("data/music/themetest.wav");
-				// 		let sound_handle = SoundBuilder::new(BaseBuilder::new())
-				// 			.with_buffer(Some(sound))
-				// 			.with_status(Status::Playing)
-				// 			.with_play_once(true)
-				// 			.build(&mut scene.graph);
-    			//         let sound_node = scene.graph[sound_handle].as_sound();
-    			//     }
-    			//     2 => {
-				// 		let sound = engine
-				// 			.resource_manager
-    			//             .request_sound_buffer("data/music/church/holy-cathedral-wav.wav");
-				// 		let sound_handle = SoundBuilder::new(BaseBuilder::new())
-				// 			.with_buffer(Some(sound))
-				// 			.with_status(Status::Playing)
-				// 			.with_play_once(true)
-				// 			.build(&mut scene.graph);
-    			//         let sound_node = scene.graph[sound_handle].as_sound();
-				// 	}
-    			//     3 => {
-				// 		let sound = engine
-				// 			.resource_manager
-    			//             .request_sound_buffer("data/music/church/holycathedral128.mp3");
-				// 		let sound_handle = SoundBuilder::new(BaseBuilder::new())
-				// 			.with_buffer(Some(sound))
-				// 			.with_status(Status::Playing)
-				// 			.with_play_once(true)
-				// 			.build(&mut scene.graph);
-    			//         let sound_node = scene.graph[sound_handle].as_sound();
-                //                 sound_node 
-				// 	}
-    			//     4 => {
-				// 		let sound = engine
-				// 			.resource_manager
-				// 			.request_sound_buffer("data/music/church/holycathedral320.mp3");
-				// 		let sound_handle = SoundBuilder::new(BaseBuilder::new())
-				// 			.with_buffer(Some(sound))
-				// 			.with_status(Status::Playing)
-				// 			.with_play_once(true)
-				// 			.build(&mut scene.graph);
-    			//         let sound_node = scene.graph[sound_handle].as_sound();
-                //                 sound_node
-				// 	}
-    			//     _ => println!("Damn i guess i dont know random number generators well src/main.rs L144"),
-    			// }
+		let mut randbgmint: i8 = 1;
+                match randbgmint {
+    		    1 => {
+			let sound = block_on(engine.resource_manager.request_sound_buffer("data/music/church/holy-cathedral-wav.wav")).unwrap();
+			let sound_handle = SoundBuilder::new(BaseBuilder::new())
+			    .with_buffer(Some(sound))
+			    .with_status(Status::Playing)
+			    .with_looping(true)
+			    .build(&mut scene.graph);
+                    }
+    		    _ => println!("Damn i guess i dont know random number generators well src/main.rs L144"),
+                }
             }
         }
 
