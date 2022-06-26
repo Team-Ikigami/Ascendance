@@ -15,6 +15,7 @@ er = "build --examples --release"
 [build]
 target-dir = "build"
 incremental = true
+rustflags = ["-C", "link-args=-fuse-ld=lld"]
 
 [doc]
 browser = "brave"
