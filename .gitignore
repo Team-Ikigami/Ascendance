@@ -10,11 +10,15 @@ Cargo.lock
 # no look
 game-plan/*.*
 fyrox-tuts/**/*.*
-build.bat
+b.bat
+r.bat
+br.bat
+rr.bat
 file-list..txt
 stats.txt
 run.bat
 data/music/scripts/**.*
+ascendance/src/bins/**/**.*
 # unecesary
 history.bin
 docker/**.* # I dont even use docker, its just here for some reason
