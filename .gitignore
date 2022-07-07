@@ -10,10 +10,10 @@ Cargo.lock
 # no look
 game-plan/*.*
 fyrox-tuts/**/*.*
-b.batch
-r.batch
-br.batch
-rr.batch
+b.bat
+r.bat
+br.bat
+rr.bat
 file-list..txt
 stats.txt
 run.bat

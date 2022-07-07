@@ -1,3 +1,19 @@
+The licenses below are all individual for certain models. Below is a list of licenses and files to specify what can and cant be used.
+
+Files:
+GNUGPL3
+|--Ascendance\**\**.*
+|--data\music\The_Cathedral.*
+|--data\music\theme.*
+|--data\music\themetest.*
+|--data\music\violin_practice.*
+|--data\music\The_church_loop.*
+|--data\music\church\**.*
+|--data\music\scripts\**.*
+|--data\models\religious\cross.glsl
+|--data\models\religious\pentagram.glsl
+|--data\configs\**.*
+
 GNU GENERAL PUBLIC LICENSE
                        Version 3, 29 June 2007
 

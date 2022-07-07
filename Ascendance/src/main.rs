@@ -91,6 +91,7 @@ use fyrox::core::rand::prelude::*;
 use fyrox::core::rand::Rng;
 use fyrox::core::rand::thread_rng;
 
+use crate::ui::game::start_menu_ui::StartGame;
 // use fyrox::scene::sound::{
 //     DataSource,
 //     SoundBufferResource,
@@ -108,19 +109,20 @@ use std::{
     thread,
     time::Duration
 };
-use crate::ui::crafting::smelt::BrewingTable;
+// use crate::ui::crafting::smelt::BrewingTable;
 
 use git_version::git_version;
 const GIT_VERSION: &str = git_version!();
 
-// Structs
-
 struct Game {
     bgm_button: Handle<UiNode>,
     scene: Handle<Scene>,
-    // level: Level,
-    // player: Player,
+    level: Level,
+    player: Player,
     // brewtable_ui: BrewingTable,
+	start_game: Handle<UiNode>,
+    exit: Handle<UiNode>,
+    base_grid: Handle<UiNode>,
 }
 
 // fn Newgame() {}
@@ -153,13 +155,71 @@ impl GameState for Game {
     where
         Self: Sized,
     {
-        // let mut scene = Scene::new();
-        // scene.ambient_lighting_color = Color::opaque(150, 150, 150);
-        // let player = block_on(Player::new(engine.resource_manager.clone(), &mut scene));
+        let mut scene = Scene::new();
+        scene.ambient_lighting_color = Color::opaque(150, 150, 150);
+        let player = block_on(Player::new(engine.resource_manager.clone(), &mut scene));
         let mut scene_init = Scene::new();
         let scene = engine.scenes.add(scene_init);
 
-        let bgm_button = button_builder_you_faggot_compiler(&mut engine.user_interface);
+        let bgm_button;
+		let start_game;
+        let exit;
+        let base_grid = GridBuilder::new(
+            WidgetBuilder::new()
+            .with_height(800.0)
+            .with_width(800.0)
+            .with_draw_on_top(true)
+            .with_children([
+                {
+                    start_game = ButtonBuilder::new(
+                        WidgetBuilder::new()
+                        .on_column(1)
+                        .on_row(1)
+                        .with_width(200.0)
+                        .with_height(75.0)
+                        )
+                        .with_text("Start game")
+                        .build(&mut ui.build_ctx());
+                    start_game
+                },
+                {
+                    exit = ButtonBuilder::new(
+                        WidgetBuilder::new()
+                        .on_column(1)
+                        .on_row(5)
+                        .with_width(200.0)
+                        .with_height(75.0)
+                        )
+                        .with_text("Exit")
+                        .build(&mut ui.build_ctx());
+                    exit
+
+                }
+				{
+					bgm_button = ButtonBuilder::new(
+						WidgetBuilder::new()
+							.on_row(3)
+							.on_column(1)
+							.with_width(200.0)
+							.with_height(75.0)
+					)
+					.with_text("Play BGM")
+					.build(&mut ui.build_ctx());
+					bgm_button
+				}
+            ])
+        )
+        .add_column(GridDimension::strict(100.0))
+        .add_column(GridDimension::strict(200.0))
+        .add_column(GridDimension::strict(500.0))
+        .add_row(GridDimension::strict(300.0))
+        .add_row(GridDimension::strict(75.0))
+        .add_row(GridDimension::strict(92.0))
+        .add_row(GridDimension::strict(75.0))
+        .add_row(GridDimension::strict(92.0))
+        .add_row(GridDimension::strict(75.0))
+        .add_row(GridDimension::strict(92.0))
+        .build(&mut ui.build_ctx());
 
         // let img = ImageReader::open("data/textures/icons/window_icon.png")
         //     .unwrap()
@@ -174,9 +234,9 @@ impl GameState for Game {
         //         pixels.push(*byte);
         //     })
         // });
-        // engine
-        //     .get_window()
-        //     .set_fullscreen(Some(Fullscreen::Borderless(None)));
+        engine
+            .get_window()
+            .set_fullscreen(Some(Fullscreen::Borderless(None)));
         // engine.get_window().set_window_icon(Some(
         //     Icon::from_rgba(pixels, img.width(), img.height()).unwrap(),
         // ));
@@ -186,8 +246,8 @@ impl GameState for Game {
 	// let brewtable_ui = BrewingTable::new();
 		
         Self {
-            // player,
-            // level: block_on(Level::new(engine.resource_manager.clone(), &mut scene)),
+            player,
+            level: block_on(Level::new(engine.resource_manager.clone(), &mut scene)),
             // scene: engine.scenes.add(scene),
 	    // brewtable_ui,
             bgm_button,
@@ -199,23 +259,29 @@ impl GameState for Game {
         // self.player.update(scene);
     }
     fn on_ui_message(&mut self, engine: &mut Engine, message: UiMessage) {
-        let scene = &mut engine.scenes[self.scene];
 	// self.brewtable_ui.handle_ui_message(&message);
+        self.start_game.handle_ui_message(&message, engine);
+        let scene = &mut engine.scenes[self.scene];
         if let Some(ButtonMessage::Click) = message.data() {
             if message.destination == self.bgm_button {
-		let mut randbgmint: i8 = 1;
+				let mut randbgmint: i8 = 1;
                 match randbgmint {
-    		    1 => {
-			let sound = block_on(engine.resource_manager.request_sound_buffer("data/music/church/holy-cathedral-wav.wav")).unwrap();
-			let sound_handle = SoundBuilder::new(BaseBuilder::new())
-			    .with_buffer(Some(sound))
-			    .with_status(Status::Playing)
-			    .with_looping(true)
-			    .build(&mut scene.graph);
+    		    	1 => {
+						let sound = block_on(engine.resource_manager.request_sound_buffer("data/music/church/holy-cathedral-wav.wav")).unwrap();
+						let sound_handle = SoundBuilder::new(BaseBuilder::new())
+						    .with_buffer(Some(sound))
+						    .with_status(Status::Playing)
+						    .with_looping(true)
+						    .build(&mut scene.graph);
                     }
-    		    _ => println!("Damn i guess i dont know random number generators well src/main.rs L144"),
+    		    	_ => println!("Damn i guess i dont know random number generators well src/main.rs L144"),
                 }
             }
+			else if message.destination == self.start_game {
+				let start_game = std::thread::spawn(|| {
+					start_game();
+				});
+			}
         }
 
 	}
@@ -242,18 +308,6 @@ struct Cli {
        set_bot_health: u32,
        #[clap(short='n', long="start-game")]
        start_game: String,
-}
-
-fn button_builder_you_faggot_compiler(ui: &mut UserInterface) -> Handle<UiNode> {
-    ButtonBuilder::new(
-        WidgetBuilder::new()
-            .on_row(0)
-            .on_column(0)
-            .with_width(800.0)
-            .with_height(800.0)
-    )
-    .with_text("Play BGM")
-    .build(&mut ui.build_ctx())
 }
 
 /// Uses the rg3d crate to create a window and run the game loop.
