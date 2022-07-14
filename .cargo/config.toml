@@ -18,4 +18,4 @@ incremental = true
 rustflags = ["-C", "link-args=-fuse-ld=lld"]
 
 [doc]
-browser = "brave"
+no-deps = true

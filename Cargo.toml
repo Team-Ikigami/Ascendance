@@ -2,6 +2,8 @@
 members = [
 	# Binary to run the main game
 	"Ascendance",
+	"editor",
+	"executor",
 	
 	# Binary scripts to add to the executor
 	# "scripts/creatures/undead_bot",
